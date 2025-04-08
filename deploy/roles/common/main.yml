@@ -1,3 +1,0 @@
----
-  - name: Install Python 3.12
-    package: name=python3.12 state=present
