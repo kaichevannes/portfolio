@@ -9,7 +9,5 @@ bun run dev
 ```
 
 ## Deploy
-### Configure the host
 1. Put local `cat ~/.ssh/id_ed25519.pub` in the hosts `~/.ssh/authorized_keys` file
-
-### Run ansible
+2. Run `ansible-playbook -i inventory.ini site.yml` in the `/deploy` directory
