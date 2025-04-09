@@ -2,3 +2,8 @@
 - name: Install Git
   become: true
   package: name=git state=present
+
+- name: Clone portfolio repo
+  ansible.builtin.git:
+    repo: https://github.com/kaichevannes/portfolio.git
+    dest: "{{ ansible_env.HOME }}/portfolio"
