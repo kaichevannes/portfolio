@@ -1,9 +1,0 @@
-FROM oven/bun:alpine
-
-COPY ./caddy /root/caddy
-
-COPY ./Caddyfile /root/Caddyfile
-
-EXPOSE 80 443
-
-CMD ["/root/caddy", "run", "--config", "/root/Caddyfile"]
