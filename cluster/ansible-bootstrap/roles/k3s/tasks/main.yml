@@ -34,4 +34,6 @@
   become: true
   file: 
     path: "{{ ansible_env.HOME }}/.kube/config"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
     mode: "0600"
