@@ -16,7 +16,7 @@
   file:
     path: "{{ ansible_env.HOME }}/.kube"
     state: directory
-    mode: "0777"
+    mode: "0755"
 
 - name: Install k3s
   shell: |
@@ -26,6 +26,12 @@
     --disable-helm-controller \
     --disable-cloud-controller \
     --write-kubeconfig={{ ansible_env.HOME }}/.kube/config " \
-    sh -s -
+    sh -s - \
   args:
     creates: /etc/rancher/k3s/k3s.yaml
+
+- name: chmod kubeconfig for ssh debugging
+  become: true
+  file: 
+    path: "{{ ansible_env.HOME }}/.kube/config"
+    mode: "0600"
