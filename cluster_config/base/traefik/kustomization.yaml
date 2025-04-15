@@ -1,0 +1,6 @@
+resources:
+  - account.yml
+  - deployment.yml
+  - role-binding.yml
+  - role.yml
+  - services.yml
