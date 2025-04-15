@@ -6,15 +6,16 @@
 - name: Bootstrap Flux
   become: true
   shell: |
-    export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
     export GITHUB_TOKEN="{{ lookup('env', 'TOKEN_AUTH') }}"
     flux bootstrap github \
       --token-auth \
       --owner=kaichevannes \
       --repository=portfolio \
       --branch=main \
-      --path=./cluster/flux_auto_config \
+      --path=./cluster/flux-auto-config \
       --personal && \
-    touch "/home/{{ ansible_user }}/flux_bootstrap"
+    touch "{{ ansible_env.HOME }}/flux_bootstrap"
   args:
-    creates: "/home/{{ ansible_user}}/flux_bootstrap"
+    creates: "{{ ansible_env.HOME }}/flux_bootstrap"
+  environment:
+    KUBECONFIG: "{{ ansible_env.HOME }}/.kube/config"

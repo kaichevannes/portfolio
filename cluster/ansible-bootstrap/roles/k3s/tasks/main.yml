@@ -11,7 +11,21 @@
     ufw allow from 10.42.0.0/16 to any #pods
     ufw allow from 10.43.0.0/16 to any #services
 
+- name: Create kubeconfig folder
+  become: true
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+    mode: "0777"
+
 - name: Install k3s
-  shell: curl -sfL https://get.k3s.io | sh -
+  shell: |
+    curl -sfL https://get.k3s.io \
+    | INSTALL_K3S_EXEC="server \
+    --disable traefik \
+    --disable-helm-controller \
+    --disable-cloud-controller \
+    --write-kubeconfig={{ ansible_env.HOME }}/.kube/config " \
+    sh -s -
   args:
     creates: /etc/rancher/k3s/k3s.yaml
