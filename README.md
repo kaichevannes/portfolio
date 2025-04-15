@@ -6,5 +6,8 @@
 5. Deploy: `kubectl -Rf apply kubernetes/`
 6. Access web app at: `http://localhost`
 
-## Deploy
-1. Put local `cat ~/.ssh/id_ed25519.pub` in the hosts `~/.ssh/authorized_keys` file
+## Bootstrap cluster
+1. Install ansible
+2. `ansible-playbook -i vm bootstrap_cluster/bootstrap.yml ~/path/to/sever-ssh-key.pem`
+
+**To access an ssh key from WSL, copy into .ssh and then chmod 600**

@@ -1,0 +1,6 @@
+- name: Boostrap cluster
+  hosts: vm
+  remote_user: root
+  roles:
+    - k3s
+    - flux
