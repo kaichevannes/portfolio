@@ -13,7 +13,7 @@
       --owner=kaichevannes \
       --repository=portfolio \
       --branch=main \
-      --path=./cluster_config \
+      --path=./cluster/flux_auto_config \
       --personal && \
     touch "/home/{{ ansible_user }}/flux_bootstrap"
   args:

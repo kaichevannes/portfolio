@@ -15,7 +15,7 @@
 3. Set environment variables
 - `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key.pem`
 - `export GITHUB_TOKEN=yourtoken`
-3. `cd cluster_bootstrap`
+3. `cd cluster/ansible_bootstrap`
 4. `ansible-playbook -i inventory.ini bootstrap.yml`
 
 **Note: to access an ssh key from WSL, copy into .ssh and then chmod 600**
