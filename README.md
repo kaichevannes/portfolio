@@ -10,4 +10,4 @@
 1. Install ansible
 2. `ansible-playbook -i vm bootstrap_cluster/bootstrap.yml ~/path/to/sever-ssh-key.pem`
 
-**To access an ssh key from WSL, copy into .ssh and then chmod 600**
+**Note: to access an ssh key from WSL, copy into .ssh and then chmod 600**
