@@ -8,12 +8,12 @@
 
 ## Bootstrap cluster
 1. Install ansible
-2. Create a [PAT](https://github.com/settings/personal-access-tokens)
+2. Create a [Github Personal Access Token](https://github.com/settings/personal-access-tokens)
 - `Administration` -> `Access: Read-only`
 - `Contents` -> `Access: Read and write`
 - `Metadata` -> `Access: Read only`
 3. Set environment variables
-- `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key.pem`
+- `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key`
 - `export GITHUB_TOKEN=yourtoken`
 3. `cd cluster/ansible_bootstrap`
 4. `ansible-playbook -i inventory.ini bootstrap.yml`
