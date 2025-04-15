@@ -8,6 +8,14 @@
 
 ## Bootstrap cluster
 1. Install ansible
-2. `ansible-playbook -i cluster_bootstrap/inventory.ini cluster_bootstrap/bootstrap.yml ~/path/to/sever-ssh-key.pem`
+2. Create a [PAT](https://github.com/settings/personal-access-tokens)
+- `Administration` -> `Access: Read-only`
+- `Contents` -> `Access: Read and write`
+- `Metadata` -> `Access: Read only`
+3. Set environment variables
+- `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key.pem`
+- `export GITHUB_TOKEN=yourtoken`
+3. `cd cluster_bootstrap`
+4. `ansible-playbook -i inventory.ini bootstrap.yml`
 
 **Note: to access an ssh key from WSL, copy into .ssh and then chmod 600**

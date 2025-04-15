@@ -2,3 +2,19 @@
   shell: curl -s https://fluxcd.io/install.sh | sudo bash
   args:
     creates: /usr/local/bin/flux
+
+- name: Bootstrap Flux
+  become: true
+  shell: |
+    export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
+    export GITHUB_TOKEN="{{ lookup('env', 'TOKEN_AUTH') }}"
+    flux bootstrap github \
+      --token-auth \
+      --owner=kaichevannes \
+      --repository=portfolio \
+      --branch=main \
+      --path=./cluster_config \
+      --personal && \
+    touch "/home/{{ ansible_user }}/flux_bootstrap"
+  args:
+    creates: "/home/{{ ansible_user}}/flux_bootstrap"
