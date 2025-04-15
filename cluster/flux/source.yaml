@@ -5,6 +5,6 @@ metadata:
   namespace: default
 spec:
   interval: 30s
+  url: https://github.com/kaichevannes/portfolio.git
   ref:
     branch: main
-    url: https://github.com/kaichevannes/portfolio.git
