@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - configmap.yml
 patches:
-  - path: deployment.patch.yml
+  - path: deployment-patch.yml
     target:
       labelSelector: "app=traefik"

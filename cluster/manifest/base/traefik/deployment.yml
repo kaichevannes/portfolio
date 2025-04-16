@@ -6,6 +6,10 @@ metadata:
   labels:
     app: traefik
 spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traefik
   template:
     spec:
       metadata:
@@ -20,7 +24,3 @@ spec:
           ports:
             - name: web
               containerPort: 80
-  replicas: 1
-  selector:
-    matchLabels:
-      app: traefik
