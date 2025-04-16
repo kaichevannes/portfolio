@@ -6,3 +6,4 @@ resources:
   - role-binding.yml
   - role.yml
   - services.yml
+  - crd.yml
