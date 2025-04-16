@@ -13,16 +13,10 @@ spec:
         - name: traefik
           image: traefik:v3.3
           envFrom:
-            - name: PORKBUN_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: porkbun-key
-                  key: porkbun-key
-            - name: PORKBUN_SECRET_API_KEY
-              valueFrom:
-                secretKeyRef:
-                  name: porkbun-secret-key
-                  key: porkbun-secret-key
+          - secretRef:
+              name: porkbun-key
+          - secretRef:
+              name: porkbun-secret-key
           volumeMounts:
             - name: traefik-config
               mountPath: /etc/traefik/traefik.yml
