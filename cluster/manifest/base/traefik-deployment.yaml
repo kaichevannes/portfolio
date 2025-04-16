@@ -11,10 +11,10 @@ spec:
     matchLabels:
       app: traefik
   template:
+    metadata:
+      labels:
+        app: traefik
     spec:
-      metadata:
-        labels:
-          app: traefik
       serviceAccountName: traefik-account
       containers:
         - name: traefik
