@@ -19,3 +19,6 @@
 4. `ansible-playbook -i inventory.ini bootstrap.yml`
 
 **Note: to access an ssh key from WSL, copy into .ssh and then chmod 600**
+
+## Troubleshooting
+- `flux reconcile source git portfolio`
