@@ -44,7 +44,7 @@ jobs:
 
       - name: Update image tag
         run: |
-          sed -i "s|image.*|image: ghcr.io/kaichevannes/portfolio:test|" $DEPLOY_FILE_PATH
+          sed -i "s|image.*|image: ghcr.io/kaichevannes/portfolio:$COMMIT_SHA|" $DEPLOY_FILE_PATH
           
       - name: Push deployment manifest
         run: |
