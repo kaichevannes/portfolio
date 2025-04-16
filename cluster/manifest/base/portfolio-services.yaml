@@ -5,9 +5,9 @@ metadata:
   namespace: default
 spec:
   ports:
-    - name: web
+    - protocol: TCP
+      name: web
       port: 3000
-      targetPort: web
 
   selector:
     app: portfolio
