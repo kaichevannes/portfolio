@@ -5,6 +5,50 @@
     KUBESEAL_VERSION='0.29.0' 
     curl -OL "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION:?}/kubeseal-${KUBESEAL_VERSION:?}-linux-{{ architecture }}.tar.gz"
     tar -xvzf kubeseal-${KUBESEAL_VERSION:?}-linux-{{ architecture }}.tar.gz kubeseal
+    rm kubeseal-${KUBESEAL_VERSION:?}-linux-{{ architecture }}.tar.gz
     sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+    rm kubeseal
   args:
     creates: /usr/local/bin/kubeseal
+
+- name: Create Porkbun key sealed secret
+  shell: |
+    kubectl create secret generic porkbun-key \
+      -o yaml \
+      --dry-run=client \
+      --from-literal=porkbun-key="{{ lookup('env', 'PORKBUN_KEY') }}" \
+    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-porkbun-key.yaml"
+  args:
+    creates: sealed-porkbun-key.yaml
+
+- name: Create Porkbun secret key sealed secret
+  shell: |
+    kubectl create secret generic porkbun-secret-key \
+      -o yaml \
+      --dry-run=client \
+      --from-literal=porkbun-secret-key="{{ lookup('env', 'PORKBUN_SECRET_KEY') }}" \
+    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-porkbun-secret-key.yaml"
+  args:
+    creates: sealed-porkbun-secret-key.yaml
+
+- name: Copy sealed Porkbun key to controller
+  fetch:
+    src: "{{ ansible_env.HOME }}/sealed-porkbun-key.yaml"
+    dest: ../manifest/overlays/production/sealed-secrets/sealed-porkbun-key.yaml
+    flat: yes
+
+- name: Copy sealed Porkbun secret key to controller
+  fetch:
+    src: "{{ ansible_env.HOME }}/sealed-porkbun-secret-key.yaml"
+    dest: ../manifest/overlays/production/sealed-secrets/sealed-porkbun-secret-key.yaml
+    flat: yes
+
+- name: Git push new sealed secrets
+  local_action:
+    module: shell
+    cmd: |
+      git add sealed-porkbun-key.yaml sealed-porkbun-secret-key.yaml \
+      && git commit -m "ANSIBLE BOOTSTRAP: resealing secrets" \
+      && git push origin main
+    chdir:
+      ../manifest/overlays/production/sealed-secrets/

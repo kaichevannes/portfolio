@@ -6,7 +6,7 @@
 - name: Bootstrap Flux
   become: true
   shell: |
-    export GITHUB_TOKEN="{{ lookup('env', 'TOKEN_AUTH') }}"
+    export GITHUB_TOKEN="{{ lookup('env', 'GITHUB_TOKEN') }}"
     flux bootstrap github \
       --token-auth \
       --owner=kaichevannes \

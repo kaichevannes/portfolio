@@ -15,6 +15,8 @@
 3. Set environment variables
 - `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key`
 - `export GITHUB_TOKEN=yourtoken`
+- `export PORKBUN_KEY=porkbunapikey`
+- `export PORKBUN_SECRET_KEY=porkbunsecretkey`
 3. `cd cluster/ansible_bootstrap`
 4. `ansible-playbook -i inventory.ini bootstrap.yml`
 
