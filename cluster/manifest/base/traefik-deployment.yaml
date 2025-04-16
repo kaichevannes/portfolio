@@ -20,6 +20,7 @@ spec:
         - name: traefik
           image: traefik:v3.3
           args:
+            - --accessLog
             - --providers.kubernetescrd
           ports:
             - name: web
