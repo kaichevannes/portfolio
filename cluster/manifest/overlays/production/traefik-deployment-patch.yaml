@@ -21,6 +21,8 @@ spec:
               subPath: traefik.yml
               readOnly: true
           args:
+            - --accessLog
+            - --providers.kubernetescrd
             # Staging server for testing
             - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
           ports:
