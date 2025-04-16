@@ -1,14 +1,12 @@
 name: release
 
 on:
-  # push:
-  #   branches:
-  #     - main
   pull_request:
   workflow_dispatch:
 
 env:
   IMAGE_NAME: portfolio
+  DEPLOY_FILE_PATH: cluster/manifest/base/portfolio/deployment.yml
 
 jobs:
   
@@ -20,12 +18,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
       - name: Build image
         run: |
           docker build . \
           --file Dockerfile \
           --tag $IMAGE_NAME \
           --label "runnumber=${GITHUB_RUN_ID}"
+
       - name: Log in to registry
         run: |
           echo "${{ secrets.GITHUB_TOKEN }}" \
@@ -41,3 +41,14 @@ jobs:
 
           docker tag $IMAGE_NAME $IMAGE_ID:$COMMIT_SHA
           docker push $IMAGE_ID:$COMMIT_SHA
+
+      - name: Update image tag
+        run: |
+          sed -i "s|image.*|image: ghcr.io/kaichevannes/portfolio:test|" $DEPLOY_FILE_PATH
+          
+      - name: Push deployment manifest
+        run: |
+          git config user.name ${{ github.actor }}
+          git config user.email  "${{ github.actor }}@users.noreply.github.com"
+          git commit -am "GITHUB ACTION: update deployment manifest to new sha"
+          git push
