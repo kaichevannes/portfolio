@@ -1,8 +1,7 @@
-kind: Deployment
-apiVersion: apps/v1
+kind: deployment
+apiVersion: v1
 metadata:
   name: traefik-deployment
-  namespace: default
 spec:
   template:
     spec:
