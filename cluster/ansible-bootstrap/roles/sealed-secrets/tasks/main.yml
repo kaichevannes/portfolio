@@ -17,7 +17,7 @@
       -o yaml \
       --dry-run=client \
       --from-literal=PORKBUN_API_KEY="{{ lookup('env', 'PORKBUN_API_KEY') }}" \
-    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-porkbun-key.yaml"
+    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
   args:
     creates: sealed-porkbun-key.yaml
 
@@ -27,20 +27,20 @@
       -o yaml \
       --dry-run=client \
       --from-literal=PORKBUN_SECRET_API_KEY="{{ lookup('env', 'PORKBUN_SECRET_API_KEY') }}" \
-    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-porkbun-secret-key.yaml"
+    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
   args:
     creates: sealed-porkbun-secret-key.yaml
 
 - name: Copy sealed Porkbun key to controller
   fetch:
     src: "{{ ansible_env.HOME }}/sealed-porkbun-key.yaml"
-    dest: ../manifest/overlays/production/sealed-secrets/sealed-porkbun-key.yaml
+    dest: ../manifest/overlays/production/sealed-secrets-porkbun-key.yaml
     flat: yes
 
 - name: Copy sealed Porkbun secret key to controller
   fetch:
     src: "{{ ansible_env.HOME }}/sealed-porkbun-secret-key.yaml"
-    dest: ../manifest/overlays/production/sealed-secrets/sealed-porkbun-secret-key.yaml
+    dest: ../manifest/overlays/production/sealed-secrets-porkbun-secret-key.yaml
     flat: yes
 
 - name: Git push new sealed secrets
@@ -51,4 +51,4 @@
       && git commit -m "ANSIBLE BOOTSTRAP: resealing secrets" \
       && git push origin main
     chdir:
-      ../manifest/overlays/production/sealed-secrets/
+      ../manifest/overlays/production
