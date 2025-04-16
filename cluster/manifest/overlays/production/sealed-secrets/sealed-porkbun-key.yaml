@@ -1,0 +1,15 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: porkbun-key
+  namespace: default
+spec:
+  encryptedData:
+    porkbun-key: AgBRKjp5COzE5+0dNtxMujwOZV7tipEIx+T/n4h0nBoJnWuLAacWGJEB2CMTMuKn5q79eAM7Nlh13+4RXRuJqyQUfAqKwubiJFTNLBhzmFoO4i8ASTUNpiOBtN0Z3bZiAP3+qSHPkKLaObt31WyDF04NmtFczECloB30Bbc60l9G4giFbdQ26jnwj7ufwPHDq1Q+iJAkZw/wMFYzQXQ1xPyxz4qW5dZBcRLChIozOy2WvCAzfCNKqpyLQFxY6IMsfzSsnfaYRjDp39ngNsKqRD2CHjQa9syLNURsJ3PdUsQtIpXMbAr164W4iyqdEA0wuHPLMWgyrq/xGdPEsuzl2+2mL5l2wAE6ZPnW1CefGawPSqg6MlESgGnNyrqZpZF3P12OsScpmAD54bYgAQ2zdLg8aZk7w+WwUG0f8NR6uWUbWXys8ZxZ4WB+WgPok2/G+7qWQYAkDcH8ANF3XZkvzkHZqLzkG7ZHHCyfV7GpIpPVvGw1ShfSEx3gwJOCNyd7De3jqcgiqQfF5PjoG/NpqNDJtefOCuV7bWLtCeqilvZm1UQ4jZF2STcGi1XX9BGtog0enjHk5AfDNLGP/hJmWuNukle7wfGXhDCumiORgy/ab0WhUWbyXt4HNI56h/pT9uLv8hb6kFWmXOaG0rrCkJNLJWhaSRplqfuMBjr2y+Yf/7TP3JK4oQ7JEpk1fuufdK6Popk9vq5JbfGj9ui4Vz3xahfmV7Jg2gThHngI/kf39l/f/RsNJ6BfT4r9emC+DGxmwdruqZrM/ZdvjMbMw2+HRKHjYw==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: porkbun-key
+      namespace: default
