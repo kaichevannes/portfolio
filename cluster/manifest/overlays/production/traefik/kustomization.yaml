@@ -2,5 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - configmap.yml
-patchesStrategicMerge:
-  - deployment.yml
+patches:
+  - path: deployment.yml
+    target:
+      group: apps
+      version: v1
+      kind: Deployment
+      name: traefik-deployment
