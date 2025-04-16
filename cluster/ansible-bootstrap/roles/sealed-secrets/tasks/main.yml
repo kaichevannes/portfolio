@@ -1,0 +1,10 @@
+- name: Install kubeseal
+  vars:
+    architecture: "{{'arm64' if ansible_architecture == 'aarch64' else ansible_architecture}}"
+  shell: |
+    KUBESEAL_VERSION='0.29.0' 
+    curl -OL "https://github.com/bitnami-labs/sealed-secrets/releases/download/v${KUBESEAL_VERSION:?}/kubeseal-${KUBESEAL_VERSION:?}-linux-{{ architecture }}.tar.gz"
+    tar -xvzf kubeseal-${KUBESEAL_VERSION:?}-linux-{{ architecture }}.tar.gz kubeseal
+    sudo install -m 755 kubeseal /usr/local/bin/kubeseal
+  args:
+    creates: /usr/local/bin/kubeseal

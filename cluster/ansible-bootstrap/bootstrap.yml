@@ -4,3 +4,4 @@
   roles:
     - k3s
     - flux
+    - sealed-secrets
