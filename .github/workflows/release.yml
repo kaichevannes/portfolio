@@ -35,6 +35,7 @@ jobs:
           --tag $IMAGE_ID:latest \
           --platform linux/arm64 \
           --cache-from ghcr.io/kaichevannes/$IMAGE_NAME:latest
+          --push
 
       - name: Update image tag
         run: |
