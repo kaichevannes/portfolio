@@ -21,7 +21,7 @@ spec:
         - name: traefik
           image: traefik:v3.3
           args:
-            - --providers.kubernetesingress
+            - --providers.kubernetescrd
           ports:
             - name: web
               containerPort: 80

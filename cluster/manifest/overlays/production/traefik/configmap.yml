@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: traefik-config
+  namespace: default
+data:
+  traefik.yml: |
+    certificatesResolvers:
+      myresolver:
+        acme:
+          dnsChallenge:
+            provider: porkbun
+            delayBeforeCheck: 0
+          email: chevannes.kai@gmail.com
+          storage: acme.json
+    entryPoints:
+      web:
+        address: ":80"
+      websecure:
+        address: ":443"

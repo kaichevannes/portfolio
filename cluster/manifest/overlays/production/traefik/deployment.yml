@@ -1,0 +1,39 @@
+spec:
+  template:
+    spec:
+      serviceAccountName: traefik-account
+      containers:
+        - name: traefik
+          image: traefik:v3.3
+          envFrom:
+            - name: PORKBUN_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: porkbun-key
+                  key: porkbun-key
+            - name: PORKBUN_SECRET_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: porkbun-secret-key
+                  key: porkbun-secret-key
+          volumeMounts:
+            - name: traefik-config
+              mountPath: /etc/traefik/traefik.yml
+              subPath: traefik.yml
+              readOnly: true
+          args:
+            - --providers.kubernetesingress
+            # Staging server for testing
+            - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
+          ports:
+            - name: web
+              containerPort: 80
+            - name: websecure
+              containerPort: 443
+      volumes:
+        - name: traefik-config
+          configMap:
+            name: traefik-config
+            items:
+              - key: traefik.yml
+                path: traefik.yml
