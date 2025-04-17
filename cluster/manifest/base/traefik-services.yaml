@@ -5,13 +5,10 @@ metadata:
   namespace: default
 
 spec:
-  type: LoadBalancer
   ports:
     - name: web
       port: 80
-      targetPort: 80
     - name: websecure
       port: 443
-      targetPort: 443
   selector:
     app: traefik

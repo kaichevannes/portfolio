@@ -16,6 +16,7 @@ spec:
         app: traefik
     spec:
       serviceAccountName: traefik-account
+      hostNetwork: true
       containers:
         - name: traefik
           image: traefik:v3.3
@@ -26,6 +27,6 @@ spec:
             - --entryPoints.websecure.address=:443
           ports:
             - name: web
-              containerPort: 80
+              hostPort: 80
             - name: websecure
-              containerPort: 443
+              hostPort: 443
