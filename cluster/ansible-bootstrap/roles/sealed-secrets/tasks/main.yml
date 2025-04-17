@@ -13,11 +13,11 @@
 
 - name: Wait for sealed secrets controller to be ready
   shell: |
-    kubectl get deployment -n kube-system sealed-secrets-controller --no-headers
-  register: sealed_secrets_deploy
+    kubectl rollout status -n kube-system deploy/sealed-secrets-controller  
+  register: sealed_secrets_ready
   retries: 30
   delay: 5
-  until: sealed_secrets_deploy.rc == 0
+  until: sealed_secrets_ready.rc == 0
 
 - name: Check if sealed porkbun key exists
   stat:
