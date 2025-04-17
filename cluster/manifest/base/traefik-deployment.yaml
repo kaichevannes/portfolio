@@ -15,7 +15,6 @@ spec:
       labels:
         app: traefik
     spec:
-      hostNetwork: true
       serviceAccountName: traefik-account
       containers:
         - name: traefik
