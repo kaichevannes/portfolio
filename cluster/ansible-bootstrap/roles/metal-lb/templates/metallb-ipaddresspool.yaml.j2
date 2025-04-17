@@ -1,8 +1,0 @@
-apiVersion: metallb.io/v1beta1
-kind: IPAddressPool
-metadata:
-  name: first-pool
-  namespace: metallb-system
-spec:
-  addresses:
-  - {{ lookup('env', 'SERVER_EXTERNAL_IP') }}-{{ lookup('env', 'SERVER_EXTERNAL_IP') }}

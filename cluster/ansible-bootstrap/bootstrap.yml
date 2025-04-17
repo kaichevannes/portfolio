@@ -3,6 +3,5 @@
   remote_user: root
   roles:
     - k3s
-    - metal-lb
     - flux
     - sealed-secrets
