@@ -6,25 +6,17 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: traefik-account
       containers:
-        - name: traefik
-          image: traefik:v3.3
           envFrom:
           - secretRef:
               name: porkbun-key
           - secretRef:
               name: porkbun-secret-key
-          ports:
-            - name: web
-              containerPort: 80
-            - name: websecure
-              containerPort: 443
           args:
             - --accessLog
             - --providers.kubernetescrd
-            - --entryPoints.web.address=":80"
-            - --entryPoints.websecure.address=":443"
+            - --entryPoints.web.address=:30080
+            - --entryPoints.websecure.address=:30443
             - --certificatesResolvers.myresolver.acme.email=chevannes.kai@gmail.com
             - --certificatesResolvers.myresolver.acme.storage=acme.json
             - --certificatesResolvers.myresolver.acme.dnsChallenge.provider=porkbun

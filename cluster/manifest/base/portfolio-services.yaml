@@ -7,7 +7,5 @@ spec:
   ports:
     - name: web
       port: 3000
-      targetPort: web
-
   selector:
     app: portfolio
