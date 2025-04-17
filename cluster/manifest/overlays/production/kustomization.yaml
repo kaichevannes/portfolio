@@ -5,6 +5,9 @@ resources:
   - sealed-secrets-controller.yaml
   - sealed-secrets-porkbun-key.yaml
   - sealed-secrets-porkbun-secret-key.yaml
+  - metallb-manifest.yaml
+  - metallb-l2advertisement.yaml
+  - metallb-ipaddresspool.yaml
 patches:
   - path: traefik-deployment-patch.yaml
   - path: portfolio-ingress-patch.yaml

@@ -23,11 +23,10 @@
     curl -sfL https://get.k3s.io \
     | INSTALL_K3S_EXEC="server \
     --disable traefik \
-    --disable-helm-controller \
+    --disable servicelb \
     --disable-cloud-controller \
-    --write-kubeconfig={{ ansible_env.HOME }}/.kube/config \
-    --node-external-ip={{ lookup('env', 'SERVER_EXTERNAL_IP') | quote }} \
-    --flannel-external-ip " \
+    --disable-helm-controller \
+    --write-kubeconfig={{ ansible_env.HOME }}/.kube/config " \
     sh -s -
   args:
     creates: /etc/rancher/k3s/k3s.yaml
