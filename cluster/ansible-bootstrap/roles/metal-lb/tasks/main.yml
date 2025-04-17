@@ -1,29 +1,26 @@
-- name: enable strict ARP mode
-  shell: |
-    kubectl get configmap kube-proxy -n kube-system -o yaml | \
-    sed -e "s/strictARP: false/strictARP: true/" | \
-    kubectl diff -f - -n kube-system \
-    && kubectl get configmap kube-proxy -n kube-system -o yaml | \
-    sed -e "s/strictARP: false/strictARP: true/" | \
-    kubectl apply -f - -n kube-system
+# - name: enable strict ARP mode
+#   shell: |
+#     kubectl get configmap kube-proxy -n kube-system -o yaml | \
+#     sed -e "s/strictARP: false/strictARP: true/" | \
+#     kubectl diff -f - -n kube-system \
+#     && kubectl get configmap kube-proxy -n kube-system -o yaml | \
+#     sed -e "s/strictARP: false/strictARP: true/" | \
+#     kubectl apply -f - -n kube-system
 
-- name: Update IP address pool
-  hosts: localhost
-  gather_facts: no
-  block:
-    - name: Copy updated IP to local directory
-      template:
-        src: metallb-ipaddresspool.yaml.j2
-        dest: ../manifest/overlays/production/metallb-ipaddresspool.yaml
-      register: ip_pool_template
+- name: Copy updated IP to local directory
+  local_action:
+    module: template
+    src: metallb-ipaddresspool.yaml.j2
+    dest: ../manifest/overlays/production/metallb-ipaddresspool.yaml
+  register: ip_pool_template
 
-    - name: Git push new sealed secrets
-      local_action:
-        module: shell
-        cmd: |
-          git add metallb-ipaddresspool.yaml \
-          && git commit -m "ANSIBLE BOOTSTRAP: update IP pool to reflect new VPS" \
-          && git push origin main
-        chdir:
-          ../manifest/overlays/production
-      when: ip_pool_template.changed
+- name: Git push updated IP if changed
+  local_action:
+    module: shell
+    cmd: |
+      git add metallb-ipaddresspool.yaml \
+      && git commit -m "ANSIBLE BOOTSTRAP: update IP pool to reflect new VPS" \
+      && git push origin main
+    chdir:
+      ../manifest/overlays/production
+  when: ip_pool_template.changed

@@ -11,6 +11,14 @@
   args:
     creates: /usr/local/bin/kubeseal
 
+- name: Wait for sealed secrets controller to be ready
+  shell: |
+    kubectl get deployment -n kube-system sealed-secrets-controller --no-headers
+  register: sealed_secrets_deploy
+  retries: 30
+  delay: 5
+  until: sealed_secrets_deploy.rc == "0
+
 - name: Check if sealed porkbun key exists
   stat:
     path: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
@@ -21,7 +29,7 @@
     path: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
   register: sealed_porkbun_secret_key_stat
 
-- name: Porkbun flow
+- name: Create secrets and push them to Git
   when: not (sealed_porkbun_key_stat.stat.exists and sealed_porkbun_secret_key_stat.stat.exists)
   block:
     - name: Create Porkbun key sealed secret

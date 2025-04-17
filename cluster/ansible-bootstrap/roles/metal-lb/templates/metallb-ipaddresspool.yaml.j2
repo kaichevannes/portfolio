@@ -5,4 +5,4 @@ metadata:
   namespace: metallb-system
 spec:
   addresses:
-  - "{{ lookup('env', 'SERVER_EXTERNAL_IP' }}"-"{{ lookup('env', 'SERVER_EXTERNAL_IP' }}"
+  - {{ lookup('env', 'SERVER_EXTERNAL_IP') }}-{{ lookup('env', 'SERVER_EXTERNAL_IP') }}
