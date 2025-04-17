@@ -6,7 +6,7 @@ on:
 
 env:
   IMAGE_NAME: portfolio
-  DEPLOY_FILE_PATH: cluster/manifest/base/portfolio/deployment.yml
+  DEPLOY_FILE_PATH: cluster/manifest/base/portfolio-deployment.yaml
 
 jobs:
   
