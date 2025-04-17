@@ -11,44 +11,57 @@
   args:
     creates: /usr/local/bin/kubeseal
 
-- name: Create Porkbun key sealed secret
-  shell: |
-    kubectl create secret generic porkbun-key \
-      -o yaml \
-      --dry-run=client \
-      --from-literal=PORKBUN_API_KEY="{{ lookup('env', 'PORKBUN_API_KEY') }}" \
-    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
-  args:
-    creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
+- name: Check if sealed porkbun key exists
+  stat:
+    path: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
+  register: sealed_porkbun_key_stat
 
-- name: Create Porkbun secret key sealed secret
-  shell: |
-    kubectl create secret generic porkbun-secret-key \
-      -o yaml \
-      --dry-run=client \
-      --from-literal=PORKBUN_SECRET_API_KEY="{{ lookup('env', 'PORKBUN_SECRET_API_KEY') }}" \
-    | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
-  args:
-    creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
+- name: Check if sealed porkbun secret key exists
+  stat:
+    path: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
+  register: sealed_porkbun_secret_key_stat
 
-- name: Copy sealed Porkbun key to controller
-  fetch:
-    src: "{{ ansible_env.HOME }}/sealed-porkbun-key.yaml"
-    dest: ../manifest/overlays/production/sealed-secrets-porkbun-key.yaml
-    flat: yes
+- name: Porkbun flow
+  when: not (sealed_porkbun_key_stat.stat.exists and sealed_porkbun_secret_key_stat.stat.exists)
+  block:
+    - name: Create Porkbun key sealed secret
+      shell: |
+        kubectl create secret generic porkbun-key \
+          -o yaml \
+          --dry-run=client \
+          --from-literal=PORKBUN_API_KEY="{{ lookup('env', 'PORKBUN_API_KEY') }}" \
+        | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
+      args:
+        creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
 
-- name: Copy sealed Porkbun secret key to controller
-  fetch:
-    src: "{{ ansible_env.HOME }}/sealed-porkbun-secret-key.yaml"
-    dest: ../manifest/overlays/production/sealed-secrets-porkbun-secret-key.yaml
-    flat: yes
+    - name: Create Porkbun secret key sealed secret
+      shell: |
+        kubectl create secret generic porkbun-secret-key \
+          -o yaml \
+          --dry-run=client \
+          --from-literal=PORKBUN_SECRET_API_KEY="{{ lookup('env', 'PORKBUN_SECRET_API_KEY') }}" \
+        | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
+      args:
+        creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
 
-- name: Git push new sealed secrets
-  local_action:
-    module: shell
-    cmd: |
-      git add sealed-porkbun-key.yaml sealed-porkbun-secret-key.yaml \
-      && git commit -m "ANSIBLE BOOTSTRAP: resealing secrets" \
-      && git push origin main
-    chdir:
-      ../manifest/overlays/production
+    - name: Copy sealed Porkbun key to controller
+      fetch:
+        src: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
+        dest: ../manifest/overlays/production/sealed-secrets-porkbun-key.yaml
+        flat: yes
+
+    - name: Copy sealed Porkbun secret key to controller
+      fetch:
+        src: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
+        dest: ../manifest/overlays/production/sealed-secrets-porkbun-secret-key.yaml
+        flat: yes
+
+    - name: Git push new sealed secrets
+      local_action:
+        module: shell
+        cmd: |
+          git add sealed-secrets-porkbun-key.yaml sealed-secrets-porkbun-secret-key.yaml \
+          && git commit -m "ANSIBLE BOOTSTRAP: resealing secrets" \
+          && git push origin main
+        chdir:
+          ../manifest/overlays/production
