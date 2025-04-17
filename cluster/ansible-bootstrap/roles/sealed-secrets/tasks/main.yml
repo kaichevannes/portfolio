@@ -19,7 +19,7 @@
       --from-literal=PORKBUN_API_KEY="{{ lookup('env', 'PORKBUN_API_KEY') }}" \
     | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
   args:
-    creates: sealed-porkbun-key.yaml
+    creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-key.yaml"
 
 - name: Create Porkbun secret key sealed secret
   shell: |
@@ -29,7 +29,7 @@
       --from-literal=PORKBUN_SECRET_API_KEY="{{ lookup('env', 'PORKBUN_SECRET_API_KEY') }}" \
     | kubeseal -o yaml > "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
   args:
-    creates: sealed-porkbun-secret-key.yaml
+    creates: "{{ ansible_env.HOME }}/sealed-secrets-porkbun-secret-key.yaml"
 
 - name: Copy sealed Porkbun key to controller
   fetch:
