@@ -15,8 +15,8 @@ spec:
           args:
             - --accessLog
             - --providers.kubernetescrd
-            - --entryPoints.web.address=:30080
-            - --entryPoints.websecure.address=:30443
+            - --entryPoints.web.address=:80
+            - --entryPoints.websecure.address=:443
             - --certificatesResolvers.myresolver.acme.email=chevannes.kai@gmail.com
             - --certificatesResolvers.myresolver.acme.storage=acme.json
             - --certificatesResolvers.myresolver.acme.dnsChallenge.provider=porkbun
