@@ -1,0 +1,10 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: portfolio
+  namespace: default
+spec:
+  interval: 30s
+  url: https://github.com/kaichevannes/portfolio.git
+  ref:
+    branch: main

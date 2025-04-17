@@ -25,17 +25,9 @@
     --disable traefik \
     --disable-helm-controller \
     --disable-cloud-controller \
-    --write-kubeconfig={{ ansible_env.HOME }}/.kube/config " \
+    --write-kubeconfig={{ ansible_env.HOME }}/.kube/config \
+    --node-external-ip={{ lookup('env', 'SERVER_EXTERNAL_IP') | quote }} " \
     sh -s -
-  # shell: |
-  #   curl -sfL https://get.k3s.io \
-  #   | INSTALL_K3S_EXEC="server \
-  #   --disable traefik \
-  #   --disable-helm-controller \
-  #   --disable-cloud-controller \
-  #   --write-kubeconfig={{ ansible_env.HOME }}/.kube/config \
-  #   --node-external-ip={{ lookup('env', 'SERVER_EXTERNAL_IP') | quote }} " \
-  #   sh -s -
   args:
     creates: /etc/rancher/k3s/k3s.yaml
 
