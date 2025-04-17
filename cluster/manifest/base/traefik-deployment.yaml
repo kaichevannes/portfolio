@@ -26,6 +26,6 @@ spec:
             - --entryPoints.websecure.address=:443
           ports:
             - name: web
-              containerPort: 30080
+              containerPort: 80
             - name: websecure
-              containerPort: 30443
+              containerPort: 443
