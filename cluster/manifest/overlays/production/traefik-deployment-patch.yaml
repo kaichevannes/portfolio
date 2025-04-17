@@ -15,25 +15,17 @@ spec:
               name: porkbun-key
           - secretRef:
               name: porkbun-secret-key
-          volumeMounts:
-            - name: traefik-config
-              mountPath: /etc/traefik/traefik.yml
-              subPath: traefik.yml
-              readOnly: true
-          args:
-            - --accessLog
-            - --providers.kubernetescrd
-            # Staging server for testing
-            - --certificatesresolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
           ports:
             - name: web
               containerPort: 80
             - name: websecure
               containerPort: 443
-      volumes:
-        - name: traefik-config
-          configMap:
-            name: traefik-config
-            items:
-              - key: traefik.yml
-                path: traefik.yml
+          args:
+            - --accessLog
+            - --providers.kubernetescrd
+            - --entryPoints.web.address=":80"
+            - --entryPoints.websecure.address=":443"
+            - --certificatesResolvers.myresolver.acme.email=chevannes.kai@gmail.com
+            - --certificatesResolvers.myresolver.acme.storage=acme.json
+            - --certificatesResolvers.myresolver.acme.dnsChallenge.provider=porkbun
+            - --certificatesResolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory

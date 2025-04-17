@@ -29,13 +29,14 @@ jobs:
         run: |
           IMAGE_ID=ghcr.io/kaichevannes/$IMAGE_NAME
 
-          docker buildx build . \
+          docker buildx build \
           --file Dockerfile \
           --tag $IMAGE_ID:${{ github.sha }} \
           --tag $IMAGE_ID:latest \
-          --platform linux/arm64 \
+          --platform linux/arm64,linux/amd64 \
           --cache-from $IMAGE_ID:latest \
-          --push
+          --push \
+          .
 
       - name: Update image tag
         run: |

@@ -5,10 +5,12 @@ metadata:
   namespace: default
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-  - match: Host(`localhost`)
+  - match: Host(`kaichevannes.com`)
     kind: Rule
     services:
     - name: portfolio
       port: 3000
+  tls:
+    certResolver: myresolver
