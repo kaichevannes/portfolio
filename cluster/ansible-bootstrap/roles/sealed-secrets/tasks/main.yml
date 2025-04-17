@@ -17,7 +17,7 @@
   register: sealed_secrets_deploy
   retries: 30
   delay: 5
-  until: sealed_secrets_deploy.rc == "0
+  until: sealed_secrets_deploy.rc == 0
 
 - name: Check if sealed porkbun key exists
   stat:
