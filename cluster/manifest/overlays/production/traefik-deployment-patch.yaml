@@ -7,7 +7,9 @@ spec:
   template:
     spec:
       containers:
-        - envFrom:
+        - name: traefik
+          image: traefik:v3.3
+          envFrom:
           - secretRef:
               name: porkbun-key
           - secretRef:
