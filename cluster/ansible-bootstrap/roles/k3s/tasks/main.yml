@@ -26,7 +26,8 @@
     --disable-helm-controller \
     --disable-cloud-controller \
     --write-kubeconfig={{ ansible_env.HOME }}/.kube/config \
-    --node-external-ip={{ lookup('env', 'SERVER_EXTERNAL_IP') | quote }} " \
+    --node-external-ip={{ lookup('env', 'SERVER_EXTERNAL_IP') | quote }} \
+    --flannel-external-ip " \
     sh -s -
   args:
     creates: /etc/rancher/k3s/k3s.yaml
