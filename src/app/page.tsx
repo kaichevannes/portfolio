@@ -9,5 +9,5 @@ export default function App() {
 }
 
 const Wrapper = styled.div`
-  color: blue;
+  color: green;
 `;
