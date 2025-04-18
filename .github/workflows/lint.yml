@@ -14,5 +14,5 @@ jobs:
       - name: Lint Code Base
         uses: super-linter/super-linter@v7.1.0
         env:
-          FILTER_REGEX_INCLUDE: ^src/
+          FILTER_REGEX_INCLUDE: '^src/'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
