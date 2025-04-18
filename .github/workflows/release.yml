@@ -9,15 +9,19 @@ env:
   DEPLOY_FILE_PATH: cluster/manifest/base/portfolio-deployment.yaml
 
 jobs:
-  
   release:
     runs-on: ubuntu-latest
     permissions:
       packages: write
       contents: write
+      pull-requests: write
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Log in to registry
         run: |
