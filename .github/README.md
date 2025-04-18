@@ -13,7 +13,6 @@
 - `Contents` -> `Access: Read and write`
 - `Metadata` -> `Access: Read only`
 3. Set environment variables
-- `export SERVER_EXTERNAL_IP=staticip`
 - `export ANSIBLE_PRIVATE_KEY_FILE=/path/to/server-ssh-key` (or add yourself to the machines vm accepted keys file)
 - `export GITHUB_TOKEN=yourtoken`
 - `export PORKBUN_API_KEY=porkbunapikey`
