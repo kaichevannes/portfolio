@@ -25,4 +25,3 @@ spec:
             - --certificatesResolvers.myresolver.acme.email=chevannes.kai@gmail.com
             - --certificatesResolvers.myresolver.acme.storage=acme.json
             - --certificatesResolvers.myresolver.acme.dnsChallenge.provider=porkbun
-            - --certificatesResolvers.myresolver.acme.caserver=https://acme-staging-v02.api.letsencrypt.org/directory
