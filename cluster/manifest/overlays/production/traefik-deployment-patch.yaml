@@ -18,6 +18,9 @@ spec:
             - --accessLog
             - --providers.kubernetescrd
             - --entryPoints.web.address=:80
+            - --entryPoints.web.http.redirections.entryPoint.to=websecure
+            - --entryPoints.web.http.redirections.entryPoint.scheme=https
+            - --entryPoints.web.http.redirections.entryPoint.permanent=true
             - --entryPoints.websecure.address=:443
             - --certificatesResolvers.myresolver.acme.email=chevannes.kai@gmail.com
             - --certificatesResolvers.myresolver.acme.storage=acme.json
