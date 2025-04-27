@@ -1,7 +1,5 @@
 import { css } from '@linaria/core';
 
-import { COLORS } from '@/constants';
-
 export const globals = css`
   :global() {
     /*
@@ -60,35 +58,11 @@ export const globals = css`
     }
 
     /*
-    Color Styles
+    Colors
     */
-    :root {
-      --color-background: ${COLORS.beige};
-      --color-text: ${COLORS.black};
-      --color-highlight: ${COLORS.highlight};
-      --color-grey-300: ${COLORS.grey[300]};
-      --color-grey-500: ${COLORS.grey[500]};
-      --color-grey-700: ${COLORS.grey[700]};
-      --color-grey-900: ${COLORS.grey[900]};
-      --color-primary: ${COLORS.primary};
-    }
-
-    [data-theme='dark'] {
-      --color-background: ${COLORS.black};
-      --color-text: ${COLORS.beige};
-      --color-highlight: ${COLORS.highlight};
-      --color-grey-300: ${COLORS.grey[300]};
-      --color-grey-500: ${COLORS.grey[500]};
-      --color-grey-700: ${COLORS.grey[700]};
-      --color-grey-900: ${COLORS.grey[900]};
-      --color-primary: ${COLORS.primary};
-    }
-
-    /*
-    Background
-    */
-    html {
+    body {
       background: var(--color-background);
+      color: var(--color-text);
     }
   }
 `
