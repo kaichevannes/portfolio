@@ -2,13 +2,12 @@
 
 import { styled } from '@linaria/react';
 
-import { useTheme } from 'next-themes';
-
 import { Header } from '@/components/Header';
 import { MaxWidthWrapper } from '@/components/MaxWidthWrapper';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function App() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useTheme();
 
   return (
     <MaxWidthWrapper>

@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from 'next-themes';
+import { Inter } from "next/font/google";
 import './styles.linaria.global';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import { type Theme, ThemeProvider } from '@/components/ThemeProvider';
+import { type ColorType, COLORS } from '@/constants';
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: "Kai Chevannes",
@@ -24,10 +18,43 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <ThemeProvider>{children}</ThemeProvider>
+    // This will only suppress hydration warnings for direct children.
+    <html lang="en" suppressHydrationWarning>
+      <body className={inter.className}>
+        <script dangerouslySetInnerHTML={{ __html: `(${boundSetColorsForTheme})()` }} />
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
 }
+
+function setColorsForTheme() {
+  let theme: Theme;
+
+  const persistedTheme = localStorage.getItem('theme');
+
+  if (persistedTheme === 'light' || persistedTheme === 'dark') {
+    theme = persistedTheme;
+  }
+  else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme = 'dark';
+  }
+  else {
+    theme = 'light';
+  }
+
+  const colors: ColorType = JSON.parse('{{ COLORS_PLACEHOLDER }}');
+
+  let root = document.documentElement;
+
+  root.style.setProperty('--initial-theme', theme);
+
+  Object.entries(colors).forEach(([colorName, lightDarkValues]) => {
+    root.style.setProperty(`--color-${colorName}`, lightDarkValues[theme]);
+  });
+}
+
+const boundSetColorsForTheme = String(setColorsForTheme)
+  .replace('{{ COLORS_PLACEHOLDER }}', JSON.stringify(COLORS))
