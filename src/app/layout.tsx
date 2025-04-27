@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import './styles.linaria.global';
 
-import { ThemeProvider } from '@/components/ThemeProvider';
-import { COLORS, ColorType } from '@/constants';
+import { type Theme, ThemeProvider } from '@/components/ThemeProvider';
+import { type ColorType, COLORS } from '@/constants';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,7 +31,7 @@ export default function RootLayout({
 }
 
 function setColorsForTheme() {
-  let theme: 'light' | 'dark';
+  let theme: Theme;
 
   const persistedTheme = localStorage.getItem('theme');
 

@@ -5,25 +5,27 @@ import React, { ReactNode } from 'react';
 import { COLORS } from '@/constants';
 
 // From https://www.joshwcomeau.com/react/dark-mode/
+type Theme = 'light' | 'dark';
+
 interface ThemeContextType {
-  theme: string | undefined;
-  setTheme: (value: 'light' | 'dark') => void;
+  theme: Theme | undefined;
+  setTheme: (value: Theme) => void;
 }
 
 const ThemeContext = React.createContext<ThemeContextType | undefined>(undefined);
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [theme, rawSetTheme] = React.useState<string>();
+  const [theme, rawSetTheme] = React.useState<Theme>();
 
   React.useEffect(() => {
     const root = window.document.documentElement;
 
     const initialTheme = root.style.getPropertyValue('--initial-theme');
 
-    rawSetTheme(initialTheme);
+    rawSetTheme(initialTheme as Theme);
   }, []);
 
-  const setTheme = (value: 'light' | 'dark') => {
+  const setTheme = (value: Theme) => {
     const root = window.document.documentElement;
 
     window.localStorage.setItem('theme', value);
@@ -50,4 +52,4 @@ const useTheme = () => {
   return context;
 };
 
-export { ThemeProvider, useTheme }
+export { type Theme, ThemeProvider, useTheme }
