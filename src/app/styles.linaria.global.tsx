@@ -53,6 +53,13 @@ export const globals = css`
     }
 
     /*
+    Fonts
+    */
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /*
     Color Styles
     */
     :root {
