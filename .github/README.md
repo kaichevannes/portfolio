@@ -25,10 +25,10 @@
 - `export GITHUB_TOKEN=yourtoken`
 - `export PORKBUN_API_KEY=porkbunapikey`
 - `export PORKBUN_SECRET_API_KEY=porkbunsecretkey`
-3. `cd cluster/ansible_bootstrap`
-4. `ansible-playbook -i inventory.ini bootstrap.yml`
+4. `cd cluster/ansible_bootstrap`
+5. `ansible-playbook -i inventory.ini bootstrap.yml`
 
-**Note: to access an ssh key from WSL, copy into .ssh and then chmod 600**
+**Note: to access an ssh key from Windows host when using WSL, copy into .ssh and then chmod 600**
 
 ## Troubleshooting
 - `flux reconcile source git portfolio`
