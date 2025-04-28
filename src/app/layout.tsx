@@ -46,7 +46,9 @@ function setColorsForTheme() {
   }
 
   // Hacking typescript, this is replaced at runtime below.
-  const colors: ColorType = '{{ COLORS_PLACEHOLDER }}' as unknown as ColorType;
+  // Leave double quotes "". When this gets minified it minifies to double
+  // quotes which we need to match in order to replace it below.
+  const colors: ColorType = "{{ COLORS_PLACEHOLDER }}" as unknown as ColorType;
 
   let root = document.documentElement;
 
@@ -58,7 +60,7 @@ function setColorsForTheme() {
 }
 
 const boundSetColorsForTheme = String(setColorsForTheme)
-  // We need the second pair of quotes to match '{{ COLORS_PLACEHOLDER }}' 
-  // rather than {{ COLORS_PLACEHOLDER }}. This means that the single quotes
+  // We need the second pair of quotes to match "{{ COLORS_PLACEHOLDER }}" 
+  // rather than {{ COLORS_PLACEHOLDER }}. This means that the double quotes
   // are included and replaced with the stringified value.
-  .replace("'{{ COLORS_PLACEHOLDER }}'", JSON.stringify(COLORS))
+  .replace('"{{ COLORS_PLACEHOLDER }}"', JSON.stringify(COLORS))
