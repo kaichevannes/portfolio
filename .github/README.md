@@ -10,7 +10,7 @@
 2. Install k3d: `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash`
 3. Install Tilt: `curl -fsSL https://raw.githubusercontent.com/tilt-dev/tilt/master/scripts/install.sh | bash`
 4. Create k3d registry: `k3d registry create myregistry.localhost --port 5000`
-5. Start k3d cluster: `k3d cluster create portfolio-cluster -p "80:80@server:0" --registry-use myregistry.localhost:5000`
+5. Start k3d cluster: `k3d cluster create portfolio-cluster -p "80:80@loadbalancer" --registry-use myregistry.localhost:5000`
 6. Start cluster with: `tilt up`
 7. Access web app at: `http://localhost`
 
