@@ -11,7 +11,7 @@ const Header = () => {
   const { theme, setTheme } = useTheme();
 
   // While we wait for the theme to resolve client side, show a blank div with
-  // the same size as the theme icon.
+  // the same size as the theme icon to preserve layout.
   let ThemeIcon;
   switch (theme) {
     case 'light':
