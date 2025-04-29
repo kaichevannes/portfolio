@@ -40,6 +40,13 @@ const COLORS: ColorType = {
   }
 }
 
+const WEIGHTS = {
+  regular: 400,
+  medium: 500,
+  semibold: 600,
+  bold: 700,
+}
+
 const BREAKPOINTS = {
   mobileMax: 550,
   tabletMax: 1100,
@@ -52,4 +59,4 @@ const QUERIES = {
   laptopAndDown: `(max-width: ${BREAKPOINTS.laptopMax / 16}rem)`,
 }
 
-export { type ColorType, COLORS, BREAKPOINTS, QUERIES };
+export { type ColorType, COLORS, WEIGHTS, BREAKPOINTS, QUERIES };

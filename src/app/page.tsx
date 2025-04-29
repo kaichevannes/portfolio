@@ -16,11 +16,6 @@ export default function App() {
         <Wrapper>
           <p>Hello World</p>
         </Wrapper>
-        <div>
-          The current theme is: {theme}
-          <button onClick={() => setTheme('light')}>Light Mode</button>
-          <button onClick={() => setTheme('dark')}>Dark Mode</button>
-        </div>
       </main>
     </MaxWidthWrapper>
   );
