@@ -68,5 +68,14 @@ export const globals = css`
     ::selection {
       background: var(--color-highlight);
     }
+
+    /*
+    Smooth scrolling
+    */
+    @media (prefers-reduced-motion: no-preference) {
+      html {
+        scroll-behavior: smooth;
+      }
+    }
   }
 `

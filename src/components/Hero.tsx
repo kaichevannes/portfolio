@@ -18,7 +18,7 @@ const Hero = () => {
           alt='Me sitting in lotus position on my bed in the morning sun.'
           width={475}
           height={376}
-          quality={100}
+          quality={25}
           priority
         />
         <HeroImage
