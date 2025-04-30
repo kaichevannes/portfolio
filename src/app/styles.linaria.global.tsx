@@ -64,5 +64,9 @@ export const globals = css`
       background: var(--color-background);
       color: var(--color-text);
     }
+
+    ::selection {
+      background: var(--color-highlight);
+    }
   }
 `

@@ -43,7 +43,7 @@ const Header = () => {
           <IconWrapper>
             <ThemeIcon />
           </IconWrapper>
-          light
+          {theme}
         </Button>
       </Buttons>
     </Wrapper>

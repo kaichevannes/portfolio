@@ -16,7 +16,7 @@ const COLORS: ColorType = {
   },
   highlight: {
     light: `hsl(50deg 100% 78%)`,
-    dark: `hsl(50deg 100% 78%)`,
+    dark: `hsl(340, 70%, 55%)`,
   },
   primary: {
     light: `hsl(166deg 100% 34%)`,
