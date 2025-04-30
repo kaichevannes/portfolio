@@ -7,7 +7,7 @@ const Heading = ({ children }: { children: ReactNode }) => {
   return <Title>{children}<Accent>.</Accent></Title>
 };
 
-const Title = styled.div`
+const Title = styled.h2`
   font-weight: ${WEIGHTS.bold};
   font-size: ${48 / 16}rem;
   letter-spacing: -2%;

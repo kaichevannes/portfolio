@@ -10,7 +10,7 @@ const About = () => {
   return (
     <Wrapper id='about'>
       <Heading>About</Heading>
-      <div>
+      <Contents>
         <P>
           I care about cultures built on curiosity and kindness, spaces for continuous learning and warmth.
         </P>
@@ -23,18 +23,24 @@ const About = () => {
         <P>
           When I’m not listening to <Anchor href="https://www.goodreads.com/review/list/168867354-kai-chevannes?order=d&shelf=read&sort=rating">audiobooks</Anchor> or tinkering with my <Hint>dev environment</Hint>, I enjoy <Anchor href="https://rateyourmusic.com/~cheva">rating obscure music albums</Anchor> and making <Anchor href="https://www.youtube.com/playlist?list=PLWJ3-Ib---3Exq8Lb829sOBjEvbJsAX3S">DJ mixes</Anchor> with songs that mean everything to me.
         </P>
-      </div>
+      </Contents>
     </Wrapper>
   )
 };
 
 const Wrapper = styled.div`
   font-weight: ${WEIGHTS.medium};
+  font-size: ${20 / 16}rem;
+`;
+
+const Contents = styled.div`
   color: var(--color-grey900);
 `;
 
 const P = styled.p`
-  padding-bottom: 16px;
+  &:not(:last-of-type) {
+    padding-bottom: 24px;
+  }
 `;
 
 export { About };
