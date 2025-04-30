@@ -12,13 +12,24 @@ const Hero = () => {
         <JobRole><Accent>Software</Accent> Developer</JobRole>
         <Description>I’m inspired by excellence — mastery of the small details.</Description>
       </Text>
-      <HeroImage
-        src='/meditation.png'
-        alt='Me sitting in lotus position on my bed in the morning sun.'
-        width={475}
-        height={376}
-        priority
-      />
+      <ImageWrapper>
+        <BlurImage
+          src='/meditation.png'
+          alt='Me sitting in lotus position on my bed in the morning sun.'
+          width={475}
+          height={376}
+          quality={100}
+          priority
+        />
+        <HeroImage
+          src='/meditation.png'
+          alt='Me sitting in lotus position on my bed in the morning sun.'
+          width={475}
+          height={376}
+          quality={100}
+          priority
+        />
+      </ImageWrapper>
     </Wrapper>
   );
 };
@@ -57,8 +68,20 @@ const Accent = styled.span`
   color: var(--color-primary);
 `;
 
+const ImageWrapper = styled.div`
+  position: relative;
+`;
+
 const HeroImage = styled(Image)`
+  position: relative;
   border-radius: 100px;
+  object-fit: cover;
+`;
+
+const BlurImage = styled(HeroImage)`
+  position: absolute;
+  filter: blur(40px);
+  transform: scale(1.05);
 `;
 
 export { Hero };
