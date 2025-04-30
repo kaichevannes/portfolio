@@ -43,12 +43,13 @@ const Wrapper = styled.div`
 `;
 
 const Text = styled.div`
-  max-width: 354px;
+  max-width: 360px;
 `;
 
 const Hello = styled.div`
   font-weight: ${WEIGHTS.medium};
   color: var(--color-grey900);
+  font-size: ${20 / 16}rem;
 `;
 
 const JobRole = styled.div`
@@ -62,6 +63,7 @@ const JobRole = styled.div`
 const Description = styled.div`
   font-weight: ${WEIGHTS.medium};
   color: var(--color-grey500);
+  font-size: ${20 / 16}rem;
 `;
 
 const Accent = styled.span`
