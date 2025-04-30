@@ -18,7 +18,7 @@ spec:
         app: portfolio
     spec:
       containers:
-      - image: ghcr.io/kaichevannes/portfolio:6070878f9fa1385005636443951f3308731ad4d3
+      - image: ghcr.io/kaichevannes/portfolio:426b74ea91b7d85d51116a0b4b7ded8ab2c42e68
         name: portfolio
         ports:
           - name: web
