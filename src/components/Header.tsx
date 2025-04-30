@@ -43,7 +43,7 @@ const Header = () => {
           <IconWrapper>
             <ThemeIcon />
           </IconWrapper>
-          light
+          {theme}
         </Button>
       </Buttons>
     </Wrapper>
@@ -54,6 +54,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
+  padding-top: 8px;
 `;
 
 const Logo = styled.a`
