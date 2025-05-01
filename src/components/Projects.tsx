@@ -41,6 +41,7 @@ const ImageWrapper = styled.div`
   position: relative;
   flex: 1;
   aspect-ratio: 490 / 376;
+  max-height: 392px;
   border: 2px solid var(--color-text);
   border-radius: 16px;
 `;

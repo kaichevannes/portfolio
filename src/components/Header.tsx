@@ -21,7 +21,7 @@ const Header = () => {
       ThemeIcon = Moon;
       break;
     default:
-      ThemeIcon = PlaceholderIcon;
+      ThemeIcon = Placeholder;
   }
 
   return (
@@ -35,13 +35,13 @@ const Header = () => {
       <Buttons>
         <Button>
           <IconWrapper>
-            <Volume2 />
+            <Volume2 width={28} height={28} />
           </IconWrapper>
           sound
         </Button>
         <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
           <IconWrapper>
-            <ThemeIcon />
+            <ThemeIcon width={28} height={28} />
           </IconWrapper>
           {theme}
         </Button>
@@ -115,9 +115,9 @@ const IconWrapper = styled.div`
   align-self: center;
 `;
 
-const PlaceholderIcon = styled.div`
-  width: 24px;
-  height: 24px;
+const Placeholder = styled.div`
+  width: 80px;
+  height: 28px;
 `;
 
 export { Header };
