@@ -31,7 +31,7 @@ const Contact = () => {
           </Social>
           <Social href='https://www.linkedin.com/in/kaichevannes/'>
             <IconWrapper>
-              <LinkedIn width={27} height={30} style={{ transform: 'translateX(1px)', marginRight: '4px' } as CSSProperties} />
+              <LinkedIn width={27} height={30} style={{ transform: 'translateX(1.5px)', marginRight: '3px' } as CSSProperties} />
             </IconWrapper>
             <TextWrapper>
               kaichevannes
@@ -115,6 +115,7 @@ const IconWrapper = styled.div`
 
 const TextWrapper = styled.div`
   position: relative;
+  font-weight: ${WEIGHTS.medium}
 `;
 
 const SquigglyWrapper = styled.div`
@@ -159,6 +160,7 @@ const Label = styled(Form.Label)`
   display: block;
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.semibold};
+  color: var(--color-grey900);
 `;
 
 const Input = styled.input`
@@ -168,6 +170,7 @@ const Input = styled.input`
   border-bottom: 2px solid var(--color-grey700);
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
+  color: inherit;
 `;
 
 const TextArea = styled.textarea`
@@ -178,6 +181,7 @@ const TextArea = styled.textarea`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   resize: none;
+  color: inherit;
 `;
 
 const Send = styled.button`
