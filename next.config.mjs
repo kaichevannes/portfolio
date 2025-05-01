@@ -27,7 +27,7 @@ const config = {
             loader: '@svgr/webpack',
             options: {
               // Set this to false to require specifying width and height
-              dimensions: true,
+              dimensions: false,
             }
           }
         ],

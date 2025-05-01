@@ -16,16 +16,16 @@ const Hero = () => {
         <BlurImage
           src='/meditation.png'
           alt='Me sitting in lotus position on my bed in the morning sun.'
-          width={475}
-          height={376}
+          width={491}
+          height={388}
           quality={25}
           priority
         />
         <HeroImage
           src='/meditation.png'
           alt='Me sitting in lotus position on my bed in the morning sun.'
-          width={475}
-          height={376}
+          width={491}
+          height={388}
           quality={100}
           priority
         />
