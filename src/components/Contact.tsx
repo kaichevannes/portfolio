@@ -159,6 +159,7 @@ const Label = styled(Form.Label)`
   display: block;
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.semibold};
+  color: var(--color-grey900);
 `;
 
 const Input = styled.input`
@@ -168,6 +169,7 @@ const Input = styled.input`
   border-bottom: 2px solid var(--color-grey700);
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
+  color: inherit;
 `;
 
 const TextArea = styled.textarea`
@@ -178,6 +180,7 @@ const TextArea = styled.textarea`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   resize: none;
+  color: inherit;
 `;
 
 const Send = styled.button`
