@@ -31,7 +31,7 @@ const Contact = () => {
           </Social>
           <Social href='https://www.linkedin.com/in/kaichevannes/'>
             <IconWrapper>
-              <LinkedIn width={27} height={30} style={{ transform: 'translateX(1px)', marginRight: '4px' } as CSSProperties} />
+              <LinkedIn width={27} height={30} style={{ transform: 'translateX(1.5px)', marginRight: '3px' } as CSSProperties} />
             </IconWrapper>
             <TextWrapper>
               kaichevannes
@@ -115,6 +115,7 @@ const IconWrapper = styled.div`
 
 const TextWrapper = styled.div`
   position: relative;
+  font-weight: ${WEIGHTS.medium}
 `;
 
 const SquigglyWrapper = styled.div`

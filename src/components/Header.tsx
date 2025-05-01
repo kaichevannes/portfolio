@@ -26,11 +26,11 @@ const Header = () => {
 
   return (
     <Wrapper>
-      <Logo href='#'>kai chevannes<Accent>.</Accent></Logo>
+      <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
       <Nav>
-        <NavLink href='#about'>about</NavLink>
-        <NavLink href='#projects'>projects</NavLink>
-        <NavLink href='#contact'>contact</NavLink>
+        <NavLink href='/#about'>about</NavLink>
+        <NavLink href='/#projects'>projects</NavLink>
+        <NavLink href='/#contact'>contact</NavLink>
       </Nav>
       <Buttons>
         <Button>
@@ -50,7 +50,7 @@ const Header = () => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;

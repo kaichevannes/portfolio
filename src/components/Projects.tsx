@@ -42,7 +42,7 @@ const ImageWrapper = styled.div`
   flex: 1;
   aspect-ratio: 490 / 376;
   max-height: 392px;
-  border: 2px solid var(--color-text);
+  border: 2px solid var(--color-grey700);
   border-radius: 16px;
 `;
 
@@ -51,7 +51,7 @@ const Details = styled.div`
   flex: 1;
   gap: 8px;
   flex-direction: column;
-  border-top: 2px solid var(--color-text);
+  border-top: 2px solid var(--color-grey700);
 `;
 
 const Name = styled.h3`
