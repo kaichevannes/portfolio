@@ -18,31 +18,33 @@ const Contact = () => {
       <ContactWrapper>
         <Socials>
           <H3>Let's talk</H3>
-          <Social href='mailto:chevannes.kai@gmail.com'>
-            <IconWrapper>
-              <Mail width={30} height={30} />
-            </IconWrapper>
-            <TextWrapper>
-              chevannes.kai@gmail.com
-              <SquigglyWrapper style={{ '--bottom-distance': '-1px' } as CSSProperties}>
-                <MailSquiggly width='100%' height='100%' />
-              </SquigglyWrapper>
-            </TextWrapper>
-          </Social>
-          <Social href='https://www.linkedin.com/in/kaichevannes/'>
-            <IconWrapper>
-              <LinkedIn width={27} height={30} style={{ transform: 'translateX(1.5px)', marginRight: '3px' } as CSSProperties} />
-            </IconWrapper>
-            <TextWrapper>
-              kaichevannes
-              <SquigglyWrapper style={{ '--bottom-distance': '1px' } as CSSProperties}>
-                <LinkedInSquiggly width='100%' height='100%' />
-              </SquigglyWrapper>
-            </TextWrapper>
-          </Social>
+          <SocialList>
+            <Social href='mailto:chevannes.kai@gmail.com'>
+              <IconWrapper>
+                <Mail width={30} height={30} />
+              </IconWrapper>
+              <TextWrapper>
+                chevannes.kai@gmail.com
+                <SquigglyWrapper style={{ '--bottom-distance': '-1px' } as CSSProperties}>
+                  <MailSquiggly width='100%' height='100%' />
+                </SquigglyWrapper>
+              </TextWrapper>
+            </Social>
+            <Social href='https://www.linkedin.com/in/kaichevannes/'>
+              <IconWrapper>
+                <LinkedIn width={27} height={30} style={{ transform: 'translateX(1.5px)', marginRight: '3px' } as CSSProperties} />
+              </IconWrapper>
+              <TextWrapper>
+                kaichevannes
+                <SquigglyWrapper style={{ '--bottom-distance': '1px' } as CSSProperties}>
+                  <LinkedInSquiggly width='100%' height='100%' />
+                </SquigglyWrapper>
+              </TextWrapper>
+            </Social>
+          </SocialList>
         </Socials>
         <ContactForm onSubmit={() => alert("This isn't implemented yet.")}>
-          < Field name='name' style={{ gridArea: 'name' }}>
+          <Field name='name' style={{ gridArea: 'name' }}>
             <LabelWrapper>
               <Label>Name</Label>
             </LabelWrapper>
@@ -87,10 +89,13 @@ const Contact = () => {
 const H3 = styled.h3`
   font-size: ${32 / 16}rem;
   color: var(--color-grey900);
+  // Optical alignment with the contact form
+  margin-bottom: -4px;
 `;
 
 const ContactWrapper = styled.div`
   display: flex;
+  align-items: baseline;
 `;
 
 const Socials = styled.div`
@@ -98,6 +103,12 @@ const Socials = styled.div`
   display: flex;
   flex-direction: column;
   color: var(--color-grey700);
+`;
+
+const SocialList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 `;
 
 const Social = styled.a`
