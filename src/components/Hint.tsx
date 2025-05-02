@@ -15,6 +15,7 @@ const Wrapper = styled.span`
 `;
 
 const HintSignifier = styled.sup`
+  line-height: 1;
   color: var(--color-primary);
 `;
 

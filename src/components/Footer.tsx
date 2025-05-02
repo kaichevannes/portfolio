@@ -41,7 +41,7 @@ const Footer = () => {
 };
 
 const Wrapper = styled.footer`
-  margin-top: 32px;
+  margin-top: 128px;
   padding-bottom: 32px;
   width: 100%;
   border-top: 1px solid var(--color-grey300);

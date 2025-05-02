@@ -11,7 +11,7 @@ const Title = styled.h2`
   font-weight: ${WEIGHTS.bold};
   font-size: ${48 / 16}rem;
   letter-spacing: -2%;
-  padding-bottom: 8px;
+  padding-bottom: 16px;
 `;
 
 const Accent = styled.span`
