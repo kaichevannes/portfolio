@@ -130,7 +130,7 @@ export default function GitOps() {
           />
           <SectionContents>
             <p>
-              One of the key benefits of GitOps is that because we store the entire cluster state in code with uniquely tagged container images, rolling back releases is identical to rolling back the code. In the run stage of my CI/CD pipeline, I tag the portfolio container image with the commit hash it was built from, shown in Figure 3. Flux detects this change and applies it to the cluster, prompting Kubernetes to perform a zero-downtime rolling update, spinning up the new image and then phasing out the old image.
+              One of the key benefits of GitOps is that because we store the entire cluster state in code with uniquely tagged container images, rolling back releases is identical to rolling back the code. In the run stage of my CI/CD pipeline, I tag the portfolio container image with the commit hash it was built from, shown in Figure 3. Flux detects this change, applies it to the cluster, and Kubernetes performs a zero-downtime rolling update by spinning up the new image and then phasing out the old image.
             </p>
           </SectionContents>
           <Section.Image
@@ -140,6 +140,33 @@ export default function GitOps() {
             alt='A screenshot of the portfolio GitHub repo showing the portfolio-deployment.yaml file. A highlighted line shows the image hash of the current version.'
             caption='Figure 3: The image tag for the current release'
           />
+        </Section>
+        <Section title='Challenges'>
+          <SectionContents>
+            <p>
+              The biggest challenge in self-hosting my portfolio was the networking. To serve a request from a user that types ‘kaichevannes.com’ into their browser, I need to:
+            </p>
+            <ol>
+              <Li><Bold>Allow</Bold> incoming traffic on HTTP (port 80) and HTTPS (port 443) to my Oracle Cloud VM by configuring its ingress rules</Li>
+              <Li><Bold>Route</Bold> incoming requests to <Hint>Traefik</Hint>, running on my Kubernetes cluster</Li>
+              <Li><Bold>Provide</Bold> Traefik with the credentials to complete an <Hint>ACME</Hint> <Hint>DNS challenge</Hint> with my domain registrar</Li>
+              <Li><Bold>Persist</Bold> the TLS certificate to avoid Let's Encrypt rate limits</Li>
+              <Li><Bold>Redirect</Bold> HTTP (port 80) to HTTPS (port 443) using a Kubernetes Ingress resource</Li>
+              <Li><Bold>Forward</Bold> HTTPS (port 443) requests to <Hint>Next.js</Hint> on its default 3000 port</Li>
+            </ol>
+            <p>
+              Phew. You might be wondering how I knew which steps were required? I didn’t at first, but after a few days of jumping between the documentation of Kubernetes, Traefik, and K3s*, I pieced it together. Step 4 taught me why we use a staging environment!
+            </p>
+            <p>
+              In step 3, I need to provide Traefik with a secret API token for authentication. This seems simple on the surface but with GitOps, the full cluster state is in source control. How is it possible to use secrets without pushing them to the Git repository?
+            </p>
+            <p>
+              In enterprise, your Kubernetes cluster would be hosted with a cloud provider that has a built-in secret manager. Since I’m running a K3s cluster directly on a VM, I need to handle secrets myself.
+            </p>
+            <p>
+              I use <Anchor href='https://github.com/bitnami-labs/sealed-secrets'>Bitnami Sealed Secrets</Anchor> which generates a public/private key pair inside the cluster. I can encrypt the secret API token using the clusters public key and safely store it in source control because the private key to decrypt this secret only exists within the cluster. You can see this in action in Figure 1, I store the necessary API tokens in environment variables, wait for the public/private key pair to be generated, seal the secrets, and automatically push them to the <Anchor href='https://github.com/kaichevannes/portfolio'>Git repository</Anchor>.
+            </p>
+          </SectionContents>
         </Section>
       </Main>
       <Footer />

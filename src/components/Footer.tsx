@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 
 import { WEIGHTS, QUERIES } from '@/constants';
 
-import NextJS from '@/svg/nextjs.svg';
+import Nextjs from '@/svg/nextjs.svg';
 import Linaria from '@/svg/linaria.svg';
 import RadixUI from '@/svg/radixui.svg';
 import LinkedIn from '@/svg/linkedin.svg';
@@ -13,8 +13,8 @@ const Footer = () => {
     <Wrapper>
       <IconGroup>
         <IconLink href='https://nextjs.org/'>
-          <NextJS width={28} height={28} />
-          Next.JS
+          <Nextjs width={28} height={28} />
+          Next.js
         </IconLink>
         <IconLink href='https://linaria.dev/'>
           <Linaria width={28} height={28} />
