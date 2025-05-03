@@ -1,0 +1,91 @@
+import { styled } from '@linaria/react';
+import React, { ReactNode, CSSProperties } from 'react'
+import Image from 'next/image';
+
+import { WEIGHTS } from '@/constants';
+
+const Section = ({ children, title }: { children: ReactNode, title: string }) => {
+  const numChildren = React.Children.count(children);
+
+  return (
+    <Wrapper style={{ '--num-children': numChildren } as CSSProperties}>
+      <Title>
+        <Sticky>{title}</Sticky>
+      </Title>
+      {/* Set the grid row so we can have a fully spanning section title. */}
+      {React.Children.toArray(children).map((child, index) => {
+        if (React.isValidElement(child)) {
+          return React.cloneElement(child, {
+            style: {
+              gridRow: index + 1,
+            }
+          } as CSSProperties);
+        }
+        return child;
+      })}
+    </Wrapper>
+  );
+};
+
+Section.Image = ({ src, intrinsicWidth, intrinsicHeight, alt, caption, ...props }:
+  { src: string, intrinsicWidth: number, intrinsicHeight: number, alt: string, caption: string }) => {
+  return (
+    <FullBleed {...props}>
+      <figure>
+        <ImageWrapper style={{ '--aspect-ratio': `${intrinsicWidth} / ${intrinsicHeight}` } as CSSProperties}>
+          <Image
+            src={src}
+            alt={alt}
+            fill
+            quality={100}
+            style={{ borderRadius: 8 }}
+          />
+        </ImageWrapper>
+        <Caption>{caption}</Caption>
+      </figure>
+    </FullBleed>
+  )
+};
+
+const Wrapper = styled.div`
+  display: grid;
+  grid-template-columns: [title-start] 4fr [title-end contents-start] 6fr [contents-end];
+  grid-template-rows: repeat(var(--num-children), auto);
+  gap: 24px 32px;
+`;
+
+const FullBleed = styled.div`
+  width: 100%;
+  grid-column: 1 / -1;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
+const ImageWrapper = styled.div`
+  position: relative;
+  aspect-ratio: var(--aspect-ratio);
+`;
+
+const Caption = styled.figcaption`
+  padding-top: 8px;
+  font-size: ${16 / 16}rem;
+  font-weight: ${WEIGHTS.regular};
+  color: var(--color-grey300);
+  text-align: center;
+`;
+
+const Title = styled.h2`
+  grid-column: title;
+  grid-row: -1 / 1;
+  top: 0;
+  font-size: ${20 / 16}rem;
+  font-weight: ${WEIGHTS.medium};
+  color: var(--color-grey700);
+`;
+
+const Sticky = styled.div`
+  position: sticky;
+  top: 0;
+`;
+
+export { Section };
