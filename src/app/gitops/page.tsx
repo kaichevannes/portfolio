@@ -2,6 +2,7 @@
 
 import { styled } from '@linaria/react';
 import React, { CSSProperties } from 'react';
+import Link from 'next/link';
 
 import { WEIGHTS, COLORS } from '@/constants';
 
@@ -103,7 +104,7 @@ export default function GitOps() {
         <Section title='Purpose & Goal'>
           <SectionContents>
             <p>
-              I became interested in <Hint>DevOps</Hint> after reading The Phoenix Project during my 2023 summer internship at Thought Quarter. I saw this project as an opportunity to improve my mental model of CI/CD technologies and Docker. My acceptance criteria were:
+              I became interested in <Hint>DevOps</Hint> after reading The Phoenix Project during my 2023 summer internship at <Anchor href='https://www.thoughtquarter.co.uk/'>Thought Quarter</Anchor>. I saw this project as an opportunity to improve my mental model of CI/CD technologies and Docker. My acceptance criteria were:
             </p>
             <ol>
               <Li><Bold>One-click</Bold> cluster bootstrap</Li>
@@ -118,7 +119,7 @@ export default function GitOps() {
         <Section title='Spotlight'>
           <SectionContents>
             <p>
-              GitOps changes the <Bold>run</Bold> stage of <Bold>build → ship → run</Bold>. Instead of <em>pushing</em> changes to a Kubernetes cluster using a secret key, GitOps <em>pulls</em> the changes from source control. This means we don’t need to store secrets. Figure 2 shows the Kubernetes <Hint>manifest</Hint> files that Flux will sync the cluster’s state with.
+              GitOps changes the <Bold>run</Bold> stage of <Bold>build → ship → run</Bold>. Instead of <em>pushing</em> changes to a Kubernetes cluster using a secret key, GitOps <em>pulls</em> the changes from source control. This eliminates the need to store high-privilege access keys, improving security. Figure 2 shows the Kubernetes <Hint>manifest</Hint> files that Flux will sync the cluster’s state with.
             </p>
           </SectionContents>
           <Section.Image
@@ -130,7 +131,7 @@ export default function GitOps() {
           />
           <SectionContents>
             <p>
-              One of the key benefits of GitOps is that because we store the entire cluster state in code with uniquely tagged container images, rolling back releases is identical to rolling back the code. In the run stage of my CI/CD pipeline, I tag the portfolio container image with the commit hash it was built from, shown in Figure 3. Flux detects this change, applies it to the cluster, and Kubernetes performs a zero-downtime rolling update by spinning up the new image and then phasing out the old image.
+              One of the key benefits of GitOps is that because we store the entire cluster state in code with uniquely tagged container images, rolling back releases becomes identical to rolling back the code. In the run stage of my CI/CD pipeline, I tag the portfolio container image with the commit hash it was built from, shown in Figure 3. Flux detects this change, applies it to the cluster, and Kubernetes performs a zero-downtime rolling update. It spins up the new image, and phases out the old one.
             </p>
           </SectionContents>
           <Section.Image
@@ -152,22 +153,40 @@ export default function GitOps() {
               <Li><Bold>Provide</Bold> Traefik with the credentials to complete an <Hint>ACME</Hint> <Hint>DNS challenge</Hint> with my domain registrar</Li>
               <Li><Bold>Persist</Bold> the TLS certificate to avoid Let's Encrypt rate limits</Li>
               <Li><Bold>Redirect</Bold> HTTP (port 80) to HTTPS (port 443) using a Kubernetes Ingress resource</Li>
-              <Li><Bold>Forward</Bold> HTTPS (port 443) requests to <Hint>Next.js</Hint> on its default 3000 port</Li>
+              <Li><Bold>Forward</Bold> HTTPS (port 443) requests to <Hint>Next.js</Hint> on its default port of 3000</Li>
             </ol>
             <p>
-              Phew. You might be wondering how I knew which steps were required? I didn’t at first, but after a few days of jumping between the documentation of Kubernetes, Traefik, and K3s*, I pieced it together. Step 4 taught me why we use a staging environment!
+              In step 3, I need to provide Traefik with a secret API token for authentication. This seems simple on the surface but provides a unique challenge for GitOps because the full cluster state is kept in source control, including secret management.</p>
+            <p>
+              In enterprise, your Kubernetes cluster would be hosted with a cloud provider that has a built-in secret manager. Since I’m running a <Hint>K3s</Hint> cluster directly on a VM, I need to handle secrets myself.
             </p>
             <p>
-              In step 3, I need to provide Traefik with a secret API token for authentication. This seems simple on the surface but with GitOps, the full cluster state is in source control. How is it possible to use secrets without pushing them to the Git repository?
-            </p>
-            <p>
-              In enterprise, your Kubernetes cluster would be hosted with a cloud provider that has a built-in secret manager. Since I’m running a K3s cluster directly on a VM, I need to handle secrets myself.
-            </p>
-            <p>
-              I use <Anchor href='https://github.com/bitnami-labs/sealed-secrets'>Bitnami Sealed Secrets</Anchor> which generates a public/private key pair inside the cluster. I can encrypt the secret API token using the clusters public key and safely store it in source control because the private key to decrypt this secret only exists within the cluster. You can see this in action in Figure 1, I store the necessary API tokens in environment variables, wait for the public/private key pair to be generated, seal the secrets, and automatically push them to the <Anchor href='https://github.com/kaichevannes/portfolio'>Git repository</Anchor>.
+              I use <Anchor href='https://github.com/bitnami-labs/sealed-secrets'>Bitnami Sealed Secrets</Anchor> which generates a public/private key pair inside the cluster. I can encrypt the secret API token using the clusters public key and safely store it in source control. The private key to decrypt this secret only exists within the cluster.
             </p>
           </SectionContents>
         </Section>
+        <Section title='Lessons Learned'>
+          <SectionContents>
+            <p>
+              The idea of slowing down and making less assumptions was repeated to me throughout the project.
+            </p>
+            <p>
+              As an example, when configuring Traefik locally I used the built-in Kubernetes <em>Ingress</em> resource, but the documentation for certificate verification used a custom <em>IngressRoute</em> resource. I didn't think this would change anything so skipped locally testing it, leading me down a rabbithole of attempting to fix what I thought was a network issue.
+            </p>
+            <p>
+              I tried <Bold>changing</Bold> my cluster configuration only to break my bootstrap script, <Bold>linking</Bold> Traefik directly to my VMs network using Kubernetes hostports, <Bold>forwarding</Bold> requests using custom iptables rules, <Bold>swapping</Bold> the networking backend of my cluster. I read the docs more thoroughly and realised the issue was the IngressRoute resource the whole time!
+            </p>
+            <p>
+              I gained a better appreciation for documentation because the issues I was running into weren't common and easy to Google. I also improved my understanding of working iteratively in small batch sizes; trying to put so many pieces together in one go led to a huge surface area for problems, eventually I had to take it step by step anyway.
+            </p>
+            <p>
+              Next time, I'll lead with that.
+            </p>
+          </SectionContents>
+        </Section>
+        <nav>
+          <PageLink href='/boids'>{"Web Boids ->"}</PageLink>
+        </nav>
       </Main>
       <Footer />
     </MaxWidthWrapper>
@@ -287,4 +306,14 @@ const Caption = styled.figcaption`
   font-weight: ${WEIGHTS.regular};
   color: var(--color-grey300);
   text-align: center;
+`;
+
+const PageLink = styled(Link)`
+  float: right;
+  text-decoration: none;
+  margin-top: 72px;
+  color: var(--color-text);
+  font-size: ${40 / 16}rem;
+  font-weight: ${WEIGHTS.bold};
+  letter-spacing: -2%;
 `;
