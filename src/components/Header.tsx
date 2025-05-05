@@ -1,11 +1,12 @@
 import { styled } from '@linaria/react';
 
-import { WEIGHTS } from '@/constants';
+import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
 
 import Volume2 from '@/svg/volume-2.svg';
 import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
+import Menu from '@/svg/menu.svg';
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -46,6 +47,9 @@ const Header = () => {
           {theme}
         </Button>
       </Buttons>
+      <MobileMenu>
+        <Menu width={44} height={44} />
+      </MobileMenu>
     </Wrapper>
   )
 }
@@ -55,6 +59,10 @@ const Wrapper = styled.header`
   justify-content: space-between;
   align-items: baseline;
   padding-top: 8px;
+
+  @media ${QUERIES.tabletAndDown} {
+    padding-top: 4px;
+  }
 `;
 
 const Logo = styled.a`
@@ -62,6 +70,7 @@ const Logo = styled.a`
   text-decoration: none;
   font-size: ${32 / 16}rem;
   font-weight: ${WEIGHTS.bold};
+  white-space: nowrap;
 `;
 
 const Accent = styled.span`
@@ -72,6 +81,10 @@ const Nav = styled.nav`
   color: var(--color-grey900);
   display: flex;
   gap: 48px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const NavLink = styled.a`
@@ -86,6 +99,10 @@ const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 16px;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const Button = styled.button`
@@ -108,6 +125,15 @@ const Button = styled.button`
 
   &:focus:not(:focus-visible) {
     outline: none;
+  }
+`;
+
+const MobileMenu = styled(Button)`
+  display: none;
+  transform: translateY(8px);
+
+  @media ${QUERIES.tabletAndDown} {
+    display: revert;
   }
 `;
 

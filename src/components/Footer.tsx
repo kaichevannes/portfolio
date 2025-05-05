@@ -53,6 +53,15 @@ const Wrapper = styled.footer`
 
   @media ${QUERIES.tabletAndDown} {
     padding-bottom: 16px;
+    margin-top: 96px;
+    justify-content: space-around;
+  }
+  
+  @media ${QUERIES.mobileAndDown} {
+    margin-top: 64px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
   }
 `;
 
@@ -60,6 +69,10 @@ const IconGroup = styled.div`
   padding-top: 16px;
   display: flex;
   gap: 16px;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column;
+  }
 `;
 
 const IconLink = styled.a`

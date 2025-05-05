@@ -48,8 +48,8 @@ const WEIGHTS = {
 }
 
 const BREAKPOINTS = {
-  mobileMax: 550,
-  tabletMax: 1100,
+  mobileMax: 600,
+  tabletMax: 1000,
   laptopMax: 1500,
 }
 
