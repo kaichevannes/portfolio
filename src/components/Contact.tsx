@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 import { CSSProperties } from 'react';
 import { Form } from 'radix-ui';
 
-import { WEIGHTS } from '@/constants';
+import { WEIGHTS, QUERIES } from '@/constants';
 
 import Mail from '@/svg/mail.svg';
 import MailSquiggly from '@/svg/mail-squiggly.svg';
@@ -15,7 +15,7 @@ const Contact = () => {
   return (
     <div id='contact'>
       <Heading>Contact</Heading>
-      <ContactWrapper>
+      <Wrapper>
         <Socials>
           <H3>Let's talk</H3>
           <SocialList>
@@ -43,45 +43,47 @@ const Contact = () => {
             </Social>
           </SocialList>
         </Socials>
-        <ContactForm onSubmit={() => alert("This isn't implemented yet.")}>
-          <Field name='name' style={{ gridArea: 'name' }}>
-            <LabelWrapper>
-              <Label>Name</Label>
-            </LabelWrapper>
-            <Form.Control asChild>
-              <Input placeholder='Bill Palmer' />
-            </Form.Control>
-          </Field>
-          <Field name='email' style={{ gridArea: 'email' }}>
-            <LabelWrapper>
-              <Label>Email</Label>
-              <FormMessage match='valueMissing'>
-                Please enter your email
-              </FormMessage>
-              <FormMessage match='typeMismatch'>
-                Please provide a valid email
-              </FormMessage>
-            </LabelWrapper>
-            <Form.Control asChild>
-              <Input placeholder='bill.palmer@partsunlimited.com' type='email' required />
-            </Form.Control>
-          </Field>
-          <MessageField name='message' style={{ gridArea: 'message' }}>
-            <LabelWrapper>
-              <Label>Message</Label>
-              <FormMessage match='valueMissing'>
-                Please enter a message
-              </FormMessage>
-            </LabelWrapper>
-            <Form.Control asChild>
-              <TextArea placeholder='I’d like to invite you to the Phoenix Team. Let’s chat.' required />
-            </Form.Control>
-          </MessageField>
-          <Form.Submit asChild>
-            <Send>Send</Send>
-          </Form.Submit>
-        </ContactForm>
-      </ContactWrapper>
+        <ContactFormWrapper>
+          <ContactForm onSubmit={() => alert("This isn't implemented yet.")}>
+            <Field name='name' style={{ gridArea: 'name' }}>
+              <LabelWrapper>
+                <Label>Name</Label>
+              </LabelWrapper>
+              <Form.Control asChild>
+                <Input placeholder='Bill Palmer' />
+              </Form.Control>
+            </Field>
+            <Field name='email' style={{ gridArea: 'email' }}>
+              <LabelWrapper>
+                <Label>Email</Label>
+                <FormMessage match='valueMissing'>
+                  Please enter your email
+                </FormMessage>
+                <FormMessage match='typeMismatch'>
+                  Please provide a valid email
+                </FormMessage>
+              </LabelWrapper>
+              <Form.Control asChild>
+                <Input placeholder='bill.palmer@partsunlimited.com' type='email' required />
+              </Form.Control>
+            </Field>
+            <MessageField name='message' style={{ gridArea: 'message' }}>
+              <LabelWrapper>
+                <Label>Message</Label>
+                <FormMessage match='valueMissing'>
+                  Please enter a message
+                </FormMessage>
+              </LabelWrapper>
+              <Form.Control asChild>
+                <TextArea placeholder='I’d like to invite you to the Phoenix Team. Let’s chat.' required />
+              </Form.Control>
+            </MessageField>
+            <Form.Submit asChild>
+              <Send>Send</Send>
+            </Form.Submit>
+          </ContactForm>
+        </ContactFormWrapper>
+      </Wrapper>
     </div >
   );
 }
@@ -93,9 +95,14 @@ const H3 = styled.h3`
   margin-bottom: -4px;
 `;
 
-const ContactWrapper = styled.div`
+const Wrapper = styled.div`
   display: flex;
   align-items: baseline;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column;
+    gap: 32px;
+  }
 `;
 
 const Socials = styled.div`
@@ -109,6 +116,11 @@ const SocialList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2px;
+
+  @media ${QUERIES.tabletAndDown} {
+    margin-top: 8px;
+    gap: 8px;
+  }
 `;
 
 const Social = styled.a`
@@ -134,8 +146,17 @@ const SquigglyWrapper = styled.div`
   bottom: var(--bottom-distance);
 `;
 
-const ContactForm = styled(Form.Root)`
+const ContactFormWrapper = styled.div`
   flex: 6;
+  container-type: inline-size;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-basis: 376px;
+    width: 100%;
+  }
+`;
+
+const ContactForm = styled(Form.Root)`
   height: 376px;
   border: 2px solid var(--color-grey700);
   border-radius: 16px;
@@ -144,6 +165,13 @@ const ContactForm = styled(Form.Root)`
   grid-template-columns: 1fr 2fr;
   grid-template-areas: "name email" \ "message message" \ "send send";
   padding: 8px 16px;
+
+  @container (max-width: 600px) {
+    height: calc(376px + 80px);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "name" \ "email" \ "message" \ "send";
+  }
 `;
 
 const Field = styled(Form.Field)`
@@ -211,6 +239,10 @@ const Send = styled.button`
 
   &:hover {
     background: var(--color-primary);
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    width: calc(100% - 16px);
   }
 `;
 

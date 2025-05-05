@@ -2,7 +2,7 @@ import { styled } from '@linaria/react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { WEIGHTS } from '@/constants';
+import { WEIGHTS, QUERIES } from '@/constants';
 
 import { Heading } from '@/components/Heading';
 
@@ -35,6 +35,10 @@ const Project = styled.div`
   display: flex;
   gap: 16px;
   align-items: center;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex-direction: column-reverse;
+  };
 `;
 
 const ImageWrapper = styled.div`
@@ -44,6 +48,17 @@ const ImageWrapper = styled.div`
   max-height: 392px;
   border: 2px solid var(--color-grey700);
   border-radius: 16px;
+
+  @media ${QUERIES.tabletAndDown} {
+    margin-top: 16px;
+    max-height: revert;
+    width: 85%
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    margin-top: 8px;
+    width: 100%
+  }
 `;
 
 const Details = styled.div`
@@ -52,6 +67,10 @@ const Details = styled.div`
   gap: 8px;
   flex-direction: column;
   border-top: 2px solid var(--color-grey700);
+
+  @media ${QUERIES.tabletAndDown} {
+    width: 100%;
+  }
 `;
 
 const Name = styled.h3`
@@ -59,6 +78,14 @@ const Name = styled.h3`
   font-size: ${32 / 16}rem;
   font-weight: ${WEIGHTS.semibold};
   color: var(--color-grey900);
+
+  @media ${QUERIES.tabletAndDown} {
+    padding-top: 16px;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
+    padding-top: 8px;
+  }
 `;
 
 const Description = styled.p`
@@ -81,6 +108,13 @@ const ButtonLink = styled(Link)`
 
   &:hover {
     background: var(--color-primary);
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    text-align: center;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
   }
 `;
 
