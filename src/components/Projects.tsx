@@ -23,7 +23,10 @@ const Projects = () => {
         <Details>
           <Name>GitOps</Name>
           <Description>Kubernetes with no manual steps. How I self-host this portfolio for free.</Description>
-          <ButtonLink href='/gitops'>Read More</ButtonLink>
+          <ButtonLink href='/gitops'>
+            Read More
+            <Hover>Read More</Hover>
+          </ButtonLink>
         </Details>
       </Project>
     </Wrapper>
@@ -100,6 +103,7 @@ const Description = styled.p`
 `;
 
 const ButtonLink = styled(Link)`
+  position: relative;
   text-decoration: none;
   background: var(--color-text);
   color: var(--color-background);
@@ -110,15 +114,38 @@ const ButtonLink = styled(Link)`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
 
-  &:hover {
-    background: var(--color-primary);
-  }
-
   @media ${QUERIES.tabletAndDown} {
     text-align: center;
     width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+`;
+
+const Hover = styled.div`
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  transition: clip-path 500ms;
+  clip-path: polygon(
+    0% 100%,
+    0% 100%,
+    100% 100%,
+    100% 100%
+  );
+  border-radius: inherit;
+  padding: inherit;
+  font-size: inherit;
+  
+  ${ButtonLink}:hover &,
+  ${ButtonLink}:focus & {
+    transition: clip-path 300ms;
+    clip-path: polygon(
+      -1% 101%,
+      -1% -1%,
+      101% -1%,
+      101% 101%
+    );
   }
 `;
 
