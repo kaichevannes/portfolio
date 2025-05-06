@@ -80,9 +80,11 @@ const IconLink = styled.a`
   gap: 8px;
   text-decoration: none;
   color: inherit;
+  transition: color 250ms;
 
   &:hover {
     color: var(--color-grey700);
+    transition: color 100ms;
   }
 `;
 

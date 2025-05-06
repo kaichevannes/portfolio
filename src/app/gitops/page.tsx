@@ -232,7 +232,7 @@ const Tech = styled.div`
 
   @media ${QUERIES.tabletAndDown} {
     justify-content: flex-start;
-    gap: 32px;
+    gap: 48px;
   }
 
   @media ${QUERIES.mobileAndDown} {

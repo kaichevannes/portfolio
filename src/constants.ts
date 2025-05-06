@@ -24,19 +24,19 @@ const COLORS: ColorType = {
   },
   grey300: {
     light: `hsl(55deg 8% 74%)`,
-    dark: `hsl(60deg 4% 19%)`,
+    dark: `hsl(60deg 4% 40%)`,
   },
   grey500: {
     light: `hsl(60deg 4% 29%)`,
-    dark: `hsl(37deg 5% 24%)`,
+    dark: `hsl(37deg 5% 60%)`,
   },
   grey700: {
     light: `hsl(37deg 5% 24%)`,
-    dark: `hsl(60deg 4% 29%)`,
+    dark: `hsl(60deg 4% 72%)`,
   },
   grey900: {
     light: `hsl(60deg 4% 19%)`,
-    dark: `hsl(55deg 8% 74%)`,
+    dark: `hsl(55deg 8% 82%)`,
   }
 }
 

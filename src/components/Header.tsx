@@ -1,5 +1,6 @@
 import { styled } from '@linaria/react';
 import { Dialog, VisuallyHidden } from 'radix-ui';
+import Link from 'next/link';
 
 import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
@@ -10,7 +11,7 @@ import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
 import Close from '@/svg/x.svg';
 
-const Header = () => {
+const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   const { theme, setTheme } = useTheme();
 
   // While we wait for the theme to resolve client side, show a blank div with
@@ -27,81 +28,93 @@ const Header = () => {
       ThemeIcon = Placeholder;
   }
 
+  const Wrap = cushioned ? CushionedWrapper : Wrapper
+
   return (
-    <>
-      <Wrapper>
-        <FrostedGlass />
-        <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
-        <Nav>
-          <NavLink href='/#about'>about</NavLink>
-          <NavLink href='/#projects'>projects</NavLink>
-          <NavLink href='/#contact'>contact</NavLink>
-        </Nav>
-        <Buttons>
-          <Button>
-            <IconWrapper>
-              <Volume2 width={28} height={28} />
-            </IconWrapper>
-            sound
-          </Button>
-          <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
-            <IconWrapper>
-              <ThemeIcon width={28} height={28} />
-            </IconWrapper>
-            {theme}
-          </Button>
-        </Buttons>
-        <Dialog.Root>
-          <Dialog.Trigger asChild>
-            <MobileButton>
-              <Menu width={44} height={44} />
-            </MobileButton>
-          </Dialog.Trigger>
-          <Dialog.Portal>
-            <Overlay />
-            <Content>
-              <VisuallyHidden.Root>
-                <Dialog.Title>Menu</Dialog.Title>
-                <Dialog.Description>Mobile navigation</Dialog.Description>
-              </VisuallyHidden.Root>
-              <Dialog.Close asChild>
-                <CloseButton>
-                  <Close width={44} height={44} />
-                </CloseButton>
-              </Dialog.Close>
-              <MobileNav>
-                <MobileNavLink href='/#about'>about</MobileNavLink>
-                <MobileNavLink href='/#projects'>projects</MobileNavLink>
-                <MobileNavLink href='/#contact'>contact</MobileNavLink>
-              </MobileNav>
-              <MobileButtons>
-                <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
-                  <IconWrapper>
-                    <ThemeIcon width={44} height={44} />
-                  </IconWrapper>
-                  {theme}
-                </MobileMenuButton>
-              </MobileButtons>
-            </Content>
-          </Dialog.Portal>
-        </Dialog.Root>
-      </Wrapper>
-    </>
+    <Wrap>
+      <FrostedGlass />
+      <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
+      <Nav>
+        <NavLink href='/#about'>about</NavLink>
+        <NavLink href='/#projects'>projects</NavLink>
+        <NavLink href='/#contact'>contact</NavLink>
+      </Nav>
+      <Buttons>
+        <Button>
+          <IconWrapper>
+            <Volume2 width={28} height={28} />
+          </IconWrapper>
+          sound
+        </Button>
+        <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+          <IconWrapper>
+            <ThemeIcon width={28} height={28} />
+          </IconWrapper>
+          {theme}
+        </Button>
+      </Buttons>
+      <Dialog.Root>
+        <Dialog.Trigger asChild>
+          <MobileButton>
+            <Menu width={44} height={44} />
+          </MobileButton>
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Overlay />
+          <Content>
+            <VisuallyHidden.Root>
+              <Dialog.Title>Menu</Dialog.Title>
+              <Dialog.Description>Mobile navigation</Dialog.Description>
+            </VisuallyHidden.Root>
+            <Dialog.Close asChild>
+              <CloseButton>
+                <Close width={44} height={44} />
+              </CloseButton>
+            </Dialog.Close>
+            <MobileNav>
+              <MobileNavLink href='/#about'>about</MobileNavLink>
+              <MobileNavLink href='/#projects'>projects</MobileNavLink>
+              <MobileNavLink href='/#contact'>contact</MobileNavLink>
+            </MobileNav>
+            <MobileButtons>
+              <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+                <IconWrapper>
+                  <ThemeIcon width={44} height={44} />
+                </IconWrapper>
+                {theme}
+              </MobileMenuButton>
+            </MobileButtons>
+          </Content>
+        </Dialog.Portal>
+      </Dialog.Root>
+    </Wrap>
   )
 }
 
 const Wrapper = styled.header`
+  --default-top: 0;
+  --default-padding-top: 8px;
   isolation: isolate;
   position: sticky;
   z-index: 1;
-  top: 0;
+  top: var(--default-top);
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  padding-top: 8px;
+  padding-top: var(--default-padding-top);
 
   & * {
     position: relative;
+  }
+`;
+
+const CushionedWrapper = styled(Wrapper)`
+  top: -48px;
+  padding-top: calc(48px + 8px);
+
+  @media ${QUERIES.tabletAndDown} {
+    top: var(--default-top);
+    padding-top: var(--default-padding-top);
   }
 `;
 
@@ -149,7 +162,7 @@ const Nav = styled.nav`
   }
 `;
 
-const NavLink = styled.a`
+const NavLink = styled(Link)`
   color: inherit;
   text-decoration: none;
   font-weight: ${WEIGHTS.semibold};

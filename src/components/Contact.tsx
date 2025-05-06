@@ -13,7 +13,7 @@ import { Heading } from '@/components/Heading';
 
 const Contact = () => {
   return (
-    <div id='contact'>
+    <Div id='contact'>
       <Heading>Contact</Heading>
       <Wrapper>
         <Socials>
@@ -84,9 +84,13 @@ const Contact = () => {
           </ContactForm>
         </ContactFormWrapper>
       </Wrapper>
-    </div >
+    </Div >
   );
 }
+
+const Div = styled.div`
+  scroll-margin-top: 72px;
+`;
 
 const H3 = styled.h3`
   font-size: ${32 / 16}rem;
