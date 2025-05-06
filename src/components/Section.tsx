@@ -57,7 +57,7 @@ Section.Image = ({ src, intrinsicWidth, intrinsicHeight, alt, caption, ...props 
   )
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   display: grid;
   grid-template-columns: [title-start] 4fr [title-end contents-start] 6fr [contents-end];
   grid-template-rows: repeat(var(--num-children), auto);

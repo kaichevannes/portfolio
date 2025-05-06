@@ -8,7 +8,7 @@ import { Heading } from '@/components/Heading';
 
 const Projects = () => {
   return (
-    <div id='projects'>
+    <Wrapper id='projects'>
       <Heading>Projects</Heading>
       <Project>
         <ImageWrapper>
@@ -26,9 +26,13 @@ const Projects = () => {
           <ButtonLink href='/gitops'>Read More</ButtonLink>
         </Details>
       </Project>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  scroll-margin-top: 72px;
+`;
 
 const Project = styled.div`
   padding-top: 12px;

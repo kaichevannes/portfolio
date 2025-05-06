@@ -31,6 +31,7 @@ const About = () => {
 const Wrapper = styled.div`
   font-weight: ${WEIGHTS.medium};
   font-size: ${20 / 16}rem;
+  scroll-margin-top: 72px;
 `;
 
 const Contents = styled.div`
