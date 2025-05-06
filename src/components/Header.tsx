@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react';
+import { Dialog, VisuallyHidden } from 'radix-ui';
 
 import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
@@ -7,6 +8,7 @@ import Volume2 from '@/svg/volume-2.svg';
 import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
+import Close from '@/svg/x.svg';
 
 const Header = () => {
   const { theme, setTheme } = useTheme();
@@ -26,42 +28,102 @@ const Header = () => {
   }
 
   return (
-    <Wrapper>
-      <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
-      <Nav>
-        <NavLink href='/#about'>about</NavLink>
-        <NavLink href='/#projects'>projects</NavLink>
-        <NavLink href='/#contact'>contact</NavLink>
-      </Nav>
-      <Buttons>
-        <Button>
-          <IconWrapper>
-            <Volume2 width={28} height={28} />
-          </IconWrapper>
-          sound
-        </Button>
-        <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
-          <IconWrapper>
-            <ThemeIcon width={28} height={28} />
-          </IconWrapper>
-          {theme}
-        </Button>
-      </Buttons>
-      <MobileMenu>
-        <Menu width={44} height={44} />
-      </MobileMenu>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <FrostedGlass />
+        <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
+        <Nav>
+          <NavLink href='/#about'>about</NavLink>
+          <NavLink href='/#projects'>projects</NavLink>
+          <NavLink href='/#contact'>contact</NavLink>
+        </Nav>
+        <Buttons>
+          <Button>
+            <IconWrapper>
+              <Volume2 width={28} height={28} />
+            </IconWrapper>
+            sound
+          </Button>
+          <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+            <IconWrapper>
+              <ThemeIcon width={28} height={28} />
+            </IconWrapper>
+            {theme}
+          </Button>
+        </Buttons>
+        <Dialog.Root>
+          <Dialog.Trigger asChild>
+            <MobileButton>
+              <Menu width={44} height={44} />
+            </MobileButton>
+          </Dialog.Trigger>
+          <Dialog.Portal>
+            <Overlay />
+            <Content>
+              <VisuallyHidden.Root>
+                <Dialog.Title>Menu</Dialog.Title>
+                <Dialog.Description>Mobile navigation</Dialog.Description>
+              </VisuallyHidden.Root>
+              <Dialog.Close asChild>
+                <CloseButton>
+                  <Close width={44} height={44} />
+                </CloseButton>
+              </Dialog.Close>
+              <MobileNav>
+                <MobileNavLink href='/#about'>about</MobileNavLink>
+                <MobileNavLink href='/#projects'>projects</MobileNavLink>
+                <MobileNavLink href='/#contact'>contact</MobileNavLink>
+              </MobileNav>
+              <MobileButtons>
+                <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+                  <IconWrapper>
+                    <ThemeIcon width={44} height={44} />
+                  </IconWrapper>
+                  {theme}
+                </MobileMenuButton>
+              </MobileButtons>
+            </Content>
+          </Dialog.Portal>
+        </Dialog.Root>
+      </Wrapper>
+    </>
   )
 }
 
 const Wrapper = styled.header`
+  isolation: isolate;
+  position: sticky;
+  z-index: 1;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   padding-top: 8px;
 
+  & * {
+    position: relative;
+  }
+`;
+
+const FrostedGlass = styled.div`
+  position: fixed;
+  inset: 0;
+  height: 148px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-background) 0%,
+    transparent 50%
+  );
+  backdrop-filter: blur(4px);
+  mask-image: linear-gradient(
+    to bottom,
+    black 0% 50%,
+    transparent 50% 100%
+  );
+  pointer-events: none;
+
   @media ${QUERIES.tabletAndDown} {
-    padding-top: 4px;
+    height: 162px;
   }
 `;
 
@@ -128,7 +190,7 @@ const Button = styled.button`
   }
 `;
 
-const MobileMenu = styled(Button)`
+const MobileButton = styled(Button)`
   display: none;
   transform: translateY(8px);
 
@@ -141,9 +203,71 @@ const IconWrapper = styled.div`
   align-self: center;
 `;
 
+const CloseButton = styled(MobileButton)`
+  color: var(--color-grey900);
+
+  position: absolute;
+  top: 5px;
+  right: 31px;
+`;
+
 const Placeholder = styled.div`
   width: 80px;
   height: 28px;
+`;
+
+const Overlay = styled(Dialog.Overlay)`
+  position: fixed;
+  z-index: 1;
+  inset: 0;
+  background: var(--color-grey500);
+  opacity: 0.5;
+`;
+
+const Content = styled(Dialog.Content)`
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-background);
+  width: clamp(300px, 80%, 600px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  color: var(--color-grey900);
+`;
+
+const MobileNav = styled.nav`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  justify-content: center;
+  align-items: center;
+  flex: 3;
+`;
+
+const MobileButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  transform: translateY(-48px);
+`;
+
+const MobileMenuButton = styled(MobileButton)`
+  translate: revert;
+  display: flex;
+  font-size: ${32 / 16}rem;
+`;
+
+const MobileNavLink = styled(NavLink)`
+  display: block;
+  font-size: ${32 / 16}rem;
+  padding: 12px;
+  width: 100%;
+  text-align: center;
 `;
 
 export { Header };

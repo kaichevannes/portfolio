@@ -92,7 +92,6 @@ const Caption = styled.figcaption`
 const Title = styled.h2`
   grid-column: title;
   grid-row: -1 / 1;
-  top: 0;
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   color: var(--color-grey700);
@@ -106,7 +105,7 @@ const Title = styled.h2`
 
 const Sticky = styled.div`
   position: sticky;
-  top: 0;
+  top: 72px;
 
   @media ${QUERIES.tabletAndDown} {
     position: revert;

@@ -16,7 +16,7 @@ const Hero = () => {
         <BlurImage
           src='/meditation.png'
           alt='Me sitting in lotus position on my bed in the morning sun.'
-          quality={25}
+          quality={100}
           fill
           priority
         />
