@@ -163,10 +163,36 @@ const Nav = styled.nav`
 `;
 
 const NavLink = styled(Link)`
+  position: relative;
   color: inherit;
   text-decoration: none;
   font-weight: ${WEIGHTS.semibold};
   font-size: ${20 / 16}rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 90%;
+    left: -5%;
+    width: 110%;
+    height: 3px;
+    background: var(--color-primary);
+    transition: 
+      top 0ms 400ms,
+      opacity 400ms;
+    border-radius: 32px;
+    opacity: 0;
+  }
+
+  &:hover {
+    &::after {
+      top: 100%;
+      opacity: 1;
+      transition: 
+        top 250ms ease-out, 
+        opacity 300ms ease-out;
+    }
+  }
 `;
 
 const Buttons = styled.div`
