@@ -79,6 +79,7 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
             <MobileButtons>
               <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
                 <IconWrapper>
+                  <ThemeIcon width={44} height={44} />
                 </IconWrapper>
                 {theme}
               </MobileMenuButton>
@@ -166,10 +167,6 @@ const NavLink = styled(Link)`
   text-decoration: none;
   font-weight: ${WEIGHTS.semibold};
   font-size: ${20 / 16}rem;
-`;
-
-const Hover = styled.span`
-  
 `;
 
 const Buttons = styled.div`
