@@ -21,6 +21,9 @@ export default function RootLayout({
   return (
     // This will only suppress hydration warnings for direct children.
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <style>{FallbackStyles()}</style>
+      </head>
       <body className={inter.className}>
         <script dangerouslySetInnerHTML={{ __html: `(${boundSetColorsForTheme})()` }} />
         <ThemeProvider>
@@ -67,3 +70,16 @@ const boundSetColorsForTheme = String(setColorsForTheme)
   // rather than {{ COLORS_PLACEHOLDER }}. This means that the double quotes
   // are included and replaced with the stringified value.
   .replace('"{{ COLORS_PLACEHOLDER }}"', JSON.stringify(COLORS))
+
+// Default styles when JS is disabled.
+// https://github.com/joshwcomeau/dark-mode-minimal/blob/5d4d5612667d06f9350f4ba3eea187df8a8231ff/gatsby-ssr.js#L64-L81
+const FallbackStyles = () => {
+  const cssVariableString = Object.entries(COLORS).reduce(
+    (acc, [name, colorByTheme]) => {
+      return `${acc}\n--color-${name}: ${colorByTheme.light};`;
+    },
+    ''
+  );
+
+  return `html { ${cssVariableString} }`;
+}

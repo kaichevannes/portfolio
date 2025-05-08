@@ -18,6 +18,7 @@ const Hero = () => {
           alt='Me sitting in lotus position on my bed in the morning sun.'
           quality={100}
           fill
+          sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
           priority
         />
         <HeroImage
@@ -25,6 +26,7 @@ const Hero = () => {
           alt='Me sitting in lotus position on my bed in the morning sun.'
           quality={100}
           fill
+          sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
           priority
         />
       </ImageWrapper>
@@ -102,9 +104,9 @@ const ImageWrapper = styled.div`
 `;
 
 const HeroImage = styled(Image)`
-  position: relative;
   border-radius: 100px;
   object-fit: cover;
+  box-shadow: var(--shadow);
 `;
 
 const BlurImage = styled(HeroImage)`

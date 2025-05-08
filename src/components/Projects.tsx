@@ -17,6 +17,7 @@ const Projects = () => {
             src='/gitops.png'
             alt='A drawn digital image of Moby the Docker whale with the Kubernetes ship wheel logo on the front.'
             fill
+            sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
             quality={100}
           />
         </ImageWrapper>
@@ -55,6 +56,7 @@ const ImageWrapper = styled.div`
   max-height: 392px;
   border: 2px solid var(--color-grey700);
   border-radius: 16px;
+  box-shadow: var(--shadow);
 
   @media ${QUERIES.tabletAndDown} {
     margin-top: 16px;

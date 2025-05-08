@@ -19,10 +19,12 @@ import { Footer } from '@/components/Footer';
 import { Hint } from '@/components/Hint';
 import { Anchor } from '@/components/Anchor';
 import { Section } from '@/components/Section';
+import { useTheme } from '@/components/ThemeProvider';
 
 export default function GitOps() {
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = React.useState(true);
+  const { theme } = useTheme();
 
   const togglePlayback = () => {
     if (!videoRef.current) return;
@@ -32,6 +34,18 @@ export default function GitOps() {
       videoRef.current.play();
     }
     setPlaying(!playing);
+  }
+
+  let VideoWrapperByTheme;
+  switch (theme) {
+    case 'light':
+      VideoWrapperByTheme = LightVideoWrapper;
+      break;
+    case 'dark':
+      VideoWrapperByTheme = DarkVideoWrapper;
+      break;
+    default:
+      VideoWrapperByTheme = undefined;
   }
 
   return (
@@ -66,23 +80,26 @@ export default function GitOps() {
           </div>
         </PageTitle>
         <figure>
-          <VideoWrapper onClick={togglePlayback}>
-            <Video
-              ref={videoRef}
-              playsInline
-              autoPlay
-              loop
-              muted
-              src='/cluster-bootstrap.mp4'
-              style={{
-                opacity: playing ? 1 : 0.75,
-              }}
-            />
-            <PlayPauseWrapper>
-              {playing ? <Pause /> : <Play />}
-            </PlayPauseWrapper>
-          </VideoWrapper>
-          <Caption>Figure 1: Bootstrapping the VM with Ansible</Caption>
+          {VideoWrapperByTheme !== undefined ?
+            <VideoWrapperByTheme onClick={togglePlayback}>
+              <Video
+                ref={videoRef}
+                playsInline
+                autoPlay
+                loop
+                muted
+                preload='metadata'
+                src='/cluster-bootstrap.mp4'
+                style={{
+                  opacity: playing ? 1 : 0.75,
+                }}
+              />
+              <PlayPauseWrapper>
+                {playing ? <Pause /> : <Play />}
+              </PlayPauseWrapper>
+            </VideoWrapperByTheme>
+            : undefined}
+          <Caption style={{ paddingTop: theme === 'light' ? '8px' : '16px' }}>Figure 1: Bootstrapping the VM with Ansible</Caption>
         </figure>
         <Section title='Summary'>
           <Section.Contents>
@@ -274,8 +291,25 @@ const VideoWrapper = styled.div`
   position: relative;
 `;
 
+const LightVideoWrapper = styled(VideoWrapper)`
+  padding: 24px;
+  box-shadow:
+    inset
+    1px 2px 4px
+    hsl(var(--color-shadow) / 0.3);
+`;
+
+const DarkVideoWrapper = styled(VideoWrapper)`
+  // to prevent anti-aliasing bug
+  will-change: transform;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+`;
+
 const Video = styled.video`
   border-radius: 8px;
+  width: 100%;
+  height: 100%;
 `;
 
 const PlayPauseWrapper = styled.div`
@@ -306,7 +340,6 @@ const Li = styled.li`
 `;
 
 const Caption = styled.figcaption`
-  padding-top: 8px;
   font-size: ${16 / 16}rem;
   font-weight: ${WEIGHTS.regular};
   color: var(--color-grey300);

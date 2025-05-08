@@ -27,6 +27,13 @@ const Section = ({ children, title }: { children: ReactNode, title: string }) =>
   );
 };
 
+const FullBleed = styled.div`
+  width: 100%;
+  grid-column: 1 / -1;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 Section.Contents = styled.div`
   grid-column: contents;
   display: flex;
@@ -35,6 +42,10 @@ Section.Contents = styled.div`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   color: var(--color-grey500);
+
+  ${FullBleed} + & {
+    margin-top: -8px;
+  }
 `;
 
 Section.Image = ({ src, intrinsicWidth, intrinsicHeight, alt, caption, ...props }:
@@ -48,7 +59,10 @@ Section.Image = ({ src, intrinsicWidth, intrinsicHeight, alt, caption, ...props 
             alt={alt}
             fill
             quality={100}
-            style={{ borderRadius: 8 }}
+            style={{
+              borderRadius: 8,
+              boxShadow: 'var(--shadow)',
+            }}
           />
         </ImageWrapper>
         <Caption>{caption}</Caption>
@@ -69,12 +83,6 @@ const Wrapper = styled.section`
   };
 `;
 
-const FullBleed = styled.div`
-  width: 100%;
-  grid-column: 1 / -1;
-  margin-left: auto;
-  margin-right: auto;
-`;
 
 const ImageWrapper = styled.div`
   position: relative;
@@ -82,7 +90,7 @@ const ImageWrapper = styled.div`
 `;
 
 const Caption = styled.figcaption`
-  padding-top: 8px;
+  padding-top: 16px;
   font-size: ${16 / 16}rem;
   font-weight: ${WEIGHTS.regular};
   color: var(--color-grey300);
