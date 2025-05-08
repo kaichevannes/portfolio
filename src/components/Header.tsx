@@ -13,6 +13,8 @@ import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
 import Close from '@/svg/x.svg';
+import LightBulb from '@/svg/lightbulb.svg';
+import LightBulbInner from '@/svg/lightbulb-inner.svg';
 
 const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   const { theme, setTheme } = useTheme();
@@ -38,12 +40,24 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   return (
     <Wrap>
       <FrostedGlass />
-      <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
+      <Logo href='/#'>
+        kai chevannes<Accent>.</Accent>
+      </Logo>
+      <Spacer>
+        <LightBulbCord />
+        <LightBulbWrapper>
+          <LightBulbInnerWrapper>
+            <LightBulbInner width={24} height={24} />
+          </LightBulbInnerWrapper>
+          <LightBulb width={36} height={36} />
+        </LightBulbWrapper>
+      </Spacer>
       <Nav>
         <NavLink href='/#about'>about</NavLink>
         <NavLink href='/#projects'>projects</NavLink>
         <NavLink href='/#contact'>contact</NavLink>
       </Nav>
+      <Spacer />
       <Buttons>
         {
           soundOn !== undefined ?
@@ -161,6 +175,34 @@ const Logo = styled.a`
   font-size: ${32 / 16}rem;
   font-weight: ${WEIGHTS.bold};
   white-space: nowrap;
+`;
+
+const LightBulbCord = styled.div`
+  position: absolute;
+  top: -60px;
+  left: 17px;
+  width: 2px;
+  height: 67px;
+  background: var(--color-text);
+`;
+
+const LightBulbWrapper = styled.div`
+  top: 3px;
+  position: relative;
+  color: var(--color-text);
+`;
+
+const LightBulbInnerWrapper = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 6px;
+  color: var(--color-highlight);
+`;
+
+const Spacer = styled.div`
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const Accent = styled.span`
