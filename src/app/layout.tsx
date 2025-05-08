@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import './styles.linaria.global';
 
 import { type Theme, ThemeProvider } from '@/components/ThemeProvider';
+import { SoundOnProvider } from '@/components/SoundOnProvider';
 import { type ColorType, COLORS } from '@/constants';
 
 const inter = Inter({ subsets: ['latin'] });
@@ -23,7 +24,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <script dangerouslySetInnerHTML={{ __html: `(${boundSetColorsForTheme})()` }} />
         <ThemeProvider>
-          {children}
+          <SoundOnProvider>
+            {children}
+          </SoundOnProvider>
         </ThemeProvider>
       </body>
     </html>

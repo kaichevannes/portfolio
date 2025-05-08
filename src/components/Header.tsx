@@ -1,11 +1,14 @@
 import { styled } from '@linaria/react';
 import { Dialog, VisuallyHidden } from 'radix-ui';
 import Link from 'next/link';
+import useSound from 'use-sound';
 
 import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
+import { useSoundOn } from '@/components/SoundOnProvider';
 
 import Volume2 from '@/svg/volume-2.svg';
+import VolumeX from '@/svg/volume-x.svg';
 import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
@@ -13,6 +16,8 @@ import Close from '@/svg/x.svg';
 
 const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   const { theme, setTheme } = useTheme();
+  const { soundOn, setSoundOn } = useSoundOn();
+  const [play] = useSound(theme === 'light' ? '/lighton.mp3' : 'lightoff.mp3');
 
   // While we wait for the theme to resolve client side, show a blank div with
   // the same size as the theme icon to preserve layout.
@@ -40,13 +45,20 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
         <NavLink href='/#contact'>contact</NavLink>
       </Nav>
       <Buttons>
-        <Button>
-          <IconWrapper>
-            <Volume2 width={28} height={28} />
-          </IconWrapper>
-          sound
-        </Button>
-        <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+        {
+          soundOn !== undefined ?
+            <Button onClick={() => setSoundOn(!soundOn)}>
+              <IconWrapper>
+                {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
+              </IconWrapper>
+              {soundOn ? 'sound' : 'muted'}
+            </Button>
+            : <Placeholder />
+        }
+        <Button onClick={() => {
+          theme === 'light' ? setTheme('dark') : setTheme('light');
+          if (soundOn) play();
+        }}>
           <IconWrapper>
             <ThemeIcon width={28} height={28} />
           </IconWrapper>
@@ -77,7 +89,10 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
               <MobileNavLink href='/#contact'>contact</MobileNavLink>
             </MobileNav>
             <MobileButtons>
-              <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+              <MobileMenuButton onClick={() => {
+                theme === 'light' ? setTheme('dark') : setTheme('light');
+                play();
+              }}>
                 <IconWrapper>
                   <ThemeIcon width={44} height={44} />
                 </IconWrapper>
