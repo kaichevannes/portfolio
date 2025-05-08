@@ -321,6 +321,7 @@ const PageLink = styled(Link)`
   font-size: ${40 / 16}rem;
   font-weight: ${WEIGHTS.bold};
   letter-spacing: -2%;
+  text-wrap: nowrap;
 
   @media ${QUERIES.tabletAndDown} {
     margin-top: 48px;
