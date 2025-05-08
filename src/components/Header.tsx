@@ -193,6 +193,12 @@ const NavLink = styled(Link)`
         opacity 300ms ease-out;
     }
   }
+
+  @media ${QUERIES.tabletAndDown} {
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 const Buttons = styled.div`
