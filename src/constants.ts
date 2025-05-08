@@ -10,6 +10,10 @@ const COLORS: ColorType = {
     light: `hsl(46deg 33% 92%)`,
     dark: `hsl(0deg 0% 7%)`,
   },
+  shadow: {
+    light: `0deg 0% 7%`,
+    dark: `46deg 33% 92%`,
+  },
   text: {
     light: `hsl(0deg 0% 7%)`,
     dark: `hsl(46deg 33% 92%)`,

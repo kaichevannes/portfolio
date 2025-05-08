@@ -1,18 +1,25 @@
 import { styled } from '@linaria/react';
 import { Dialog, VisuallyHidden } from 'radix-ui';
 import Link from 'next/link';
+import useSound from 'use-sound';
 
 import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
+import { useSoundOn } from '@/components/SoundOnProvider';
 
 import Volume2 from '@/svg/volume-2.svg';
+import VolumeX from '@/svg/volume-x.svg';
 import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
 import Close from '@/svg/x.svg';
+import LightBulb from '@/svg/lightbulb.svg';
+import LightBulbInner from '@/svg/lightbulb-inner.svg';
 
 const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   const { theme, setTheme } = useTheme();
+  const { soundOn, setSoundOn } = useSoundOn();
+  const [play] = useSound(theme === 'light' ? '/lighton.mp3' : 'lightoff.mp3');
 
   // While we wait for the theme to resolve client side, show a blank div with
   // the same size as the theme icon to preserve layout.
@@ -33,20 +40,39 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   return (
     <Wrap>
       <FrostedGlass />
-      <Logo href='/#'>kai chevannes<Accent>.</Accent></Logo>
+      <Logo href='/#'>
+        kai chevannes<Accent>.</Accent>
+      </Logo>
+      <Spacer>
+        <LightBulbCord />
+        <LightBulbWrapper>
+          <LightBulbInnerWrapper>
+            <LightBulbInner width={24} height={24} />
+          </LightBulbInnerWrapper>
+          <LightBulb width={36} height={36} />
+        </LightBulbWrapper>
+      </Spacer>
       <Nav>
         <NavLink href='/#about'>about</NavLink>
         <NavLink href='/#projects'>projects</NavLink>
         <NavLink href='/#contact'>contact</NavLink>
       </Nav>
+      <Spacer />
       <Buttons>
-        <Button>
-          <IconWrapper>
-            <Volume2 width={28} height={28} />
-          </IconWrapper>
-          sound
-        </Button>
-        <Button onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+        {
+          soundOn !== undefined ?
+            <Button onClick={() => setSoundOn(!soundOn)}>
+              <IconWrapper>
+                {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
+              </IconWrapper>
+              {soundOn ? 'sound' : 'muted'}
+            </Button>
+            : <Placeholder />
+        }
+        <Button onClick={() => {
+          theme === 'light' ? setTheme('dark') : setTheme('light');
+          if (soundOn) play();
+        }}>
           <IconWrapper>
             <ThemeIcon width={28} height={28} />
           </IconWrapper>
@@ -77,7 +103,10 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
               <MobileNavLink href='/#contact'>contact</MobileNavLink>
             </MobileNav>
             <MobileButtons>
-              <MobileMenuButton onClick={() => theme === 'light' ? setTheme('dark') : setTheme('light')}>
+              <MobileMenuButton onClick={() => {
+                theme === 'light' ? setTheme('dark') : setTheme('light');
+                play();
+              }}>
                 <IconWrapper>
                   <ThemeIcon width={44} height={44} />
                 </IconWrapper>
@@ -148,6 +177,34 @@ const Logo = styled.a`
   white-space: nowrap;
 `;
 
+const LightBulbCord = styled.div`
+  position: absolute;
+  top: -60px;
+  left: 17px;
+  width: 2px;
+  height: 67px;
+  background: var(--color-text);
+`;
+
+const LightBulbWrapper = styled.div`
+  top: 3px;
+  position: relative;
+  color: var(--color-text);
+`;
+
+const LightBulbInnerWrapper = styled.div`
+  position: absolute;
+  top: 12px;
+  left: 6px;
+  color: var(--color-highlight);
+`;
+
+const Spacer = styled.div`
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+`;
+
 const Accent = styled.span`
   color: var(--color-primary);
 `;
@@ -163,10 +220,42 @@ const Nav = styled.nav`
 `;
 
 const NavLink = styled(Link)`
+  position: relative;
   color: inherit;
   text-decoration: none;
   font-weight: ${WEIGHTS.semibold};
   font-size: ${20 / 16}rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 90%;
+    left: -5%;
+    width: 110%;
+    height: 3px;
+    background: var(--color-primary);
+    transition: 
+      top 0ms 400ms,
+      opacity 400ms;
+    border-radius: 32px;
+    opacity: 0;
+  }
+
+  &:hover {
+    &::after {
+      top: 100%;
+      opacity: 1;
+      transition: 
+        top 250ms ease-out, 
+        opacity 300ms ease-out;
+    }
+  }
+
+  @media ${QUERIES.tabletAndDown} {
+    &::after {
+      display: none;
+    }
+  }
 `;
 
 const Buttons = styled.div`

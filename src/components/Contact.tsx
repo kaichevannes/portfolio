@@ -153,6 +153,8 @@ const SquigglyWrapper = styled.div`
 const ContactFormWrapper = styled.div`
   flex: 6;
   container-type: inline-size;
+  box-shadow: var(--shadow);
+  border-radius: 16px;
 
   @media ${QUERIES.tabletAndDown} {
     flex-basis: 376px;

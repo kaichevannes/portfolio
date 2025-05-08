@@ -70,6 +70,19 @@ export const globals = css`
     }
 
     /*
+    Shadows
+    */
+    :root {
+      --shadow-color: var(--color-shadow);
+      --shadow:
+        0.4px 0.7px 1.1px hsl(var(--shadow-color) / 0.02),
+        1.6px 2.7px 4.5px -0.1px hsl(var(--shadow-color) / 0.05),
+        2.9px 4.9px 8.1px -0.2px hsl(var(--shadow-color) / 0.08),
+        5.1px 8.5px 14.1px -0.4px hsl(var(--shadow-color) / 0.12),
+        9px 14.9px 24.8px -0.5px hsl(var(--shadow-color) / 0.15);
+    }
+
+    /*
     Smooth scrolling
     */
     @media (prefers-reduced-motion: no-preference) {
