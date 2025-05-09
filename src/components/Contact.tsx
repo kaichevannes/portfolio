@@ -13,6 +13,7 @@ import { Heading } from '@/components/Heading';
 
 const Contact = () => {
   const [sentMessage, setSentMessage] = React.useState(false);
+  const [sendingMessage, setSendingMessage] = React.useState(false);
 
   return (
     <Div id='contact'>
@@ -50,6 +51,7 @@ const Contact = () => {
             onSubmit={
               async (event) => {
                 event.preventDefault();
+                setSendingMessage(true);
                 const data = Object.fromEntries(new FormData(event.currentTarget));
                 const res = await fetch('/api/contact', {
                   method: 'POST',
@@ -61,6 +63,7 @@ const Contact = () => {
                 } else {
                   alert("There was an issue sending your message. Try emailing me directly.")
                 }
+                setSendingMessage(false);
               }
             }
           >
@@ -98,10 +101,16 @@ const Contact = () => {
               </Form.Control>
             </MessageField>
             {!sentMessage ?
-              <Form.Submit asChild>
-                <Send>Send</Send>
-              </Form.Submit> :
-              'Sent, Thanks for getting touch!'
+              !sendingMessage ?
+                <Form.Submit asChild>
+                  <Send>
+                    Send
+                    <Hover>Send</Hover>
+                  </Send>
+                </Form.Submit> :
+                <Thanks>Sending...</Thanks>
+              :
+              <Thanks>Sent. Thanks for getting touch!</Thanks>
             }
           </ContactForm>
         </ContactFormWrapper>
@@ -252,6 +261,7 @@ const TextArea = styled.textarea`
 `;
 
 const Send = styled.button`
+  position: relative;
   grid-area: send;
   margin: 8px;
   text-decoration: none;
@@ -264,14 +274,47 @@ const Send = styled.button`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   width: 135px;
-
-  &:hover {
-    background: var(--color-primary);
-  }
+  cursor: pointer;
 
   @media ${QUERIES.tabletAndDown} {
     width: calc(100% - 16px);
   }
+`;
+
+const Hover = styled.div`
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  transition: clip-path 500ms;
+  clip-path: polygon(
+    0% 100%,
+    0% 100%,
+    100% 100%,
+    100% 100%
+  );
+  border-radius: inherit;
+  padding: inherit;
+  font-size: inherit;
+  
+  ${Send}:hover &,
+  ${Send}:focus & {
+    transition: clip-path 300ms;
+    clip-path: polygon(
+      -1% 101%,
+      -1% -1%,
+      101% -1%,
+      101% 101%
+    );
+  }
+`;
+
+const Thanks = styled.p`
+  grid-area: send;
+  height: 38px;
+  margin: 8px;
+  color: var(--color-primary);
+  font-size: ${20 / 16}rem;
+  font-weight: ${WEIGHTS.semibold};
 `;
 
 export { Contact };

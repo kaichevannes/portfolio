@@ -15,21 +15,22 @@ const transporter = nodemailer.createTransport({
 async function POST(request: NextRequest) {
   const { name, email, message } = await request.json();
 
+  const messageContents = `Name: ${name}\n\nEmail: ${email}\n\nMessage: ${message}`;
+
   try {
     const info = await transporter.sendMail({
       from: '"Portfolio Website" <chevannes.kai@gmail.com>',
       to: 'chevannes.kai@gmail.com',
       subject: `${name} - Portfolio Contact`,
-      text: `Name: ${name}\n\nEmail: ${email}\n\nMessage: ${message}`,
+      text: messageContents,
     });
 
     console.log(`Message sent: ${info.messageId}`);
-    console.log(`Preview URL: ${nodemailer.getTestMessageUrl(info)}`);
     return NextResponse.json(
       {
         success: true,
-        message: info.messageId,
-        preview: nodemailer.getTestMessageUrl(info),
+        messageId: info.messageId,
+        messageContents: messageContents,
       },
       { status: 200 }
     );
