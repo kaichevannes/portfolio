@@ -1,4 +1,5 @@
 import { styled } from '@linaria/react';
+import { CSSProperties } from 'react';
 import { Dialog, VisuallyHidden } from 'radix-ui';
 import Link from 'next/link';
 import useSound from 'use-sound';
@@ -7,14 +8,14 @@ import { WEIGHTS, QUERIES } from '@/constants';
 import { useTheme } from '@/components/ThemeProvider';
 import { useSoundOn } from '@/components/SoundOnProvider';
 
+import { LightBulb } from '@/components/Lightbulb';
+
 import Volume2 from '@/svg/volume-2.svg';
 import VolumeX from '@/svg/volume-x.svg';
 import Sun from '@/svg/sun.svg';
 import Moon from '@/svg/moon.svg';
 import Menu from '@/svg/menu.svg';
 import Close from '@/svg/x.svg';
-import LightBulb from '@/svg/lightbulb.svg';
-import LightBulbInner from '@/svg/lightbulb-inner.svg';
 
 const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   const { theme, setTheme } = useTheme();
@@ -44,13 +45,7 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
         kai chevannes<Accent>.</Accent>
       </Logo>
       <Spacer>
-        <LightBulbCord />
-        <LightBulbWrapper>
-          <LightBulbInnerWrapper>
-            <LightBulbInner width={24} height={24} />
-          </LightBulbInnerWrapper>
-          <LightBulb width={36} height={36} />
-        </LightBulbWrapper>
+        <LightBulb />
       </Spacer>
       <Nav>
         <NavLink href='/#about'>about</NavLink>
@@ -58,27 +53,30 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
         <NavLink href='/#contact'>contact</NavLink>
       </Nav>
       <Spacer />
-      <Buttons>
-        {
-          soundOn !== undefined ?
-            <Button onClick={() => setSoundOn(!soundOn)}>
-              <IconWrapper>
-                {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
-              </IconWrapper>
-              {soundOn ? 'sound' : 'muted'}
-            </Button>
-            : <Placeholder />
-        }
-        <Button onClick={() => {
-          theme === 'light' ? setTheme('dark') : setTheme('light');
-          if (soundOn) play();
-        }}>
-          <IconWrapper>
-            <ThemeIcon width={28} height={28} />
-          </IconWrapper>
-          {theme}
-        </Button>
-      </Buttons>
+      {theme !== undefined && soundOn != undefined
+        ?
+        <Buttons>
+          <SlideInButton onClick={() => setSoundOn(!soundOn)}>
+            <IconWrapper>
+              {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
+            </IconWrapper>
+            {soundOn ? 'sound' : 'muted'}
+          </SlideInButton>
+          <SlideInButton
+            onClick={() => {
+              theme === 'light' ? setTheme('dark') : setTheme('light');
+              if (soundOn) play();
+            }}
+            style={{ '--delay': '300ms' } as CSSProperties}
+          >
+            <IconWrapper>
+              <ThemeIcon width={28} height={28} />
+            </IconWrapper>
+            {theme}
+          </SlideInButton>
+        </Buttons>
+        :
+        <Placeholder />}
       <Dialog.Root>
         <Dialog.Trigger asChild>
           <MobileButton>
@@ -111,6 +109,12 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
                   <ThemeIcon width={44} height={44} />
                 </IconWrapper>
                 {theme}
+              </MobileMenuButton>
+              <MobileMenuButton onClick={() => setSoundOn(!soundOn)}>
+                <IconWrapper>
+                  {soundOn ? <Volume2 width={44} height={44} /> : <VolumeX width={44} height={44} />}
+                </IconWrapper>
+                {soundOn ? 'sound' : 'muted'}
               </MobileMenuButton>
             </MobileButtons>
           </Content>
@@ -177,32 +181,14 @@ const Logo = styled.a`
   white-space: nowrap;
 `;
 
-const LightBulbCord = styled.div`
-  position: absolute;
-  top: -60px;
-  left: 17px;
-  width: 2px;
-  height: 67px;
-  background: var(--color-text);
-`;
-
-const LightBulbWrapper = styled.div`
-  top: 3px;
-  position: relative;
-  color: var(--color-text);
-`;
-
-const LightBulbInnerWrapper = styled.div`
-  position: absolute;
-  top: 12px;
-  left: 6px;
-  color: var(--color-highlight);
-`;
-
 const Spacer = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const Accent = styled.span`
@@ -292,9 +278,25 @@ const Button = styled.button`
   }
 `;
 
+const SlideInButton = styled(Button)`
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+
+  animation: slideIn 600ms ease-out backwards;
+  animation-delay: var(--delay);
+`;
+
 const MobileButton = styled(Button)`
   display: none;
-  transform: translateY(8px);
+  transform: translate(2px, 8px);
 
   @media ${QUERIES.tabletAndDown} {
     display: revert;
@@ -309,12 +311,12 @@ const CloseButton = styled(MobileButton)`
   color: var(--color-grey900);
 
   position: absolute;
-  top: 5px;
-  right: 31px;
+  top: 8px;
+  right: 8px;
 `;
 
 const Placeholder = styled.div`
-  width: 80px;
+  width: 190px;
   height: 28px;
 `;
 
@@ -355,7 +357,8 @@ const MobileButtons = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  transform: translateY(-48px);
+  transform: translateY(-72px);
+  gap: 48px;
 `;
 
 const MobileMenuButton = styled(MobileButton)`

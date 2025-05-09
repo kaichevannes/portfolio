@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
 import { Form } from 'radix-ui';
 
 import { WEIGHTS, QUERIES } from '@/constants';
@@ -12,6 +12,9 @@ import LinkedInSquiggly from '@/svg/linkedin-squiggly.svg';
 import { Heading } from '@/components/Heading';
 
 const Contact = () => {
+  const [sentMessage, setSentMessage] = React.useState(false);
+  const [sendingMessage, setSendingMessage] = React.useState(false);
+
   return (
     <Div id='contact'>
       <Heading>Contact</Heading>
@@ -44,7 +47,26 @@ const Contact = () => {
           </SocialList>
         </Socials>
         <ContactFormWrapper>
-          <ContactForm onSubmit={() => alert("This isn't implemented yet.")}>
+          <ContactForm
+            onSubmit={
+              async (event) => {
+                event.preventDefault();
+                setSendingMessage(true);
+                const data = Object.fromEntries(new FormData(event.currentTarget));
+                const res = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(data),
+                });
+                if (res.ok) {
+                  setSentMessage(true);
+                } else {
+                  alert("There was an issue sending your message. Try emailing me directly.")
+                }
+                setSendingMessage(false);
+              }
+            }
+          >
             <Field name='name' style={{ gridArea: 'name' }}>
               <LabelWrapper>
                 <Label>Name</Label>
@@ -78,9 +100,18 @@ const Contact = () => {
                 <TextArea placeholder='I’d like to invite you to the Phoenix Team. Let’s chat.' required />
               </Form.Control>
             </MessageField>
-            <Form.Submit asChild>
-              <Send>Send</Send>
-            </Form.Submit>
+            {!sentMessage ?
+              !sendingMessage ?
+                <Form.Submit asChild>
+                  <Send>
+                    Send
+                    <Hover>Send</Hover>
+                  </Send>
+                </Form.Submit> :
+                <Thanks>Sending...</Thanks>
+              :
+              <Thanks>Sent. Thanks for getting touch!</Thanks>
+            }
           </ContactForm>
         </ContactFormWrapper>
       </Wrapper>
@@ -230,6 +261,7 @@ const TextArea = styled.textarea`
 `;
 
 const Send = styled.button`
+  position: relative;
   grid-area: send;
   margin: 8px;
   text-decoration: none;
@@ -242,14 +274,47 @@ const Send = styled.button`
   font-size: ${20 / 16}rem;
   font-weight: ${WEIGHTS.medium};
   width: 135px;
-
-  &:hover {
-    background: var(--color-primary);
-  }
+  cursor: pointer;
 
   @media ${QUERIES.tabletAndDown} {
     width: calc(100% - 16px);
   }
+`;
+
+const Hover = styled.div`
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  transition: clip-path 500ms;
+  clip-path: polygon(
+    0% 100%,
+    0% 100%,
+    100% 100%,
+    100% 100%
+  );
+  border-radius: inherit;
+  padding: inherit;
+  font-size: inherit;
+  
+  ${Send}:hover &,
+  ${Send}:focus & {
+    transition: clip-path 300ms;
+    clip-path: polygon(
+      -1% 101%,
+      -1% -1%,
+      101% -1%,
+      101% 101%
+    );
+  }
+`;
+
+const Thanks = styled.p`
+  grid-area: send;
+  height: 38px;
+  margin: 8px;
+  color: var(--color-primary);
+  font-size: ${20 / 16}rem;
+  font-weight: ${WEIGHTS.semibold};
 `;
 
 export { Contact };

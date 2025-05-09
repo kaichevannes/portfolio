@@ -1,0 +1,17 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: portfolio
+  namespace: default
+spec:
+  template:
+    spec:
+      containers:
+      - name: portfolio
+        envFrom:
+        - secretRef:
+            name: google-client-id
+        - secretRef:
+            name: google-client-secret
+        - secretRef:
+            name: google-refresh-token
