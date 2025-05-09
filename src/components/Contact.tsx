@@ -1,5 +1,5 @@
 import { styled } from '@linaria/react';
-import { CSSProperties } from 'react';
+import React, { CSSProperties } from 'react';
 import { Form } from 'radix-ui';
 
 import { WEIGHTS, QUERIES } from '@/constants';
@@ -12,6 +12,8 @@ import LinkedInSquiggly from '@/svg/linkedin-squiggly.svg';
 import { Heading } from '@/components/Heading';
 
 const Contact = () => {
+  const [sentMessage, setSentMessage] = React.useState(false);
+
   return (
     <Div id='contact'>
       <Heading>Contact</Heading>
@@ -44,7 +46,24 @@ const Contact = () => {
           </SocialList>
         </Socials>
         <ContactFormWrapper>
-          <ContactForm onSubmit={() => alert("This isn't implemented yet.")}>
+          <ContactForm
+            onSubmit={
+              async (event) => {
+                event.preventDefault();
+                const data = Object.fromEntries(new FormData(event.currentTarget));
+                const res = await fetch('/api/contact', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(data),
+                });
+                if (res.ok) {
+                  setSentMessage(true);
+                } else {
+                  alert("There was an issue sending your message. Try emailing me directly.")
+                }
+              }
+            }
+          >
             <Field name='name' style={{ gridArea: 'name' }}>
               <LabelWrapper>
                 <Label>Name</Label>
@@ -78,9 +97,12 @@ const Contact = () => {
                 <TextArea placeholder='I’d like to invite you to the Phoenix Team. Let’s chat.' required />
               </Form.Control>
             </MessageField>
-            <Form.Submit asChild>
-              <Send>Send</Send>
-            </Form.Submit>
+            {!sentMessage ?
+              <Form.Submit asChild>
+                <Send>Send</Send>
+              </Form.Submit> :
+              'Sent, Thanks for getting touch!'
+            }
           </ContactForm>
         </ContactFormWrapper>
       </Wrapper>
