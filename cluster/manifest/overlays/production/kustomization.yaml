@@ -5,6 +5,9 @@ resources:
   - sealed-secrets-controller.yaml
   - sealed-secrets-porkbun-key.yaml
   - sealed-secrets-porkbun-secret-key.yaml
+  - sealed-secrets-google-client-id.yaml
+  - sealed-secrets-google-client-secret.yaml
+  - sealed-secrets-google-refresh-token.yaml
 patches:
   - path: traefik-deployment-patch.yaml
   - path: portfolio-ingress-patch.yaml
