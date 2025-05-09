@@ -3,23 +3,11 @@ apiVersion: apps/v1
 metadata:
   name: portfolio
   namespace: default
-  labels:
-    app: portfolio
-
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: portfolio
-  strategy: {}
   template:
-    metadata:
-      labels:
-        app: portfolio
     spec:
       containers:
-      - image: ghcr.io/kaichevannes/portfolio:b369111b2fa674091824b3ab8ab960f7eab9481e
-        name: portfolio
+      - name: portfolio
         envFrom:
         - secretRef:
             name: google-client-id
@@ -27,6 +15,3 @@ spec:
             name: google-client-secret
         - secretRef:
             name: google-refresh-token
-        ports:
-          - name: web
-            containerPort: 3000
