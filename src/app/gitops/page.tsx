@@ -304,6 +304,11 @@ const LightVideoWrapper = styled(VideoWrapper)`
       2px 2px 4px
       hsl(var(--color-shadow) / 0.3);
   }
+
+  @media ${QUERIES.tabletAndDown} {
+    padding: 16px;
+    margin-top: -36px;
+  }
 `;
 
 const DarkVideoWrapper = styled(VideoWrapper)`

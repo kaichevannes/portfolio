@@ -56,14 +56,12 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
       {theme !== undefined && soundOn != undefined
         ?
         <Buttons>
-          {
-            <SlideInButton onClick={() => setSoundOn(!soundOn)}>
-              <IconWrapper>
-                {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
-              </IconWrapper>
-              {soundOn ? 'sound' : 'muted'}
-            </SlideInButton>
-          }
+          <SlideInButton onClick={() => setSoundOn(!soundOn)}>
+            <IconWrapper>
+              {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
+            </IconWrapper>
+            {soundOn ? 'sound' : 'muted'}
+          </SlideInButton>
           <SlideInButton
             onClick={() => {
               theme === 'light' ? setTheme('dark') : setTheme('light');
@@ -111,6 +109,12 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
                   <ThemeIcon width={44} height={44} />
                 </IconWrapper>
                 {theme}
+              </MobileMenuButton>
+              <MobileMenuButton onClick={() => setSoundOn(!soundOn)}>
+                <IconWrapper>
+                  {soundOn ? <Volume2 width={44} height={44} /> : <VolumeX width={44} height={44} />}
+                </IconWrapper>
+                {soundOn ? 'sound' : 'muted'}
               </MobileMenuButton>
             </MobileButtons>
           </Content>
@@ -181,6 +185,10 @@ const Spacer = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
+
+  @media ${QUERIES.tabletAndDown} {
+    display: none;
+  }
 `;
 
 const Accent = styled.span`
@@ -288,7 +296,7 @@ const SlideInButton = styled(Button)`
 
 const MobileButton = styled(Button)`
   display: none;
-  transform: translateY(8px);
+  transform: translate(2px, 8px);
 
   @media ${QUERIES.tabletAndDown} {
     display: revert;
@@ -303,8 +311,8 @@ const CloseButton = styled(MobileButton)`
   color: var(--color-grey900);
 
   position: absolute;
-  top: 5px;
-  right: 31px;
+  top: 8px;
+  right: 8px;
 `;
 
 const Placeholder = styled.div`
@@ -349,7 +357,8 @@ const MobileButtons = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  transform: translateY(-48px);
+  transform: translateY(-72px);
+  gap: 48px;
 `;
 
 const MobileMenuButton = styled(MobileButton)`
