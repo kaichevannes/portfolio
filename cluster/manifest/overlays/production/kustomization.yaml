@@ -8,3 +8,4 @@ resources:
 patches:
   - path: traefik-deployment-patch.yaml
   - path: portfolio-ingress-patch.yaml
+  - path: portfolio-deployment-patch.yaml
