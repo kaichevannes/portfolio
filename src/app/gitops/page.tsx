@@ -1,7 +1,7 @@
 'use client';
 
 import { styled } from '@linaria/react';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 import { WEIGHTS, COLORS, QUERIES } from '@/constants';
@@ -297,6 +297,13 @@ const LightVideoWrapper = styled(VideoWrapper)`
     inset
     1px 2px 4px
     hsl(var(--color-shadow) / 0.3);
+  border-radius: 1px;
+
+  & video {
+    box-shadow:
+      2px 2px 4px
+      hsl(var(--color-shadow) / 0.3);
+  }
 `;
 
 const DarkVideoWrapper = styled(VideoWrapper)`
