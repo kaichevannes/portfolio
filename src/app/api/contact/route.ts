@@ -13,11 +13,14 @@ const transporter = nodemailer.createTransport({
 })
 
 async function POST(request: NextRequest) {
+  console.log('Waiting for request.json');
   const { name, email, message } = await request.json();
 
+  console.log('Message contents');
   const messageContents = `Name: ${name}\n\nEmail: ${email}\n\nMessage: ${message}`;
 
   try {
+    console.log('Waiting for transporter.sendMail');
     const info = await transporter.sendMail({
       from: '"Portfolio Website" <chevannes.kai@gmail.com>',
       to: 'chevannes.kai@gmail.com',
