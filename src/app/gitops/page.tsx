@@ -375,4 +375,12 @@ const PageLink = styled(Link)`
   @media ${QUERIES.mobileAndDown} {
     margin-top: 32px;
   }
+
+  transition: transform 300ms;
+
+  &:hover,
+  &:focus {
+    transition: transform 150ms;
+    transform: scale(1.01);
+  }
 `;

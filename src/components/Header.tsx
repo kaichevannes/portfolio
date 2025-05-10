@@ -179,6 +179,13 @@ const Logo = styled.a`
   font-size: ${32 / 16}rem;
   font-weight: ${WEIGHTS.bold};
   white-space: nowrap;
+
+  transition: transform 300ms;
+  &:hover,
+  &:focus {
+    transition: transform 150ms;
+    transform: scale(1.01);
+  }
 `;
 
 const Spacer = styled.div`
