@@ -227,7 +227,10 @@ const NavLink = styled(Link)`
     opacity: 0;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+    color: var(--color-text);
+
     &::after {
       top: 100%;
       opacity: 1;
@@ -276,6 +279,13 @@ const Button = styled.button`
   &:focus:not(:focus-visible) {
     outline: none;
   }
+
+  transition: color 250ms;
+  &:hover,
+  &:focus {
+    color: var(--color-text);
+    transition: color 100ms;
+  }
 `;
 
 const SlideInButton = styled(Button)`
@@ -305,6 +315,12 @@ const MobileButton = styled(Button)`
 
 const IconWrapper = styled.div`
   align-self: center;
+  transition: transform 100ms;
+
+  ${Button}:hover & {
+    transform: scale(1.01) translateY(-1px);
+    transition: transform 200ms;
+  }
 `;
 
 const CloseButton = styled(MobileButton)`

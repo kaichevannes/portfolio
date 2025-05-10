@@ -88,7 +88,7 @@ export default function GitOps() {
                 autoPlay
                 loop
                 muted
-                preload='metadata'
+                preload='auto'
                 src='/cluster-bootstrap.mp4'
                 style={{
                   opacity: playing ? 1 : 0.75,
