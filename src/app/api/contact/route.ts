@@ -1,5 +1,3 @@
-export const runtime = 'edge';
-
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
@@ -16,10 +14,9 @@ const transporter = nodemailer.createTransport({
 
 async function POST(request: NextRequest) {
   console.log('Waiting for request.text()');
-  const bodyText = request.text();
+  const bodyText = await request.text();
   console.log(`Received: ${bodyText}`);
-  console.log('Waiting for request.json');
-  const { name, email, message } = await request.json();
+  const { name, email, message } = JSON.parse(bodyText);
 
   console.log('Message contents');
   const messageContents = `Name: ${name}\n\nEmail: ${email}\n\nMessage: ${message}`;
