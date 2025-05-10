@@ -166,11 +166,9 @@ const Social = styled.a`
   gap: 4px;
   font-size: ${20 / 16}rem;
   
-  transition: color 250ms;
   &:hover,
   &:focus {
     color: var(--color-text);
-    transition: color 100ms;
   }
 `;
 

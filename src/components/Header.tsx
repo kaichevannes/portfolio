@@ -280,11 +280,9 @@ const Button = styled.button`
     outline: none;
   }
 
-  transition: color 250ms;
   &:hover,
   &:focus {
     color: var(--color-text);
-    transition: color 100ms;
   }
 `;
 
