@@ -84,7 +84,7 @@ const IconLink = styled.a`
 
   &:hover {
     color: var(--color-grey700);
-    transition: color 100ms;
+    transition: color 100ms, transform 100ms;
   }
 `;
 

@@ -21,7 +21,7 @@ const About = () => {
           I studied Computer Science at the University of Southampton and graduated with First Class Honours. Right now, I’m focused on building an intuition for industry best practices by reading the <Anchor href="https://www.goodreads.com/review/list/168867354?shelf=software&sort=rating">most influential books in the field.</Anchor>
         </P>
         <P>
-          When I’m not listening to <Anchor href="https://www.goodreads.com/review/list/168867354-kai-chevannes?order=d&shelf=read&sort=rating">audiobooks</Anchor> or tinkering with my <Hint>dev environment</Hint>, I enjoy <Anchor href="https://rateyourmusic.com/~cheva">rating obscure music albums</Anchor> and making <Anchor href="https://www.youtube.com/playlist?list=PLWJ3-Ib---3Exq8Lb829sOBjEvbJsAX3S">DJ mixes</Anchor> with songs that mean everything to me.
+          When I’m not listening to <Anchor href="https://www.goodreads.com/review/list/168867354-kai-chevannes?order=d&shelf=read&sort=rating">audiobooks</Anchor> or tinkering with my <Hint hintContent={<p><Anchor href='https://learn.microsoft.com/en-us/windows/wsl/about'>WSL</Anchor>, <Anchor href='https://wezterm.org/'>Wezterm</Anchor>, and <Anchor href='https://neovim.io/'>Neovim</Anchor>. I have <Anchor href='https://github.com/kaichevannes/dotfiles'>idempotent one-click dotfiles</Anchor> too!</p>}>dev-environment</Hint>, I enjoy <Anchor href="https://rateyourmusic.com/~cheva">rating obscure music albums</Anchor> and making <Anchor href="https://www.youtube.com/playlist?list=PLWJ4-Ib---3Exq8Lb829sOBjEvbJsAX3S">DJ mixes</Anchor> with songs that mean everything to me.
         </P>
       </Contents>
     </Wrapper>

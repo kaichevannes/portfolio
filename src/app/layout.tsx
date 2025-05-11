@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import './styles.linaria.global';
 
+import { Tooltip } from 'radix-ui';
+
 import { type Theme, ThemeProvider } from '@/components/ThemeProvider';
 import { SoundOnProvider } from '@/components/SoundOnProvider';
 import { type ColorType, COLORS } from '@/constants';
@@ -28,11 +30,13 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: `(${boundSetColorsForTheme})()` }} />
         <ThemeProvider>
           <SoundOnProvider>
-            {children}
+            <Tooltip.Provider delayDuration={0}>
+              {children}
+            </Tooltip.Provider>
           </SoundOnProvider>
         </ThemeProvider>
       </body>
-    </html>
+    </html >
   );
 }
 

@@ -41,9 +41,11 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   return (
     <Wrap>
       <FrostedGlass />
-      <Logo href='/#'>
-        kai chevannes<Accent>.</Accent>
-      </Logo>
+      <H1>
+        <Logo href='/#'>
+          kai chevannes<Accent>.</Accent>
+        </Logo>
+      </H1>
       <Spacer>
         <LightBulb />
       </Spacer>
@@ -173,6 +175,17 @@ const FrostedGlass = styled.div`
   }
 `;
 
+const H1 = styled.h1`
+  transition: transform 300ms;
+  &:hover,
+  &:focus {
+    transition: transform 150ms;
+    transform: scale(1.01);
+  }
+
+  cursor: pointer;
+`;
+
 const Logo = styled.a`
   color: inherit;
   text-decoration: none;
@@ -227,7 +240,10 @@ const NavLink = styled(Link)`
     opacity: 0;
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
+    color: var(--color-text);
+
     &::after {
       top: 100%;
       opacity: 1;
@@ -276,6 +292,11 @@ const Button = styled.button`
   &:focus:not(:focus-visible) {
     outline: none;
   }
+
+  &:hover,
+  &:focus {
+    color: var(--color-text);
+  }
 `;
 
 const SlideInButton = styled(Button)`
@@ -305,6 +326,12 @@ const MobileButton = styled(Button)`
 
 const IconWrapper = styled.div`
   align-self: center;
+  transition: transform 100ms;
+
+  ${Button}:hover & {
+    transform: scale(1.01) translateY(-1px);
+    transition: transform 200ms;
+  }
 `;
 
 const CloseButton = styled(MobileButton)`
@@ -312,7 +339,7 @@ const CloseButton = styled(MobileButton)`
 
   position: absolute;
   top: 8px;
-  right: 8px;
+  right: 24px;
 `;
 
 const Placeholder = styled.div`
@@ -325,7 +352,31 @@ const Overlay = styled(Dialog.Overlay)`
   z-index: 1;
   inset: 0;
   background: var(--color-grey500);
-  opacity: 0.5;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 0.5;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+  
+  &[data-state='open'] {
+    animation: fadeIn 500ms ease-out forwards;
+  }
+  &[data-state='closed'] {
+    animation: fadeOut 300ms ease-out forwards;
+  }
 `;
 
 const Content = styled(Dialog.Content)`
@@ -335,11 +386,40 @@ const Content = styled(Dialog.Content)`
   right: 0;
   bottom: 0;
   background: var(--color-background);
-  width: clamp(300px, 80%, 600px);
+  width: clamp(316px, 80%, 616px);
+  margin-right: -16px;
   height: 100%;
   display: flex;
   flex-direction: column;
   color: var(--color-grey900);
+
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+    }
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      transform: translateX(0%);
+    }
+    to {
+      transform: translateX(100%);
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    &[data-state='open'] {
+      animation: slideIn 300ms cubic-bezier(0, 0.6, 0.32, 1.06) backwards;
+      animation-delay: 100ms;
+    }
+    &[data-state='closed'] {
+      animation: slideOut 250ms ease-out backwards;
+    }
+  }
 `;
 
 const MobileNav = styled.nav`
