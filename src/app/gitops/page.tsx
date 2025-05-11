@@ -104,22 +104,22 @@ export default function GitOps() {
         <Section title='Summary'>
           <Section.Contents>
             <p>
-              I set up a <Hint>CI/CD</Hint> pipeline using GitHub Actions to automate site updates. On each merge to `main` it follows Docker’s “<Bold>build → ship → run</Bold>” methodology:
+              I set up a <Hint hintContent={<p><Hint.Bold>Continuous Integration</Hint.Bold> / <Hint.Bold>Continuous Deployment</Hint.Bold> automates testing and releases.</p>}>CI/CD</Hint> pipeline using GitHub Actions to automate site updates. On each merge to `main` it follows Docker’s “<Bold>build → ship → run</Bold>” methodology:
             </p>
             <ol>
               <Li><Bold>Build</Bold> a Docker image of the site</Li>
               <Li><Bold>Ship</Bold> the image to GitHub’s Container Registry</Li>
-              <Li><Bold>Run</Bold> the image on my always-free Oracle Cloud <Hint>VM</Hint></Li>
+              <Li><Bold>Run</Bold> the image on my always-free Oracle Cloud <Hint hintContent={<Hint.Bold>Virtual Machine</Hint.Bold>}>VM</Hint></Li>
             </ol>
             <p>
-              I bootstrap the VM with <Hint>Ansible</Hint>, setting up <Hint>Kubernetes</Hint> and <Hint>Flux</Hint> seen in Figure 1. Flux watches the portfolio's <Anchor href='https://github.com/kaichevannes/portfolio'>Git repository</Anchor> and syncs the cluster with its state.
+              I bootstrap the VM with <Hint hintContent='An “Infrastructure as Code” tool used to configure virtual machines post-provisioning.'>Ansible</Hint>, setting up <Hint hintContent='A container orchestrator used for CI/CD. It automates the deployment, scaling, and updating of our applications.'>Kubernetes</Hint> and <Hint hintContent='A GitOps CD tool.'>Flux</Hint> seen in Figure 1. Flux watches the portfolio's <Anchor href='https://github.com/kaichevannes/portfolio'>Git repository</Anchor> and syncs the cluster with its state.
             </p>
           </Section.Contents>
         </Section>
         <Section title='Purpose & Goal'>
           <Section.Contents>
             <p>
-              I became interested in <Hint>DevOps</Hint> after reading The Phoenix Project during my 2023 summer internship at <Anchor href='https://www.thoughtquarter.co.uk/'>Thought Quarter</Anchor>. I saw this project as an opportunity to improve my mental model of CI/CD technologies and Docker. My acceptance criteria were:
+              I became interested in <Hint hintContent={'A software development approach that follows the "three ways": increasing left to right flow of work (from requirements to delivery), increasing feedback from right to left, and cultivating a culture of continuous experimentation and learning.'}>DevOps</Hint> after reading The Phoenix Project during my 2023 summer internship at <Anchor href='https://www.thoughtquarter.co.uk/'>Thought Quarter</Anchor>. I saw this project as an opportunity to improve my mental model of CI/CD technologies and Docker. My acceptance criteria were:
             </p>
             <ol>
               <Li><Bold>One-click</Bold> cluster bootstrap</Li>
@@ -134,7 +134,7 @@ export default function GitOps() {
         <Section title='Spotlight'>
           <Section.Contents>
             <p>
-              GitOps changes the <Bold>run</Bold> stage of <Bold>build → ship → run</Bold>. Instead of <em>pushing</em> changes to a Kubernetes cluster using a secret key, GitOps <em>pulls</em> the changes from source control. This eliminates the need to store high-privilege access keys, improving security. Figure 2 shows the Kubernetes <Hint>manifest</Hint> files that Flux will sync the cluster’s state with.
+              GitOps changes the <Bold>run</Bold> stage of <Bold>build → ship → run</Bold>. Instead of <em>pushing</em> changes to a Kubernetes cluster using a secret key, GitOps <em>pulls</em> the changes from source control. This eliminates the need to store high-privilege access keys, improving security. Figure 2 shows the Kubernetes <Hint hintContent='YAML files that store the declarative state of the cluster.'>manifest</Hint> files that Flux will sync the cluster’s state with.
             </p>
           </Section.Contents>
           <Section.Image
@@ -164,16 +164,16 @@ export default function GitOps() {
             </p>
             <ol>
               <Li><Bold>Allow</Bold> incoming traffic on HTTP (port 80) and HTTPS (port 443) to my Oracle Cloud VM by configuring its ingress rules</Li>
-              <Li><Bold>Route</Bold> incoming requests to <Hint>Traefik</Hint>, running on my Kubernetes cluster</Li>
-              <Li><Bold>Provide</Bold> Traefik with the credentials to complete an <Hint>ACME</Hint> <Hint>DNS challenge</Hint> with my domain registrar</Li>
+              <Li><Bold>Route</Bold> incoming requests to <Hint hintContent='A cloud native reverse proxy similar to nginx, designed for use with containers.'>Traefik</Hint>, running on my Kubernetes cluster</Li>
+              <Li><Bold>Provide</Bold> Traefik with the credentials to complete an <Hint hintContent={<p><Hint.Bold>Automatic Certificate Management Environment</Hint.Bold> protocol. It automates the retrieval and renewal of the TLS certificates we need to serve requests over HTTPS.</p>}>ACME</Hint> DNS challenge with my domain registrar</Li>
               <Li><Bold>Persist</Bold> the TLS certificate to avoid Let's Encrypt rate limits</Li>
               <Li><Bold>Redirect</Bold> HTTP (port 80) to HTTPS (port 443) using a Kubernetes Ingress resource</Li>
-              <Li><Bold>Forward</Bold> HTTPS (port 443) requests to <Hint>Next.js</Hint> on its default port of 3000</Li>
+              <Li><Bold>Forward</Bold> HTTPS (port 443) requests to <Hint hintContent='A full-stack meta-framework built on top of React.'>Next.js</Hint> on its default port of 3000</Li>
             </ol>
             <p>
               In step 3, I need to provide Traefik with a secret API token for authentication. This seems simple on the surface but provides a unique challenge for GitOps because the full cluster state is kept in source control, including secret management.</p>
             <p>
-              In enterprise, your Kubernetes cluster would be hosted with a cloud provider that has a built-in secret manager. Since I’m running a <Hint>K3s</Hint> cluster directly on a VM, I need to handle secrets myself.
+              In enterprise, your Kubernetes cluster would be hosted with a cloud provider that has a built-in secret manager. Since I’m running a <Hint hintContent='A minimal Kubernetes distribution built for environments with limited resources.'>K3s</Hint> cluster directly on a VM, I need to handle secrets myself.
             </p>
             <p>
               I use <Anchor href='https://github.com/bitnami-labs/sealed-secrets'>Bitnami Sealed Secrets</Anchor> which generates a public/private key pair inside the cluster. I can encrypt the secret API token using the clusters public key and safely store it in source control. The private key to decrypt this secret only exists within the cluster.
@@ -204,7 +204,7 @@ export default function GitOps() {
         </nav>
       </Main>
       <Footer />
-    </MaxWidthWrapper>
+    </MaxWidthWrapper >
   )
 };
 
@@ -377,7 +377,6 @@ const PageLink = styled(Link)`
   }
 
   transition: transform 300ms;
-
   &:hover,
   &:focus {
     transition: transform 150ms;
