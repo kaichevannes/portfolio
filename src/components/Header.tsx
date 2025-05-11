@@ -112,12 +112,6 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
                 </IconWrapper>
                 {theme}
               </MobileMenuButton>
-              <MobileMenuButton onClick={() => setSoundOn(!soundOn)}>
-                <IconWrapper>
-                  {soundOn ? <Volume2 width={44} height={44} /> : <VolumeX width={44} height={44} />}
-                </IconWrapper>
-                {soundOn ? 'sound' : 'muted'}
-              </MobileMenuButton>
             </MobileButtons>
           </Content>
         </Dialog.Portal>
@@ -428,7 +422,7 @@ const MobileNav = styled.nav`
   gap: 32px;
   justify-content: center;
   align-items: center;
-  flex: 3;
+  flex: 4;
 `;
 
 const MobileButtons = styled.div`
@@ -437,7 +431,7 @@ const MobileButtons = styled.div`
   justify-content: center;
   align-items: center;
   flex: 1;
-  transform: translateY(-72px);
+  transform: translateY(-64px);
   gap: 48px;
 `;
 
@@ -445,6 +439,7 @@ const MobileMenuButton = styled(MobileButton)`
   translate: revert;
   display: flex;
   font-size: ${32 / 16}rem;
+  margin-left: -16px;
 `;
 
 const MobileNavLink = styled(NavLink)`
