@@ -41,9 +41,11 @@ const Header = ({ cushioned }: { cushioned?: Boolean }) => {
   return (
     <Wrap>
       <FrostedGlass />
-      <Logo href='/#'>
-        kai chevannes<Accent>.</Accent>
-      </Logo>
+      <H1>
+        <Logo href='/#'>
+          kai chevannes<Accent>.</Accent>
+        </Logo>
+      </H1>
       <Spacer>
         <LightBulb />
       </Spacer>
@@ -173,19 +175,23 @@ const FrostedGlass = styled.div`
   }
 `;
 
-const Logo = styled.a`
-  color: inherit;
-  text-decoration: none;
-  font-size: ${32 / 16}rem;
-  font-weight: ${WEIGHTS.bold};
-  white-space: nowrap;
-
+const H1 = styled.h1`
   transition: transform 300ms;
   &:hover,
   &:focus {
     transition: transform 150ms;
     transform: scale(1.01);
   }
+
+  cursor: pointer;
+`;
+
+const Logo = styled.a`
+  color: inherit;
+  text-decoration: none;
+  font-size: ${32 / 16}rem;
+  font-weight: ${WEIGHTS.bold};
+  white-space: nowrap;
 `;
 
 const Spacer = styled.div`

@@ -23,12 +23,12 @@ const COLORS: ColorType = {
     dark: `hsl(166deg 100% 24%)`,
   },
   primary: {
-    light: `hsl(166deg 100% 34%)`,
-    dark: `hsl(166deg 100% 34%)`,
+    light: `hsl(166deg 100% 24%)`,
+    dark: `hsl(166deg 100% 30%)`,
   },
   grey300: {
-    light: `hsl(55deg 8% 74%)`,
-    dark: `hsl(60deg 4% 40%)`,
+    light: `hsl(55deg 8% 40%)`,
+    dark: `hsl(60deg 4% 47%)`,
   },
   grey500: {
     light: `hsl(60deg 4% 29%)`,

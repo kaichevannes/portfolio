@@ -50,20 +50,24 @@ const Contact = () => {
           <ContactForm
             onSubmit={
               async (event) => {
-                event.preventDefault();
-                setSendingMessage(true);
-                const data = Object.fromEntries(new FormData(event.currentTarget));
-                const res = await fetch('/api/contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(data),
-                });
-                if (res.ok) {
-                  setSentMessage(true);
-                } else {
+                try {
+                  event.preventDefault();
+                  setSendingMessage(true);
+                  const data = Object.fromEntries(new FormData(event.currentTarget));
+                  const res = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                  }, { signal: AbortSignal.timeout(5000) });
+                  if (res.ok) {
+                    setSentMessage(true);
+                  } else {
+                    alert("There was an issue sending your message. Try emailing me directly.")
+                  }
+                  setSendingMessage(false);
+                } catch (err) {
                   alert("There was an issue sending your message. Try emailing me directly.")
                 }
-                setSendingMessage(false);
               }
             }
           >

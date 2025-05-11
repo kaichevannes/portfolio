@@ -39,6 +39,7 @@ const Wrapper = styled.span`
 
 const HintSignifier = styled.sup`
   line-height: 1;
+  font-weight: ${WEIGHTS.bold};
   color: var(--color-primary);
 `;
 
