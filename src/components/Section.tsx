@@ -5,26 +5,26 @@ import Image from 'next/image';
 import { WEIGHTS, QUERIES } from '@/constants';
 
 const Section = ({ children, title }: { children: ReactNode, title: string }) => {
-  const numChildren = React.Children.count(children);
+    const numChildren = React.Children.count(children);
 
-  return (
-    <Wrapper style={{ '--num-children': numChildren } as CSSProperties}>
-      <Title>
-        <Sticky>{title}</Sticky>
-      </Title>
-      {/* Set the grid row so we can have a fully spanning section title. */}
-      {React.Children.toArray(children).map((child, index) => {
-        if (React.isValidElement(child)) {
-          return React.cloneElement(child, {
-            style: {
-              gridRow: index + 1,
-            }
-          } as CSSProperties);
-        }
-        return child;
-      })}
-    </Wrapper>
-  );
+    return (
+        <Wrapper style={{ '--num-children': numChildren } as CSSProperties}>
+            <Title>
+                <Sticky>{title}</Sticky>
+            </Title>
+            {/* Set the grid row so we can have a fully spanning section title. */}
+            {React.Children.toArray(children).map((child, index) => {
+                if (React.isValidElement(child)) {
+                    return React.cloneElement(child, {
+                        style: {
+                            gridRow: index + 1,
+                        }
+                    } as CSSProperties);
+                }
+                return child;
+            })}
+        </Wrapper>
+    );
 };
 
 const FullBleed = styled.div`
@@ -49,26 +49,27 @@ Section.Contents = styled.div`
 `;
 
 Section.Image = ({ src, intrinsicWidth, intrinsicHeight, alt, caption, ...props }:
-  { src: string, intrinsicWidth: number, intrinsicHeight: number, alt: string, caption: string }) => {
-  return (
-    <FullBleed {...props}>
-      <figure>
-        <ImageWrapper style={{ '--aspect-ratio': `${intrinsicWidth} / ${intrinsicHeight}` } as CSSProperties}>
-          <Image
-            src={src}
-            alt={alt}
-            fill
-            quality={100}
-            style={{
-              borderRadius: 8,
-              boxShadow: 'var(--shadow)',
-            }}
-          />
-        </ImageWrapper>
-        <Caption>{caption}</Caption>
-      </figure>
-    </FullBleed>
-  )
+    { src: string, intrinsicWidth: number, intrinsicHeight: number, alt: string, caption: string }) => {
+    return (
+        <FullBleed {...props}>
+            <figure>
+                <ImageWrapper style={{ '--aspect-ratio': `${intrinsicWidth} / ${intrinsicHeight}` } as CSSProperties}>
+                    <Image
+                        src={src}
+                        alt={alt}
+                        fill
+                        quality={100}
+                        style={{
+                            borderRadius: 8,
+                            boxShadow: 'var(--shadow)',
+                        }}
+                        sizes={`${QUERIES.tabletAndDown} 100vw, 1100px`}
+                    />
+                </ImageWrapper>
+                <Caption>{caption}</Caption>
+            </figure>
+        </FullBleed>
+    )
 };
 
 const Wrapper = styled.section`
