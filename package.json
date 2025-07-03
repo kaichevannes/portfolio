@@ -10,7 +10,7 @@
         "lint": "next lint"
     },
     "dependencies": {
-        "@kaichevannes/react-boids": "0.1.21",
+        "@kaichevannes/react-boids": "0.1.26",
         "@linaria/core": "^6.3.0",
         "@linaria/react": "^6.3.0",
         "@radix-ui/react-tabs": "^1.1.12",
