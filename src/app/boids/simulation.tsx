@@ -233,6 +233,11 @@ const Wrapper = styled.div`
 
 const CanvasWrapper = styled.div`
     position: relative;
+    display: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        display: revert;
+    }
 `;
 
 const PlaybackWrapper = styled.div`
