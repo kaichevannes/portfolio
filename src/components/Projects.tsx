@@ -7,31 +7,30 @@ import { WEIGHTS, QUERIES } from '@/constants';
 import { Heading } from '@/components/Heading';
 
 const Projects = () => {
-  return (
-    <Wrapper id='projects'>
-      <Heading>Projects</Heading>
-      <Project>
-        <ImageWrapper>
-          {/* The sizes below should be 50vw for desktop, at the moment for mobile. */}
-          <Image
-            src='/gitops.png'
-            alt='A drawn digital image of Moby the Docker whale with the Kubernetes ship wheel logo on the front.'
-            fill
-            sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
-            quality={100}
-          />
-        </ImageWrapper>
-        <Details>
-          <Name>GitOps</Name>
-          <Description>Kubernetes with no manual steps. How I self-host this portfolio for free.</Description>
-          <ButtonLink href='/gitops'>
-            Read More
-            <Hover>Read More</Hover>
-          </ButtonLink>
-        </Details>
-      </Project>
-    </Wrapper>
-  );
+    return (
+        <Wrapper id='projects'>
+            <Heading>Projects</Heading>
+            <Project>
+                <ImageWrapper>
+                    <Image
+                        src='/gitops.png'
+                        alt='A drawn digital image of Moby the Docker whale with the Kubernetes ship wheel logo on the front.'
+                        fill
+                        sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
+                        quality={100}
+                    />
+                </ImageWrapper>
+                <Details>
+                    <Name>GitOps</Name>
+                    <Description>Kubernetes with no manual steps. How I self-host this portfolio for free.</Description>
+                    <ButtonLink href='/gitops'>
+                        Read More
+                        <Hover>Read More</Hover>
+                    </ButtonLink>
+                </Details>
+            </Project>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`

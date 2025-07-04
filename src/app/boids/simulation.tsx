@@ -6,6 +6,8 @@ import { Tabs } from "radix-ui";
 import Play from '@/svg/play.svg';
 import Pause from '@/svg/pause.svg';
 import { QUERIES, WEIGHTS } from '@/constants';
+import { Hint } from '@/components/Hint';
+import { Anchor } from '@/components/Anchor';
 
 export default function Simulation() {
     const [Boids, setBoids] = useState<any>(null);
@@ -33,10 +35,7 @@ export default function Simulation() {
     return (
         <Wrapper>
             <Boids.Root>
-                <CanvasWrapper onClick={() => {
-                    console.log('here');
-                    togglePlayback();
-                }}>
+                <CanvasWrapper onClick={togglePlayback}>
                     <Boids.Canvas width={1036} height={789} />
                     <PlayPauseWrapper>
                         {playing ? <Pause /> : <Play />}
@@ -75,7 +74,15 @@ export default function Simulation() {
                     <Content value="advanced" aria-label="Advanced controls">
                         <Controls>
                             <CheckboxWrapper>
-                                <Boids.Multithreaded />
+                                <Hint
+                                    hintContent={
+                                        <p>
+                                            I ran out of time while trying to get the multithreading code to bundle correctly on NextJS. I discuss this in the challenges section below. To see multithreading in action run the <Anchor href='https://github.com/kaichevannes/react-boids'>source code</Anchor>.
+                                        </p>
+                                    }
+                                >
+                                    <Boids.Multithreaded disabled />
+                                </Hint>
                             </CheckboxWrapper>
                             <DropdownWrapper>
                                 <Boids.Algorithm />
@@ -165,7 +172,7 @@ const Trigger = styled(Tabs.Trigger)`
     padding: 4px 16px;
     justify-content: center;
     align-items: center;
-    background-color: var(--color-grey500);
+    background-color: var(--color-grey700);
     color: var(--color-background);
     font-weight: ${WEIGHTS.medium};
 
@@ -176,7 +183,7 @@ const Trigger = styled(Tabs.Trigger)`
         border-top-right-radius: 8px;
     }
     &[data-state="active"] {
-        background-color: var(--color-text);
+        background-color: var(--color-primary);
     }
 
     @media ${QUERIES.tabletAndDown} {
@@ -192,8 +199,8 @@ const DesktopOnly = styled.div`
     flex: 1;
     background-image: repeating-linear-gradient(
         135deg,
-        var(--color-text),
-        var(--color-text) 10px,
+        var(--color-grey700),
+        var(--color-grey700) 10px,
         var(--color-background) 10px,
         var(--color-background) 20px
     );
