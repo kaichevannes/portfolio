@@ -111,6 +111,8 @@ const HeroImage = styled(Image)`
 `;
 
 const BlurImage = styled(HeroImage)`
+    will-change: transform;
+  border-radius: 100px;
   position: absolute;
   filter: blur(40px);
   transform: scale(1.05);
