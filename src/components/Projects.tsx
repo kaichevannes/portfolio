@@ -29,6 +29,30 @@ const Projects = () => {
                     </ButtonLink>
                 </Details>
             </Project>
+            <Project>
+                <ImageWrapper>
+                    <Image
+                        src='/boids.png'
+                        alt='A drawn digital image of the famous DiVinci Vitruvian Man diagram with boids drawn over the top.'
+                        fill
+                        sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
+                        quality={100}
+                    />
+                </ImageWrapper>
+                <Details>
+                    <Name>Web Boids</Name>
+                    <Description>I ported my dissertation to multithreaded WASM, it's blazingly fast.</Description>
+                    <Buttons>
+                        <ButtonLink href='/boids'>
+                            Read More
+                            <Hover>Read More</Hover>
+                        </ButtonLink>
+                        <SecondaryButtonLink href='/boids#simulation'>
+                            Demo
+                        </SecondaryButtonLink>
+                    </Buttons>
+                </Details>
+            </Project>
         </Wrapper>
     );
 };
@@ -81,6 +105,11 @@ const Details = styled.div`
   }
 `;
 
+const Buttons = styled.div`
+    display: flex;
+    gap: 16px;
+`;
+
 const Name = styled.h3`
   padding-top: 32px;
   font-size: ${32 / 16}rem;
@@ -120,6 +149,15 @@ const ButtonLink = styled(Link)`
     width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
+  }
+`;
+
+const SecondaryButtonLink = styled(ButtonLink)`
+  background: var(--color-primary);
+  color: var(--color-background);
+  transition: transform 200ms;
+  &:hover {
+      transform: scale(1.05);
   }
 `;
 

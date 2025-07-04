@@ -183,7 +183,7 @@ export default function GitOps() {
                 <Section title='Lessons Learned'>
                     <Section.Contents>
                         <p>
-                            The lesson of slowing down and making less assumptions was repeated to me throughout the project.
+                            The lesson of slowing down and making less assumptions repeated through the project.
                         </p>
                         <p>
                             As an example, when configuring Traefik locally I used the built-in Kubernetes <em>Ingress</em> resource, but the documentation for certificate verification used a custom <em>IngressRoute</em> resource. I didn't think this would change anything so skipped locally testing it, leading me down a rabbithole of attempting to fix what I thought was a network issue.

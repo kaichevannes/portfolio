@@ -33,7 +33,7 @@ export default function Simulation() {
     }
 
     return (
-        <Wrapper>
+        <Wrapper id="simulation">
             <Boids.Root>
                 <CanvasWrapper onClick={togglePlayback}>
                     <Boids.Canvas width={1036} height={789} />
