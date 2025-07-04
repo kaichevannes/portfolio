@@ -4,7 +4,7 @@
     "": {
       "name": "portfolio",
       "dependencies": {
-        "@kaichevannes/react-boids": "0.1.26",
+        "@kaichevannes/react-boids": "0.2.3",
         "@linaria/core": "^6.3.0",
         "@linaria/react": "^6.3.0",
         "@radix-ui/react-tabs": "^1.1.12",
@@ -326,7 +326,7 @@
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.25", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.1.0", "@jridgewell/sourcemap-codec": "^1.4.14" } }, "sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ=="],
 
-    "@kaichevannes/react-boids": ["@kaichevannes/react-boids@0.1.26", "", { "dependencies": { "@radix-ui/react-slider": "^1.3.5", "radix-ui": "^1.4.2", "use-debounce": "^10.0.5" }, "peerDependencies": { "react": "^19.1.0", "react-dom": "^19.1.0" } }, "sha512-7480wdqO8VDwv/mYbLA5HTcXfVpDDZp04W0ggl0sfo4RJVQDR3DVFSlj+TTaYIu4cVWiTXdoJ0NOqsVN50ZdPA=="],
+    "@kaichevannes/react-boids": ["@kaichevannes/react-boids@0.2.3", "", { "dependencies": { "@radix-ui/react-slider": "^1.3.5", "radix-ui": "^1.4.2", "use-debounce": "^10.0.5" }, "peerDependencies": { "react": "^19.1.0", "react-dom": "^19.1.0" } }, "sha512-58hIbdfX8qsSRd6fh6K53+fe/paKO3dkD2fTtMPeK8P5eU5qogz2d0hncb9R2cG/p9e54XLL/wfVm7gPWSR+Rg=="],
 
     "@linaria/core": ["@linaria/core@6.3.0", "", { "dependencies": { "@wyw-in-js/processor-utils": "^0.6.0" } }, "sha512-fs1aQyX4DmJpeGMyobuSznAo/Y02+Q8vhm+c/jr2WHDmqKHEJpCqH2Mhu1End+SdiUvZIUgb4MNiZryWtZLD5g=="],
 

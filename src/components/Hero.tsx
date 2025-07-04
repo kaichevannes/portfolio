@@ -3,35 +3,36 @@ import { styled } from '@linaria/react';
 import { WEIGHTS, QUERIES } from '@/constants';
 
 import Image from 'next/image';
+import { Hint } from './Hint';
 
 const Hero = () => {
-  return (
-    <Wrapper>
-      <Text>
-        <Hello>Hi, I'm Kai</Hello>
-        <JobRole><Accent>Software</Accent> Developer</JobRole>
-        <Description>I’m inspired by excellence — mastery of the small details.</Description>
-      </Text>
-      <ImageWrapper>
-        <BlurImage
-          src='/meditation.png'
-          alt='Me sitting in lotus position on my bed in the morning sun.'
-          quality={100}
-          fill
-          sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
-          priority
-        />
-        <HeroImage
-          src='/meditation.png'
-          alt='Me sitting in lotus position on my bed in the morning sun.'
-          quality={100}
-          fill
-          sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
-          priority
-        />
-      </ImageWrapper>
-    </Wrapper>
-  );
+    return (
+        <Wrapper>
+            <Text>
+                <Hello>Hi, I'm Kai</Hello>
+                <JobRole><Accent>Software</Accent> Developer</JobRole>
+                <Description>I’m inspired by excellence <Hint hintContent="This isn't AI generated, I just like em dashes.">—</Hint> mastery of the small details.</Description>
+            </Text>
+            <ImageWrapper>
+                <BlurImage
+                    src='/meditation.png'
+                    alt='Me sitting in lotus position on my bed in the morning sun.'
+                    quality={100}
+                    fill
+                    sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
+                    priority
+                />
+                <HeroImage
+                    src='/meditation.png'
+                    alt='Me sitting in lotus position on my bed in the morning sun.'
+                    quality={100}
+                    fill
+                    sizes={`${QUERIES.tabletAndDown} 100vw, 50vw`}
+                    priority
+                />
+            </ImageWrapper>
+        </Wrapper>
+    );
 };
 
 const Wrapper = styled.div`
