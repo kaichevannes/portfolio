@@ -18,106 +18,106 @@ import Menu from '@/svg/menu.svg';
 import Close from '@/svg/x.svg';
 
 const Header = ({ cushioned }: { cushioned?: Boolean }) => {
-  const { theme, setTheme } = useTheme();
-  const { soundOn, setSoundOn } = useSoundOn();
-  const [play] = useSound(theme === 'light' ? '/lighton.mp3' : 'lightoff.mp3');
+    const { theme, setTheme } = useTheme();
+    const { soundOn, setSoundOn } = useSoundOn();
+    const [play] = useSound(theme === 'light' ? '/lighton.mp3' : 'lightoff.mp3');
 
-  // While we wait for the theme to resolve client side, show a blank div with
-  // the same size as the theme icon to preserve layout.
-  let ThemeIcon;
-  switch (theme) {
-    case 'light':
-      ThemeIcon = Sun;
-      break;
-    case 'dark':
-      ThemeIcon = Moon;
-      break;
-    default:
-      ThemeIcon = Placeholder;
-  }
+    // While we wait for the theme to resolve client side, show a blank div with
+    // the same size as the theme icon to preserve layout.
+    let ThemeIcon;
+    switch (theme) {
+        case 'light':
+            ThemeIcon = Sun;
+            break;
+        case 'dark':
+            ThemeIcon = Moon;
+            break;
+        default:
+            ThemeIcon = Placeholder;
+    }
 
-  const Wrap = cushioned ? CushionedWrapper : Wrapper
+    const Wrap = cushioned ? CushionedWrapper : Wrapper
 
-  return (
-    <Wrap>
-      <FrostedGlass />
-      <H1>
-        <Logo href='/#'>
-          kai chevannes<Accent>.</Accent>
-        </Logo>
-      </H1>
-      <Spacer>
-        <LightBulb />
-      </Spacer>
-      <Nav>
-        <NavLink href='/#about'>about</NavLink>
-        <NavLink href='/#projects'>projects</NavLink>
-        <NavLink href='/#contact'>contact</NavLink>
-      </Nav>
-      <Spacer />
-      {theme !== undefined && soundOn != undefined
-        ?
-        <Buttons>
-          <SlideInButton onClick={() => setSoundOn(!soundOn)}>
-            <IconWrapper>
-              {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
-            </IconWrapper>
-            {soundOn ? 'sound' : 'muted'}
-          </SlideInButton>
-          <SlideInButton
-            onClick={() => {
-              theme === 'light' ? setTheme('dark') : setTheme('light');
-              if (soundOn) play();
-            }}
-            style={{ '--delay': '300ms' } as CSSProperties}
-          >
-            <IconWrapper>
-              <ThemeIcon width={28} height={28} />
-            </IconWrapper>
-            {theme}
-          </SlideInButton>
-        </Buttons>
-        :
-        <Placeholder />}
-      <Dialog.Root>
-        <Dialog.Trigger asChild>
-          <MobileButton>
-            <Menu width={44} height={44} />
-          </MobileButton>
-        </Dialog.Trigger>
-        <Dialog.Portal>
-          <Overlay />
-          <Content>
-            <VisuallyHidden.Root>
-              <Dialog.Title>Menu</Dialog.Title>
-              <Dialog.Description>Mobile navigation</Dialog.Description>
-            </VisuallyHidden.Root>
-            <Dialog.Close asChild>
-              <CloseButton>
-                <Close width={44} height={44} />
-              </CloseButton>
-            </Dialog.Close>
-            <MobileNav>
-              <MobileNavLink href='/#about'>about</MobileNavLink>
-              <MobileNavLink href='/#projects'>projects</MobileNavLink>
-              <MobileNavLink href='/#contact'>contact</MobileNavLink>
-            </MobileNav>
-            <MobileButtons>
-              <MobileMenuButton onClick={() => {
-                theme === 'light' ? setTheme('dark') : setTheme('light');
-                play();
-              }}>
-                <IconWrapper>
-                  <ThemeIcon width={44} height={44} />
-                </IconWrapper>
-                {theme}
-              </MobileMenuButton>
-            </MobileButtons>
-          </Content>
-        </Dialog.Portal>
-      </Dialog.Root>
-    </Wrap>
-  )
+    return (
+        <Wrap>
+            <FrostedGlass />
+            <H1>
+                <Logo href='/#'>
+                    kai chevannes<Accent>.</Accent>
+                </Logo>
+            </H1>
+            <Spacer>
+                <LightBulb />
+            </Spacer>
+            <Nav>
+                <NavLink href='/#about'>about</NavLink>
+                <NavLink href='/#projects'>projects</NavLink>
+                <NavLink href='/#contact'>contact</NavLink>
+            </Nav>
+            <Spacer />
+            {theme !== undefined && soundOn != undefined
+                ?
+                <Buttons>
+                    <SlideInButton onClick={() => setSoundOn(!soundOn)}>
+                        <IconWrapper>
+                            {soundOn ? <Volume2 width={28} height={28} /> : <VolumeX width={28} height={28} />}
+                        </IconWrapper>
+                        {soundOn ? 'sound' : 'muted'}
+                    </SlideInButton>
+                    <SlideInButton
+                        onClick={() => {
+                            theme === 'light' ? setTheme('dark') : setTheme('light');
+                            if (soundOn) play();
+                        }}
+                        style={{ '--delay': '300ms' } as CSSProperties}
+                    >
+                        <IconWrapper>
+                            <ThemeIcon width={28} height={28} />
+                        </IconWrapper>
+                        {theme}
+                    </SlideInButton>
+                </Buttons>
+                :
+                <Placeholder />}
+            <Dialog.Root>
+                <Dialog.Trigger asChild>
+                    <MobileButton>
+                        <Menu width={44} height={44} />
+                    </MobileButton>
+                </Dialog.Trigger>
+                <Dialog.Portal>
+                    <Overlay />
+                    <Content>
+                        <VisuallyHidden.Root>
+                            <Dialog.Title>Menu</Dialog.Title>
+                            <Dialog.Description>Mobile navigation</Dialog.Description>
+                        </VisuallyHidden.Root>
+                        <Dialog.Close asChild>
+                            <CloseButton>
+                                <Close width={44} height={44} />
+                            </CloseButton>
+                        </Dialog.Close>
+                        <MobileNav>
+                            <MobileNavLink href='/#about'>about</MobileNavLink>
+                            <MobileNavLink href='/#projects'>projects</MobileNavLink>
+                            <MobileNavLink href='/#contact'>contact</MobileNavLink>
+                        </MobileNav>
+                        <MobileButtons>
+                            <MobileMenuButton onClick={() => {
+                                theme === 'light' ? setTheme('dark') : setTheme('light');
+                                play();
+                            }}>
+                                <IconWrapper>
+                                    <ThemeIcon width={44} height={44} />
+                                </IconWrapper>
+                                {theme}
+                            </MobileMenuButton>
+                        </MobileButtons>
+                    </Content>
+                </Dialog.Portal>
+            </Dialog.Root>
+        </Wrap>
+    )
 }
 
 const Wrapper = styled.header`
@@ -148,6 +148,7 @@ const CushionedWrapper = styled(Wrapper)`
 `;
 
 const FrostedGlass = styled.div`
+  will-change: transform;
   position: fixed;
   inset: 0;
   height: 148px;
