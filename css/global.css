@@ -65,6 +65,30 @@ body {
   background: var(--color-highlight);
 }
 
+:root[color-mode="light"] {
+  background: hsl(46deg 33% 92%);
+  shadow: hsl(0deg 0% 7%);
+  text: hsl(0deg 0% 7%);
+  highlight: hsl(50deg 100% 78%);
+  primary: hsl(166deg 100% 24%);
+  grey300: hsl(55deg 8% 40%);
+  grey500: hsl(60deg 4% 29%);
+  grey700: hsl(37deg 5% 24%);
+  grey900: hsl(60deg 4% 19%);
+}
+
+:root[color-mode="dark"] {
+  background: hsl(0deg 0% 7%);
+  shadow: hsl(46deg 33% 92%);
+  text: hsl(46deg 33% 92%);
+  highlight: hsl(166deg 100% 24%);
+  primary: hsl(166deg 100% 30%);
+  grey300: hsl(60deg 4% 47%);
+  grey500: hsl(37deg 5% 60%);
+  grey700: hsl(60deg 4% 72%);
+  grey900: hsl(55deg 8% 82%);
+}
+
 /*
 Shadows
 */
@@ -85,13 +109,4 @@ Smooth scrolling
   html {
     scroll-behavior: smooth;
   }
-}
-
-.max-width-wrapper {
-  position: relative;
-  max-width: min(100%, 1100px);
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 32px;
-  padding-right: 32px;
 }
