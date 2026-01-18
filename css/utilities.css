@@ -49,3 +49,11 @@
 :root[color-mode="dark"] .dark--hidden {
   display: none;
 }
+
+:root[sound-mode="sound"] .sound--hidden {
+  display: none;
+}
+
+:root[sound-mode="muted"] .muted--hidden {
+  display: none;
+}

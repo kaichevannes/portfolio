@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" color-mode="light">
+<html lang="en" color-mode="light" sound-mode="sound">
 
 <head>
   <title>Kai Chevannes</title>
@@ -17,18 +17,6 @@
         !localStorage.getItem("color-mode"))
     ) {
       document.documentElement.setAttribute("color-mode", "dark");
-    }
-
-    function setColorMode(mode) {
-      document.documentElement.setAttribute('color-mode', mode);
-      localStorage.setItem('color-mode', mode);
-
-      <!-- Don't slide in after the initial render -->
-      const lightButton = document.querySelector(".dark--hidden");
-      const darkButton = document.querySelector(".light--hidden");
-
-      lightButton.classList.remove("slide-in");
-      darkButton.classList.remove("slide-in");
     }
   </script>
 </head>
@@ -54,15 +42,26 @@
         </a>
       </nav>
       <div class="header__buttons">
-        <button class="header__button slide-in" style="--delay: 120ms;">
+        <!-- Sound button -->
+        <button class="header__button slide-in muted--hidden" style="--delay: 120ms;" onclick="setSoundMode('muted');">
           <svg class="header__icon" width="28" height="28">
             <use href="assets/svgs/volume-2.svg#volume-2" />
           </svg>
           sound
         </button>
 
+        <!-- Muted button -->
+        <button class="header__button slide-in sound--hidden" style="--delay: 120ms;" onclick="setSoundMode('sound');">
+          <svg class="header__icon" width="28" height="28">
+            <use href="assets/svgs/volume-x.svg#volume-x" />
+          </svg>
+          muted
+        </button>
+
         <!-- Light mode button -->
-        <button class="header__button slide-in dark--hidden" style="--delay: 300ms;" onclick="setColorMode('dark')">
+        <audio id="sound-lightoff" src="assets/sounds/lightoff.mp3" preload="auto"></audio>
+        <button class="header__button slide-in dark--hidden" style="--delay: 300ms;"
+          onclick="setColorMode('dark'); playLightOff();">
           <svg class="header__icon" width="28" height="28">
             <use href="assets/svgs/sun.svg#sun" />
           </svg>
@@ -70,7 +69,9 @@
         </button>
 
         <!-- Dark mode button -->
-        <button class="header__button slide-in light--hidden" style="--delay: 300ms;" onclick="setColorMode('light')">
+        <audio id="sound-lighton" src="assets/sounds/lighton.mp3" preload="auto"></audio>
+        <button class="header__button slide-in light--hidden" style="--delay: 300ms;"
+          onclick="setColorMode('light'); playLightOn();">
           <svg class="header__icon" width="28" height="28">
             <use href="assets/svgs/moon.svg#moon" />
           </svg>
@@ -85,6 +86,46 @@
       Footer
       <footer>
   </div>
+
+  <script>
+    function setColorMode(mode) {
+      document.documentElement.setAttribute('color-mode', mode);
+      localStorage.setItem('color-mode', mode);
+
+      const lightButton = document.querySelector(".dark--hidden");
+      const darkButton = document.querySelector(".light--hidden");
+
+      lightButton.classList.remove("slide-in");
+      darkButton.classList.remove("slide-in");
+    }
+
+    function setSoundMode(mode) {
+      document.documentElement.setAttribute('sound-mode', mode);
+      localStorage.setItem('sound-mode', mode);
+
+      const soundButton = document.querySelector(".sound--hidden");
+      const mutedButton = document.querySelector(".muted--hidden");
+
+      soundButton.classList.remove("slide-in");
+      mutedButton.classList.remove("slide-in");
+    }
+
+    const lightOnAudio = document.getElementById("sound-lighton");
+    function playLightOn() {
+      if (document.documentElement.getAttribute('sound-mode') === 'muted') return;
+
+      lightOnAudio.currentTime = 0;
+      lightOnAudio.play();
+    }
+
+    const lightOffAudio = document.getElementById("sound-lightoff");
+    function playLightOff() {
+      if (document.documentElement.getAttribute('sound-mode') === 'muted') return;
+
+      lightOffAudio.currentTime = 0;
+      lightOffAudio.play();
+    }
+  </script>
 </body>
 
 </html>
