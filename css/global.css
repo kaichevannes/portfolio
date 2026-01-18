@@ -3,7 +3,9 @@ Josh's Custom CSS Reset
 https://www.joshwcomeau.com/css/custom-css-reset/
 */
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -22,27 +24,47 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
@@ -90,9 +112,9 @@ body {
   --color-highlight: hsl(50deg 100% 78%);
   --color-primary: hsl(166deg 100% 24%);
   --color-grey300: hsl(55deg 8% 40%);
-  --grey500: hsl(60deg 4% 29%);
-  --grey700: hsl(37deg 5% 24%);
-  --grey900: hsl(60deg 4% 19%);
+  --color-grey500: hsl(60deg 4% 29%);
+  --color-grey700: hsl(37deg 5% 24%);
+  --color-grey900: hsl(60deg 4% 19%);
 }
 
 :root[color-mode="dark"] {

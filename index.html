@@ -1,29 +1,90 @@
 <!DOCTYPE html>
 <html lang="en" color-mode="light">
+
 <head>
   <title>Kai Chevannes</title>
 
   <link rel="icon" href="favicon.ico" type="image/x-icon">
 
-  <link rel="stylesheet" href="css/global.css" href="css/global.css">
-  <link rel="stylesheet" href="css/styles.css" href="css/style.css">
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/utilities.css">
+  <link rel="stylesheet" href="css/header.css">
+
+  <script>
+    if (
+      localStorage.getItem("color-mode") === "dark" ||
+      (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+        !localStorage.getItem("color-mode"))
+    ) {
+      document.documentElement.setAttribute("color-mode", "dark");
+    }
+
+    function setColorMode(mode) {
+      document.documentElement.setAttribute('color-mode', mode);
+      localStorage.setItem('color-mode', mode);
+
+      <!-- Don't slide in after the initial render -->
+      const lightButton = document.querySelector(".dark--hidden");
+      const darkButton = document.querySelector(".light--hidden");
+
+      lightButton.classList.remove("slide-in");
+      darkButton.classList.remove("slide-in");
+    }
+  </script>
 </head>
+
 <body>
   <div class="max-width-wrapper">
     <header class="header header--cushioned">
       <!-- <div class="header__frosted-glass" /> -->
-      <h1 class="header__title">
-        <a class="header__logo" href="/">
+      <h1 class="header__title slide-in" style="--offset: -4px;">
+        <a class="header__title-anchor" href="/#">
           kai chevannes<span class="accent">.</span>
         </a>
       </h1>
+      <nav class="header__nav">
+        <a href="/#about" class="header__nav-link slide-in" style="--delay: 100ms; --offset: -6px;">
+          about
+        </a>
+        <a href="/#projects" class="header__nav-link slide-in" style="--delay: 150ms; offset: -6px;">
+          projects
+        </a>
+        <a href="/#contact" class="header__nav-link slide-in" style="--delay: 200ms; offset: -6px;">
+          contact
+        </a>
+      </nav>
+      <div class="header__buttons">
+        <button class="header__button slide-in" style="--delay: 120ms;">
+          <svg class="header__icon" width="28" height="28">
+            <use href="assets/svgs/volume-2.svg#volume-2" />
+          </svg>
+          sound
+        </button>
+
+        <!-- Light mode button -->
+        <button class="header__button slide-in dark--hidden" style="--delay: 300ms;" onclick="setColorMode('dark')">
+          <svg class="header__icon" width="28" height="28">
+            <use href="assets/svgs/sun.svg#sun" />
+          </svg>
+          light
+        </button>
+
+        <!-- Dark mode button -->
+        <button class="header__button slide-in light--hidden" style="--delay: 300ms;" onclick="setColorMode('light')">
+          <svg class="header__icon" width="28" height="28">
+            <use href="assets/svgs/moon.svg#moon" />
+          </svg>
+          dark
+        </button>
+      </div>
     </header>
     <main>
       Main
     </main>
     <footer>
       Footer
-    <footer>
+      <footer>
   </div>
 </body>
+
 </html>
