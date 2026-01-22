@@ -1,134 +1,168 @@
 <!DOCTYPE html>
 <html lang="en" color-mode="light" sound-mode="sound">
+  <head>
+    <meta charset="utf-8" />
 
-<head>
-  <meta charset="utf-8" />
+    <title>Kai Chevannes</title>
+    <meta name="description" content="Portfolio" />
 
-  <title>Kai Chevannes</title>
-  <meta name="description" content="Portfolio" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/utilities.css" />
+    <link rel="stylesheet" href="css/header.css" />
 
-  <link rel="stylesheet" href="css/global.css">
-  <link rel="stylesheet" href="css/utilities.css">
-  <link rel="stylesheet" href="css/header.css">
+    <script>
+      if (
+        localStorage.getItem("color-mode") === "dark" ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+          !localStorage.getItem("color-mode"))
+      ) {
+        document.documentElement.setAttribute("color-mode", "dark");
+      }
+    </script>
+  </head>
 
-  <script>
-    if (
-      localStorage.getItem("color-mode") === "dark" ||
-      (window.matchMedia("(prefers-color-scheme: dark)").matches &&
-        !localStorage.getItem("color-mode"))
-    ) {
-      document.documentElement.setAttribute("color-mode", "dark");
-    }
-  </script>
-</head>
+  <body>
+    <div class="max-width-wrapper">
+      <header class="header header--cushioned">
+        <!-- <div class="header__frosted-glass" /> -->
+        <h1 class="header__title slide-in" style="--offset: -4px">
+          <a class="header__title-anchor" href="/#">
+            kai chevannes<span class="accent">.</span>
+          </a>
+        </h1>
+        <svg class="header__spacer header__lightbulb">
+          <use href="assets/svgs/lightbulb.svg#lightbulb" />
+        </svg>
+        <nav class="header__nav">
+          <a
+            href="/#about"
+            class="header__nav-link slide-in"
+            style="--delay: 100ms; --offset: -6px"
+          >
+            about
+          </a>
+          <a
+            href="/#projects"
+            class="header__nav-link slide-in"
+            style="--delay: 150ms; offset: -6px"
+          >
+            projects
+          </a>
+          <a
+            href="/#contact"
+            class="header__nav-link slide-in"
+            style="--delay: 200ms; offset: -6px"
+          >
+            contact
+          </a>
+        </nav>
+        <div class="header__spacer" />
+        <div class="header__buttons">
+          <!-- Sound button -->
+          <button
+            class="header__button slide-in muted--hidden"
+            style="--delay: 120ms"
+            onclick="setSoundMode('muted');"
+          >
+            <svg class="header__icon" width="28" height="28">
+              <use href="assets/svgs/volume-2.svg#volume-2" />
+            </svg>
+            sound
+          </button>
 
-<body>
-  <div class="max-width-wrapper">
-    <header class="header header--cushioned">
-      <!-- <div class="header__frosted-glass" /> -->
-      <h1 class="header__title slide-in" style="--offset: -4px;">
-        <a class="header__title-anchor" href="/#">
-          kai chevannes<span class="accent">.</span>
-        </a>
-      </h1>
-      <nav class="header__nav">
-        <a href="/#about" class="header__nav-link slide-in" style="--delay: 100ms; --offset: -6px;">
-          about
-        </a>
-        <a href="/#projects" class="header__nav-link slide-in" style="--delay: 150ms; offset: -6px;">
-          projects
-        </a>
-        <a href="/#contact" class="header__nav-link slide-in" style="--delay: 200ms; offset: -6px;">
-          contact
-        </a>
-      </nav>
-      <div class="header__buttons">
-        <!-- Sound button -->
-        <button class="header__button slide-in muted--hidden" style="--delay: 120ms;" onclick="setSoundMode('muted');">
-          <svg class="header__icon" width="28" height="28">
-            <use href="assets/svgs/volume-2.svg#volume-2" />
-          </svg>
-          sound
-        </button>
+          <!-- Muted button -->
+          <button
+            class="header__button slide-in sound--hidden"
+            style="--delay: 120ms"
+            onclick="setSoundMode('sound');"
+          >
+            <svg class="header__icon" width="28" height="28">
+              <use href="assets/svgs/volume-x.svg#volume-x" />
+            </svg>
+            muted
+          </button>
 
-        <!-- Muted button -->
-        <button class="header__button slide-in sound--hidden" style="--delay: 120ms;" onclick="setSoundMode('sound');">
-          <svg class="header__icon" width="28" height="28">
-            <use href="assets/svgs/volume-x.svg#volume-x" />
-          </svg>
-          muted
-        </button>
+          <!-- Light mode button -->
+          <audio
+            id="sound-lightoff"
+            src="assets/sounds/lightoff.mp3"
+            preload="auto"
+          ></audio>
+          <button
+            class="header__button slide-in dark--hidden"
+            style="--delay: 300ms"
+            onclick="setColorMode('dark'); playLightOff();"
+          >
+            <svg class="header__icon" width="28" height="28">
+              <use href="assets/svgs/sun.svg#sun" />
+            </svg>
+            light
+          </button>
 
-        <!-- Light mode button -->
-        <audio id="sound-lightoff" src="assets/sounds/lightoff.mp3" preload="auto"></audio>
-        <button class="header__button slide-in dark--hidden" style="--delay: 300ms;"
-          onclick="setColorMode('dark'); playLightOff();">
-          <svg class="header__icon" width="28" height="28">
-            <use href="assets/svgs/sun.svg#sun" />
-          </svg>
-          light
-        </button>
+          <!-- Dark mode button -->
+          <audio
+            id="sound-lighton"
+            src="assets/sounds/lighton.mp3"
+            preload="auto"
+          ></audio>
+          <button
+            class="header__button slide-in light--hidden"
+            style="--delay: 300ms"
+            onclick="setColorMode('light'); playLightOn();"
+          >
+            <svg class="header__icon" width="28" height="28">
+              <use href="assets/svgs/moon.svg#moon" />
+            </svg>
+            dark
+          </button>
+        </div>
+      </header>
+      <main>Main</main>
+      <footer>Footer</footer>
+    </div>
 
-        <!-- Dark mode button -->
-        <audio id="sound-lighton" src="assets/sounds/lighton.mp3" preload="auto"></audio>
-        <button class="header__button slide-in light--hidden" style="--delay: 300ms;"
-          onclick="setColorMode('light'); playLightOn();">
-          <svg class="header__icon" width="28" height="28">
-            <use href="assets/svgs/moon.svg#moon" />
-          </svg>
-          dark
-        </button>
-      </div>
-    </header>
-    <main>
-      Main
-    </main>
-    <footer>
-      Footer
-      <footer>
-  </div>
+    <script>
+      function setColorMode(mode) {
+        document.documentElement.setAttribute("color-mode", mode);
+        localStorage.setItem("color-mode", mode);
 
-  <script>
-    function setColorMode(mode) {
-      document.documentElement.setAttribute('color-mode', mode);
-      localStorage.setItem('color-mode', mode);
+        const lightButton = document.querySelector(".dark--hidden");
+        const darkButton = document.querySelector(".light--hidden");
 
-      const lightButton = document.querySelector(".dark--hidden");
-      const darkButton = document.querySelector(".light--hidden");
+        lightButton.classList.remove("slide-in");
+        darkButton.classList.remove("slide-in");
+      }
 
-      lightButton.classList.remove("slide-in");
-      darkButton.classList.remove("slide-in");
-    }
+      function setSoundMode(mode) {
+        document.documentElement.setAttribute("sound-mode", mode);
+        localStorage.setItem("sound-mode", mode);
 
-    function setSoundMode(mode) {
-      document.documentElement.setAttribute('sound-mode', mode);
-      localStorage.setItem('sound-mode', mode);
+        const soundButton = document.querySelector(".sound--hidden");
+        const mutedButton = document.querySelector(".muted--hidden");
 
-      const soundButton = document.querySelector(".sound--hidden");
-      const mutedButton = document.querySelector(".muted--hidden");
+        soundButton.classList.remove("slide-in");
+        mutedButton.classList.remove("slide-in");
+      }
 
-      soundButton.classList.remove("slide-in");
-      mutedButton.classList.remove("slide-in");
-    }
+      const lightOnAudio = document.getElementById("sound-lighton");
+      function playLightOn() {
+        if (document.documentElement.getAttribute("sound-mode") === "muted")
+          return;
 
-    const lightOnAudio = document.getElementById("sound-lighton");
-    function playLightOn() {
-      if (document.documentElement.getAttribute('sound-mode') === 'muted') return;
+        lightOnAudio.currentTime = 0;
+        lightOnAudio.play();
+      }
 
-      lightOnAudio.currentTime = 0;
-      lightOnAudio.play();
-    }
+      const lightOffAudio = document.getElementById("sound-lightoff");
+      function playLightOff() {
+        if (document.documentElement.getAttribute("sound-mode") === "muted")
+          return;
 
-    const lightOffAudio = document.getElementById("sound-lightoff");
-    function playLightOff() {
-      if (document.documentElement.getAttribute('sound-mode') === 'muted') return;
-
-      lightOffAudio.currentTime = 0;
-      lightOffAudio.play();
-    }
-  </script>
-</body>
-
+        lightOffAudio.currentTime = 0;
+        lightOffAudio.play();
+      }
+    </script>
+  </body>
 </html>
