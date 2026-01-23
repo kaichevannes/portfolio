@@ -27,13 +27,20 @@
     <div class="max-width-wrapper">
       <header class="header header--cushioned">
         <div class="header__frosted-glass"></div>
-        <h1 class="header__title slide-in" style="--offset: -4px">
+        <h1 class="header__title">
           <a class="header__title-anchor" href="/#">
             kai chevannes<span class="accent">.</span>
           </a>
         </h1>
         <div class="header__spacer">
-          <div class="header__lightbulb">
+          <div
+            class="header__lightbulb slide-in"
+            style="
+              --offset: -80px;
+              --duration: 1300ms;
+              --ease-function: var(--spring-easing);
+            "
+          >
             <div class="header__lightbulb-cord"></div>
             <!-- Light mode lightbulb inner -->
             <svg
@@ -55,34 +62,15 @@
           </div>
         </div>
         <nav class="header__nav">
-          <a
-            href="/#about"
-            class="header__nav-link slide-in"
-            style="--delay: 100ms; --offset: -6px"
-          >
-            about
-          </a>
-          <a
-            href="/#projects"
-            class="header__nav-link slide-in"
-            style="--delay: 150ms; offset: -6px"
-          >
-            projects
-          </a>
-          <a
-            href="/#contact"
-            class="header__nav-link slide-in"
-            style="--delay: 200ms; offset: -6px"
-          >
-            contact
-          </a>
+          <a href="/#about" class="header__nav-link"> about </a>
+          <a href="/#projects" class="header__nav-link"> projects </a>
+          <a href="/#contact" class="header__nav-link"> contact </a>
         </nav>
         <div class="header__spacer"></div>
         <div class="header__buttons">
           <!-- Sound button -->
           <button
             class="header__button slide-in sound-on-only"
-            style="--delay: 120ms"
             onclick="setSoundMode('muted');"
           >
             <svg class="header__icon" width="28" height="28">
@@ -94,7 +82,6 @@
           <!-- Muted button -->
           <button
             class="header__button slide-in sound-muted-only"
-            style="--delay: 120ms"
             onclick="setSoundMode('sound');"
           >
             <svg class="header__icon" width="28" height="28">
