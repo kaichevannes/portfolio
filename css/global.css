@@ -113,7 +113,7 @@ body {
 
 :root[color-mode="light"] {
   --color-background: hsl(46deg 33% 92%);
-  --color-shadow: hsl(0deg 0% 7%);
+  --color-shadow: 0deg 0% 7%;
   --color-text: hsl(0deg 0% 7%);
   --color-highlight: hsl(50deg 100% 78%);
   --color-primary: hsl(166deg 100% 24%);
@@ -125,7 +125,7 @@ body {
 
 :root[color-mode="dark"] {
   --color-background: hsl(0deg 0% 7%);
-  --color-shadow: hsl(46deg 33% 92%);
+  --color-shadow: 46deg 33% 92%;
   --color-text: hsl(46deg 33% 92%);
   --color-highlight: hsl(166deg 100% 24%);
   --color-primary: hsl(166deg 100% 30%);
@@ -139,13 +139,12 @@ body {
 Shadows
 */
 :root {
-  --shadow-color: var(--color-shadow);
   --shadow:
-    0.4px 0.7px 1.1px hsl(var(--shadow-color) / 0.02),
-    1.6px 2.7px 4.5px -0.1px hsl(var(--shadow-color) / 0.05),
-    2.9px 4.9px 8.1px -0.2px hsl(var(--shadow-color) / 0.08),
-    5.1px 8.5px 14.1px -0.4px hsl(var(--shadow-color) / 0.12),
-    9px 14.9px 24.8px -0.5px hsl(var(--shadow-color) / 0.15);
+    0.4px 0.7px 1.1px hsl(var(--color-shadow) / 0.02),
+    1.6px 2.7px 4.5px -0.1px hsl(var(--color-shadow) / 0.05),
+    2.9px 4.9px 8.1px -0.2px hsl(var(--color-shadow) / 0.08),
+    5.1px 8.5px 14.1px -0.4px hsl(var(--color-shadow) / 0.12),
+    9px 14.9px 24.8px -0.5px hsl(var(--color-shadow) / 0.15);
 }
 
 /*

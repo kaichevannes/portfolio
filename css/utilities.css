@@ -1,3 +1,19 @@
+:root[color-mode="dark"] .light-mode-only {
+  display: none;
+}
+
+:root[color-mode="light"] .dark-mode-only {
+  display: none;
+}
+
+:root[sound-mode="muted"] .sound-on-only {
+  display: none;
+}
+
+:root[sound-mode="sound"] .sound-muted-only {
+  display: none;
+}
+
 .max-width-wrapper {
   position: relative;
   max-width: min(100%, 1100px);
@@ -76,18 +92,70 @@
   animation-delay: var(--delay, 0);
 }
 
-:root[color-mode="dark"] .light-mode-only {
-  display: none;
+.link {
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 2px 0 var(--color-primary);
+  font-weight: var(--weight-semibold);
+  transition:
+    box-shadow 0.2s,
+    filter 0.3s;
+  box-decoration-break: clone;
+  outline-color: var(--color-primary);
 }
 
-:root[color-mode="light"] .dark-mode-only {
-  display: none;
+.link:hover {
+  box-shadow: 0 2px 0 transparent;
 }
 
-:root[sound-mode="muted"] .sound-on-only {
-  display: none;
+.button-link {
+  position: relative;
+  text-decoration: none;
+  border: none;
+  width: fit-content;
+  padding: 4px 16px;
+  border-radius: 4px;
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: var(--weight-medium);
+  transition: transform 200ms;
 }
 
-:root[sound-mode="sound"] .sound-muted-only {
-  display: none;
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .button-link {
+    text-align: center;
+    width: 100%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+  }
+}
+
+.button-link:hover {
+  transform: scale(1.03);
+}
+
+.button-link--primary {
+  background: var(--color-text);
+  color: var(--color-background);
+}
+
+.button-link--secondary {
+  background: var(--color-primary);
+  color: var(--color-background);
+}
+
+.button-link--hover {
+  position: absolute;
+  inset: 0;
+  background: var(--color-primary);
+  transition: clip-path 500ms;
+  clip-path: polygon(0% 100%, 0% 100%, 100% 100%, 100% 100%);
+  border-radius: inherit;
+  padding: inherit;
+  font-size: inherit;
+}
+
+.button-link:hover .button-link--hover,
+.button-link:hover .button-link--hover {
+  transition: clip-path 300ms;
+  clip-path: polygon(-1% 101%, -1% -1%, 101% -1%, 101% 101%);
 }

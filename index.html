@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/utilities.css" />
     <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+
+    <link rel="preload" as="image" href="assets/images/meditation.webp" />
 
     <script>
       if (
@@ -28,7 +31,7 @@
       <header class="header header--cushioned">
         <div class="header__frosted-glass"></div>
         <h1 class="header__title">
-          <a class="header__title-anchor" href="/#">
+          <a class="header__title-anchor" href="/">
             kai chevannes<span class="accent">.</span>
           </a>
         </h1>
@@ -125,7 +128,68 @@
           </button>
         </div>
       </header>
-      <main>Main</main>
+      <main>
+        <section class="hero">
+          <div class="hero__text">
+            <div class="hero__hello">Hi, I'm Kai</div>
+            <div class="hero__job-role">
+              <span class="accent">Software</span> Developer
+            </div>
+            <div class="hero__description">
+              I'm inspired by excellence, mastery of the details.
+            </div>
+          </div>
+          <div class="hero__image-wrapper">
+            <img src="assets/images/meditation.webp" alt="Blurred background image." class="hero__image hero__blurred-image"></img>
+            <img src="assets/images/meditation.webp" alt="Me sitting in lotus position on my bed in the morning sun." class="hero__image"></img>
+          </div>
+        </section>
+        <div class="sections">
+          <section id="about" class="about">
+            <h2 class="sections__subheading">About</h2>
+            <p>I care about companies with values, spaces for individuals beyond their time.</p>
+            <p>I'm eager to ask questions and improve my skills, to grow as both a person and a developer. I want to wake up and get learn from thoughtful people each day.</p>
+            <p>I studied Computer Science at the University of Southampton and graduated with First Class Honours. I've read <a href="https://www.goodreads.com/review/list/168867354?shelf=software&sort=rating" class="link">many foundational software texts</a> and often think about what good code means.
+            <p>When I'm not tinkering with my <a href="https://github.com/kaichevannes/nixos-config" class="link">dev environment</a>, I enjoy listening to <a href="https://rateyourmusic.com/~cheva" class="link">new music</a> and <a href="https://www.goodreads.com/review/list/168867354-kai-chevannes?order=d&shelf=read&sort=rating" class="link">reading</a>.
+          </section>
+          <section id="projects">
+            <h2 class="sections__subheading">Projects</h2>
+            <div class="projects">
+              <div class="projects__project">
+                <div class="projects__project-image">
+                  <img src="assets/images/gitops.webp" alt="A drawn digital image of Moby the Docker whale with the Kubernetes ship wheel logo on the front."> </img>
+                </div>
+                <div class="projects__project-details">
+                  <h3 class="projects__project-name">GitOps</h3>
+                  <p class="projects__project-description">Self-hosted, zero downtime Kubernetes... and why I ditched it 9 months later.</p>
+                  <a href="/gitops" class="button-link button-link--primary">
+                    Read More
+                    <div class="button-link--hover">Read More</div>
+                  </a>
+                </div>
+              </div>
+              <div class="projects__project">
+                <div class="projects__project-image">
+                  <img src="assets/images/boids.webp" alt="A drawn digital image of DiVinci's Vitruvian Man diagram with boids drawn over the top."> </img>
+                </div>
+                <div class="projects__project-details">
+                  <h3 class="projects__project-name">Web Boids</h3>
+                  <p class="projects__project-description">I ported my dissertation to multithreaded WASM, it's blazingly fast.</p>
+                  <div class="projects__project-buttons">
+                    <a href="/boids" class="button-link button-link--primary">
+                      Read More
+                      <div class="button-link--hover">Read More</div>
+                    </a>
+                    <a href="/boids#simulation" class="button-link button-link--secondary">
+                      Demo
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
       <footer>Footer</footer>
     </div>
 
