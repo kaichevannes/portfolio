@@ -151,7 +151,7 @@
   }
 }
 
-.projects__project-image {
+.projects__image {
   position: relative;
   flex: 1;
   aspect-ratio: 490 / 376;
@@ -162,7 +162,7 @@
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
-  .projects__project-image {
+  .projects__image {
     margin-top: 16px;
     max-height: revert;
     width: 85%;
@@ -170,13 +170,13 @@
 }
 
 @media (max-width: calc(600 / 16 * 1rem)) {
-  .projects__project-image {
+  .projects__image {
     margin-top: 8px;
     width: 100%;
   }
 }
 
-.projects__project-details {
+.projects__details {
   display: flex;
   flex: 1;
   gap: 8px;
@@ -185,12 +185,12 @@
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
-  .projects__project-details {
+  .projects__details {
     width: 100%;
   }
 }
 
-.projects__project-name {
+.projects__name {
   padding-top: 32px;
   font-size: calc(32 / 16 * 1rem);
   font-weight: var(--weight-semibold);
@@ -198,25 +198,25 @@
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
-  .projects__project-name {
+  .projects__name {
     padding-top: 16px;
   }
 }
 
 @media (max-width: calc(600 / 16 * 1rem)) {
-  .projects__project-name {
+  .projects__name {
     padding-top: 8px;
   }
 }
 
-.projects__project-description {
+.projects__description {
   padding-bottom: 8px;
   font-size: calc(20 / 16 * 1rem);
   font-weight: var(--weight-medium);
   color: var(--color-grey500);
 }
 
-.projects__project-buttons {
+.projects__buttons {
   display: flex;
   gap: 16px;
 }
