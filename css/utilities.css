@@ -42,18 +42,18 @@
   animation-delay: var(--delay, 0);
 }
 
-:root[color-mode="light"] .light--hidden {
+:root[color-mode="dark"] .light-mode-only {
   display: none;
 }
 
-:root[color-mode="dark"] .dark--hidden {
+:root[color-mode="light"] .dark-mode-only {
   display: none;
 }
 
-:root[sound-mode="sound"] .sound--hidden {
+:root[sound-mode="muted"] .sound-on-only {
   display: none;
 }
 
-:root[sound-mode="muted"] .muted--hidden {
+:root[sound-mode="sound"] .sound-muted-only {
   display: none;
 }

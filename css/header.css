@@ -49,6 +49,8 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  width: 36px;
+  height: 36px;
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
@@ -58,8 +60,29 @@
 }
 
 .header__lightbulb {
-  position: fixed;
-  left: 307px;
+  transform: translateY(4px);
+}
+
+.header__lightbulb-cord {
+  position: absolute;
+  background: var(--color-text);
+  width: 2px;
+  height: 64px;
+  left: 17px;
+  top: -62px;
+}
+
+.header__lightbulb-inner {
+  position: absolute;
+  width: 24px;
+  height: 23px;
+  transform: translate(6px, 13px);
+}
+
+.header__lightbulb-outer {
+  position: absolute;
+  width: 36px;
+  height: 36px;
 }
 
 .header__title {

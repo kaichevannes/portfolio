@@ -26,15 +26,34 @@
   <body>
     <div class="max-width-wrapper">
       <header class="header header--cushioned">
-        <!-- <div class="header__frosted-glass" /> -->
+        <div class="header__frosted-glass"></div>
         <h1 class="header__title slide-in" style="--offset: -4px">
           <a class="header__title-anchor" href="/#">
             kai chevannes<span class="accent">.</span>
           </a>
         </h1>
-        <svg class="header__spacer header__lightbulb">
-          <use href="assets/svgs/lightbulb.svg#lightbulb" />
-        </svg>
+        <div class="header__spacer">
+          <div class="header__lightbulb">
+            <div class="header__lightbulb-cord"></div>
+            <!-- Light mode lightbulb inner -->
+            <svg
+              class="header__lightbulb-inner light-mode-only"
+              style="color: var(--color-highlight)"
+            >
+              <use href="assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+            </svg>
+            <!-- Dark mode lightbulb inner -->
+            <svg
+              class="header__lightbulb-inner dark-mode-only"
+              style="color: transparent"
+            >
+              <use href="assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+            </svg>
+            <svg class="header__lightbulb-outer">
+              <use href="assets/svgs/lightbulb.svg#lightbulb" />
+            </svg>
+          </div>
+        </div>
         <nav class="header__nav">
           <a
             href="/#about"
@@ -58,11 +77,11 @@
             contact
           </a>
         </nav>
-        <div class="header__spacer" />
+        <div class="header__spacer"></div>
         <div class="header__buttons">
           <!-- Sound button -->
           <button
-            class="header__button slide-in muted--hidden"
+            class="header__button slide-in sound-on-only"
             style="--delay: 120ms"
             onclick="setSoundMode('muted');"
           >
@@ -74,7 +93,7 @@
 
           <!-- Muted button -->
           <button
-            class="header__button slide-in sound--hidden"
+            class="header__button slide-in sound-muted-only"
             style="--delay: 120ms"
             onclick="setSoundMode('sound');"
           >
@@ -91,7 +110,7 @@
             preload="auto"
           ></audio>
           <button
-            class="header__button slide-in dark--hidden"
+            class="header__button slide-in light-mode-only"
             style="--delay: 300ms"
             onclick="setColorMode('dark'); playLightOff();"
           >
@@ -108,7 +127,7 @@
             preload="auto"
           ></audio>
           <button
-            class="header__button slide-in light--hidden"
+            class="header__button slide-in dark-mode-only"
             style="--delay: 300ms"
             onclick="setColorMode('light'); playLightOn();"
           >
@@ -128,8 +147,12 @@
         document.documentElement.setAttribute("color-mode", mode);
         localStorage.setItem("color-mode", mode);
 
-        const lightButton = document.querySelector(".dark--hidden");
-        const darkButton = document.querySelector(".light--hidden");
+        const lightButton = document.querySelector(
+          ".header__button.light-mode-only",
+        );
+        const darkButton = document.querySelector(
+          ".header__button.dark-mode-only",
+        );
 
         lightButton.classList.remove("slide-in");
         darkButton.classList.remove("slide-in");
@@ -139,8 +162,12 @@
         document.documentElement.setAttribute("sound-mode", mode);
         localStorage.setItem("sound-mode", mode);
 
-        const soundButton = document.querySelector(".sound--hidden");
-        const mutedButton = document.querySelector(".muted--hidden");
+        const soundButton = document.querySelector(
+          ".header__button.sound-on-only",
+        );
+        const mutedButton = document.querySelector(
+          ".header__button.sound-muted-only",
+        );
 
         soundButton.classList.remove("slide-in");
         mutedButton.classList.remove("slide-in");
