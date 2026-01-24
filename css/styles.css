@@ -241,8 +241,7 @@
 .contact__heading {
   font-size: calc(32 / 16 * 1rem);
   color: var(--color-grey900);
-  /* Optical alignment with the contact form */
-  margin-bottom: -4px;
+  margin-bottom: 2px;
 }
 
 .contact__list {
@@ -263,7 +262,7 @@
   color: inherit;
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 6px;
   font-size: calc(20 / 16 * 1rem);
   transition: transform 100ms;
 }
@@ -278,23 +277,10 @@
   padding-bottom: 2px;
 }
 
-.contact__social--linkedin {
-  /* Optical alignment */
-  padding-left: 1px;
-}
-
 .contact__icon {
   transition: transform 400ms;
-}
-
-.contact__icon--mail {
   width: 28px;
   height: 28px;
-}
-
-.contact__icon--linkedin {
-  width: 26px;
-  height: 26px;
 }
 
 .contact__social:hover .contact__icon {
@@ -305,26 +291,12 @@
 .contact__text {
   position: relative;
   font-weight: var(--weight-medium);
-  /* Align to 8px grid */
-  padding-left: 2px;
-}
-
-.contact__text--linkedin {
-  /* Optical alignment 1 more pixel to the right. */
-  padding-left: 3px;
 }
 
 .contact__squiggly {
   position: absolute;
   height: 5px;
-}
-
-.contact__squiggly--mail {
   transform: scaleX(-1) translateY(-5px);
-}
-
-.contact__squiggly--linkedin {
-  transform: translateY(-5px);
 }
 
 .contact__form-wrapper {
@@ -332,10 +304,14 @@
   container-type: inline-size;
   box-shadow: var(--shadow);
   border-radius: 16px;
+
+  /* Optical alignment with contact email */
+  transform: translateY(5px);
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
   .contact__form-wrapper {
+    transform: revert;
     flex-basis: 376px;
     width: 100%;
   }
@@ -422,4 +398,94 @@
   width: 135px;
   color: var(--color-background);
   background: var(--color-text);
+}
+
+.footer {
+  margin-top: 128px;
+  padding-bottom: 32px;
+  width: 100%;
+  border-top: 2px solid var(--color-grey300);
+  display: flex;
+  justify-content: space-between;
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: var(--weight-regular);
+  color: var(--color-grey300);
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .footer {
+    padding-bottom: 16px;
+    margin-top: 96px;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: calc(600 / 16 * 1rem)) {
+  .footer {
+    margin-top: 64px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}
+
+.footer__icons {
+  padding-top: 16px;
+  display: flex;
+  gap: 16px;
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .footer__icons {
+    flex-direction: column;
+  }
+}
+
+.footer__link {
+  display: flex;
+  gap: 6px;
+  text-decoration: none;
+  color: inherit;
+  transition: color 250ms;
+}
+
+.footer__link:hover {
+  color: var(--color-grey700);
+  transform: scaleY(1.01);
+  transition:
+    color 100ms,
+    transform 100ms;
+}
+
+.footer__icon {
+  width: 28px;
+  height: 28px;
+  transition: transform 300ms;
+}
+
+.footer__link:hover .footer__icon {
+  transition: transform 200ms;
+  transform: scale(1.02) translateY(-1px);
+  transition-delay: 50ms;
+}
+
+.footer__icon--wave {
+  position: relative;
+  margin-right: 2px;
+  top: -1px;
+}
+
+.footer__icon--axe {
+  position: relative;
+  top: -6px;
+  margin-right: -3px;
+  width: 38px;
+  height: 38px;
+}
+
+.footer__icon--github {
+  position: relative;
+  top: -2px;
+  width: 31px;
+  height: 31px;
 }
