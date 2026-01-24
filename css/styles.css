@@ -95,7 +95,7 @@
   box-shadow: var(--shadow);
 }
 
-.hero__blurred-image {
+.hero__image--blurred {
   filter: blur(40px);
   transform: scale(1.05);
 }
@@ -110,14 +110,14 @@
   scroll-margin-top: 72px;
 }
 
-.sections__subheading {
+.sections__heading {
   font-weight: var(--weight-bold);
   font-size: calc(48 / 16 * 1rem);
   letter-spacing: -2%;
   padding-bottom: 16px;
 }
 
-.sections__subheading::after {
+.sections__heading::after {
   content: ".";
   color: var(--color-primary);
 }
@@ -219,4 +219,207 @@
 .projects__buttons {
   display: flex;
   gap: 16px;
+}
+
+.contact {
+  display: flex;
+  align-items: baseline;
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .contact {
+    flex-direction: column;
+    gap: 32px;
+  }
+}
+
+.contact__socials {
+  flex: 4;
+  color: var(--color-grey700);
+}
+
+.contact__heading {
+  font-size: calc(32 / 16 * 1rem);
+  color: var(--color-grey900);
+  /* Optical alignment with the contact form */
+  margin-bottom: -4px;
+}
+
+.contact__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .contact__list {
+    margin-top: 8px;
+    gap: 8px;
+  }
+}
+
+.contact__social {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: calc(20 / 16 * 1rem);
+  transition: transform 100ms;
+}
+
+.contact__social:hover,
+.contact__social:focus {
+  color: var(--color-text);
+  transform: scaleY(1.02);
+}
+
+.contact__social:not(:last-of-type) {
+  padding-bottom: 2px;
+}
+
+.contact__social--linkedin {
+  /* Optical alignment */
+  padding-left: 1px;
+}
+
+.contact__icon {
+  transition: transform 400ms;
+}
+
+.contact__icon--mail {
+  width: 28px;
+  height: 28px;
+}
+
+.contact__icon--linkedin {
+  width: 26px;
+  height: 26px;
+}
+
+.contact__social:hover .contact__icon {
+  transform: scale(1.01) translateY(-1px);
+  transition: transform 200ms;
+}
+
+.contact__text {
+  position: relative;
+  font-weight: var(--weight-medium);
+  /* Align to 8px grid */
+  padding-left: 2px;
+}
+
+.contact__text--linkedin {
+  /* Optical alignment 1 more pixel to the right. */
+  padding-left: 3px;
+}
+
+.contact__squiggly {
+  position: absolute;
+  height: 5px;
+}
+
+.contact__squiggly--mail {
+  transform: scaleX(-1) translateY(-5px);
+}
+
+.contact__squiggly--linkedin {
+  transform: translateY(-5px);
+}
+
+.contact__form-wrapper {
+  flex: 6;
+  container-type: inline-size;
+  box-shadow: var(--shadow);
+  border-radius: 16px;
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .contact__form-wrapper {
+    flex-basis: 376px;
+    width: 100%;
+  }
+}
+
+.contact__form {
+  height: 376px;
+  border: 2px solid var(--color-grey700);
+  border-radius: 16px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas: "name email" "message message" "send send";
+  padding: 8px 16px;
+}
+
+@container (max-width: 600px) {
+  .contact__form {
+    height: calc(376px + 80px);
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: "name" "email" "message" "send";
+  }
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.contact__message-field {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.contact__name {
+  grid-area: name;
+}
+
+.contact__email {
+  grid-area: email;
+}
+
+.contact__message {
+  grid-area: message;
+}
+
+.contact__label {
+  display: block;
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: var(--weight-semibold);
+  color: var(--color-grey900);
+}
+
+.contact__input {
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 2px solid var(--color-grey700);
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: var(--weight-medium);
+  color: inherit;
+}
+
+.contact__textarea {
+  background: none;
+  border: 2px solid var(--color-grey700);
+  border-radius: 8px;
+  flex: 1;
+  font-size: calc(20 / 16 * 1rem);
+  font-weight: var(--weight-medium);
+  resize: none;
+  color: inherit;
+}
+
+.contact__submit {
+  position: relative;
+  grid-area: send;
+  margin: 8px;
+  width: 135px;
+  color: var(--color-background);
+  background: var(--color-text);
 }

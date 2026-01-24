@@ -191,20 +191,20 @@
   font-size: calc(20 / 16 * 1rem);
 }
 
-.header__button:focus {
-  outline-offset: 2px;
-}
-
-.header__button:focus:not(:focus-visible) {
-  outline: none;
-}
-
 .header__button:hover,
 .header__button:focus {
   color: var(--color-text);
   transform: scaleY(1.01);
   transition: transform 200ms;
   transition-delay: 100ms;
+}
+
+.header__button:focus {
+  outline-offset: 2px;
+}
+
+.header__button:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .header__icon {
