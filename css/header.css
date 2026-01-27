@@ -60,6 +60,8 @@
 }
 
 .header__lightbulb {
+  width: 36px;
+  height: 36px;
   top: 4px;
 }
 
@@ -170,7 +172,7 @@
 }
 
 @media (max-width: calc(1000 / 16 * 1rem)) {
-  .header_buttons {
+  .header__buttons {
     display: none;
   }
 }
@@ -207,9 +209,27 @@
   outline: none;
 }
 
+.header__button--mobile {
+  align-self: flex-end;
+  display: none;
+}
+
+@media (max-width: calc(1000 / 16 * 1rem)) {
+  .header__button--mobile {
+    display: revert;
+  }
+}
+
 .header__icon {
+  width: 28px;
+  height: 28px;
   align-self: center;
   transition: transform 100ms;
+}
+
+.header__icon--mobile {
+  width: 44px;
+  height: 44px;
 }
 
 .header__button:hover .header__icon {

@@ -79,7 +79,7 @@
             class="header__button slide-in sound-on-only"
             onclick="setSoundMode('muted');"
           >
-            <svg class="header__icon" width="28" height="28">
+            <svg class="header__icon">
               <use href="assets/svgs/volume-2.svg#volume-2" />
             </svg>
             sound
@@ -90,7 +90,7 @@
             class="header__button slide-in sound-muted-only"
             onclick="setSoundMode('sound');"
           >
-            <svg class="header__icon" width="28" height="28">
+            <svg class="header__icon">
               <use href="assets/svgs/volume-x.svg#volume-x" />
             </svg>
             muted
@@ -107,7 +107,7 @@
             style="--delay: 300ms"
             onclick="setColorMode('dark'); playLightOff();"
           >
-            <svg class="header__icon" width="28" height="28">
+            <svg class="header__icon">
               <use href="assets/svgs/sun.svg#sun" />
             </svg>
             light
@@ -124,12 +124,17 @@
             style="--delay: 300ms"
             onclick="setColorMode('light'); playLightOn();"
           >
-            <svg class="header__icon" width="28" height="28">
+            <svg class="header__icon">
               <use href="assets/svgs/moon.svg#moon" />
             </svg>
             dark
           </button>
         </div>
+        <button class="header__button header__button--mobile slide-in">
+          <svg class="header__icon header__icon--mobile">
+            <use href="assets/svgs/menu.svg#menu">
+          </svg>
+        </button>
       </header>
       <main>
         <section class="hero">
@@ -331,7 +336,7 @@
             <svg class="footer__icon footer__icon--wave">
               <use href="assets/svgs/wave.svg#wave" />
             </svg>
-            WAVE
+            Wave
           </a>
           <a href="https://www.deque.com/" class="footer__link">
             <svg class="footer__icon footer__icon--axe">
