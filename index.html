@@ -23,6 +23,9 @@
       ) {
         document.documentElement.setAttribute("color-mode", "dark");
       }
+      if (localStorage.getItem("sound-mode") === "muted") {
+        document.documentElement.setAttribute("sound-mode", "muted");
+      }
     </script>
   </head>
 
