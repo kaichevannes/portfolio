@@ -27,6 +27,7 @@
       if (localStorage.getItem("sound-mode") === "muted") {
         document.documentElement.setAttribute("sound-mode", "muted");
       }
+      document.documentElement.setAttribute("playing-mode", "playing");
     </script>
   </head>
 
@@ -276,8 +277,7 @@
               <source src="assets/videos/cluster-bootstrap.mp4" />
             </video>
             <button
-              id="pause-button"
-              class="project__video-button"
+              class="project__video-button playing-only"
               onclick="setPlaying(false)"
             >
               <svg class="project__video-button-icon">
@@ -285,8 +285,7 @@
               </svg>
             </button>
             <button
-              id="play-button"
-              class="project__video-button"
+              class="project__video-button paused-only"
               onclick="setPlaying(true)"
             >
               <svg class="project__video-button-icon">
@@ -341,24 +340,15 @@
     </div>
 
     <script>
-      const pauseButton = document.querySelector("#pause-button");
-      const playButton = document.querySelector("#play-button");
-
-      playButton.style.display = "none";
-
       function setPlaying(play) {
         const video = document.querySelector("#video");
 
         if (play) {
           video.play();
-          pauseButton.style.display = "revert";
-          playButton.style.display = "none";
-          video.style.opacity = 1;
+          document.documentElement.setAttribute("playing-mode", "playing");
         } else {
           video.pause();
-          pauseButton.style.display = "none";
-          playButton.style.display = "revert";
-          video.style.opacity = 0.75;
+          document.documentElement.setAttribute("playing-mode", "paused");
         }
       }
 

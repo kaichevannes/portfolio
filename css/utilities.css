@@ -14,6 +14,14 @@
   display: none;
 }
 
+:root[playing-mode="playing"] .paused-only {
+  display: none;
+}
+
+:root[playing-mode="paused"] .playing-only {
+  display: none;
+}
+
 .max-width-wrapper {
   position: relative;
   max-width: min(100%, 1100px);
