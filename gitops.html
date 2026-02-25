@@ -262,6 +262,42 @@
             </div>
           </div>
         </div>
+        <figure>
+          <div class="project__video-wrapper">
+            <video
+              id="video"
+              class="project__video"
+              playsinline
+              autoplay
+              loop
+              muted
+              preload="auto"
+            >
+              <source src="assets/videos/cluster-bootstrap.mp4" />
+            </video>
+            <button
+              id="pause-button"
+              class="project__video-button"
+              onclick="setPlaying(false)"
+            >
+              <svg class="project__video-button-icon">
+                <use href="assets/svgs/pause.svg#pause" />
+              </svg>
+            </button>
+            <button
+              id="play-button"
+              class="project__video-button"
+              onclick="setPlaying(true)"
+            >
+              <svg class="project__video-button-icon">
+                <use href="assets/svgs/play.svg#play" />
+              </svg>
+            </button>
+          </div>
+          <figcaption class="project__caption project__caption--video">
+            Figure 1: Bootstrapping the VM with Ansible
+          </figcaption>
+        </figure>
       </main>
       <footer class="footer">
         <div class="footer__icons">
@@ -305,6 +341,27 @@
     </div>
 
     <script>
+      const pauseButton = document.querySelector("#pause-button");
+      const playButton = document.querySelector("#play-button");
+
+      playButton.style.display = "none";
+
+      function setPlaying(play) {
+        const video = document.querySelector("#video");
+
+        if (play) {
+          video.play();
+          pauseButton.style.display = "revert";
+          playButton.style.display = "none";
+          video.style.opacity = 1;
+        } else {
+          video.pause();
+          pauseButton.style.display = "none";
+          playButton.style.display = "revert";
+          video.style.opacity = 0.75;
+        }
+      }
+
       const mobileDialog = document.querySelector("#mobile-dialog");
 
       mobileDialog.addEventListener("click", (e) => {
