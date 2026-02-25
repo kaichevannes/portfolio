@@ -68,9 +68,9 @@
           </div>
         </div>
         <nav class="header__nav">
-          <a href="/#about" class="header__nav-link"> about </a>
-          <a href="/#projects" class="header__nav-link"> projects </a>
-          <a href="/#contact" class="header__nav-link"> contact </a>
+          <a href="/#about" class="header__nav-link">about</a>
+          <a href="/#projects" class="header__nav-link">projects</a>
+          <a href="/#contact" class="header__nav-link">contact</a>
         </nav>
         <div class="header__spacer"></div>
         <div class="header__buttons">
@@ -130,11 +130,97 @@
             dark
           </button>
         </div>
-        <button class="header__button header__button--mobile slide-in">
+        <button
+          class="header__button header__button--mobile slide-in"
+          onclick="openMobileDialog()"
+        >
           <svg class="header__icon header__icon--mobile">
-            <use href="assets/svgs/menu.svg#menu">
+            <use href="assets/svgs/menu.svg#menu" />
           </svg>
         </button>
+        <dialog id="mobile-dialog" class="header__mobile-dialog">
+          <nav class="header__mobile-nav">
+            <a href="/#about" class="header__nav-link header__nav-link--mobile"
+              >about</a
+            >
+            <a
+              href="/#projects"
+              class="header__nav-link header__nav-link--mobile"
+              >projects</a
+            >
+            <a
+              href="/#contact"
+              class="header__nav-link header__nav-link--mobile"
+              >contact</a
+            >
+          </nav>
+          <div class="header__mobile-buttons">
+            <div>
+              <!-- Light mode button -->
+              <audio
+                id="sound-lightoff"
+                src="assets/sounds/lightoff.mp3"
+                preload="auto"
+              ></audio>
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu light-mode-only"
+                onclick="setColorMode('dark'); playLightOff();"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="assets/svgs/sun.svg#sun" />
+                </svg>
+                light
+              </button>
+
+              <!-- Dark mode button -->
+              <audio
+                id="sound-lighton"
+                src="assets/sounds/lighton.mp3"
+                preload="auto"
+              ></audio>
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu dark-mode-only"
+                onclick="setColorMode('light'); playLightOn();"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="assets/svgs/moon.svg#moon" />
+                </svg>
+                dark
+              </button>
+            </div>
+            <div>
+              <!-- Sound button -->
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu sound-on-only"
+                onclick="setSoundMode('muted');"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="assets/svgs/volume-2.svg#volume-2" />
+                </svg>
+                sound
+              </button>
+
+              <!-- Muted button -->
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu sound-muted-only"
+                onclick="setSoundMode('sound');"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="assets/svgs/volume-x.svg#volume-x" />
+                </svg>
+                muted
+              </button>
+            </div>
+          </div>
+          <button
+            class="header__button header__button--mobile header__button--close"
+            onclick="closeMobileDialog()"
+          >
+            <svg class="header__icon header__icon--mobile">
+              <use href="assets/svgs/x.svg#x" />
+            </svg>
+          </button>
+        </dialog>
       </header>
       <main>
         <section class="hero">
@@ -164,7 +250,8 @@
           <section id="about" class="about">
             <h2 class="sections__heading">About</h2>
             <p>
-              I care about companies with values, spaces for individuals to grow and learn.
+              I care about companies with values, spaces for individuals to grow
+              and learn.
             </p>
             <p>
               I'm eager to ask questions and improve my skills, to grow as both
@@ -371,6 +458,22 @@
     </div>
 
     <script>
+      const mobileDialog = document.querySelector("#mobile-dialog");
+
+      mobileDialog.addEventListener("click", (e) => {
+        if (e.target === mobileDialog) {
+          mobileDialog.close();
+        }
+      });
+
+      function openMobileDialog() {
+        mobileDialog.showModal();
+      }
+
+      function closeMobileDialog() {
+        mobileDialog.close();
+      }
+
       function setColorMode(mode) {
         document.documentElement.setAttribute("color-mode", mode);
         localStorage.setItem("color-mode", mode);
