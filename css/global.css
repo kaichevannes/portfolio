@@ -165,3 +165,10 @@ Font Weights
   --weight-semibold: 600;
   --weight-bold: 700;
 }
+
+/*
+Lists
+*/
+li::marker {
+  color: var(--color-primary);
+}

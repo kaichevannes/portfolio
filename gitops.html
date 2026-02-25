@@ -301,10 +301,72 @@
           <h2 class="project__section-title">Summary</h2>
           <div class="project__section-contents">
             <p>
-              Test
+              I set up a
               <span class="tooltip"
-                >tooltip<span class="tooltiptext">tooltiptext</span></span
+                >CI/CD<span class="tooltiptext"
+                  ><strong>Continuous Integration</strong> /
+                  <strong>Continuous Deployment</strong> automates testing and
+                  releases.</span
+                ></span
               >
+              pipeline using GitHub Actions to automate site updates. On each
+              merge to <code>main</code> it follows the
+              <span class="tooltip"
+                >Docker<span class="tooltiptext"
+                  >A tool for creating <strong>containers</strong>: mini
+                  operating systems that have instructions for how to install
+                  and run an application, so apps run identically anywhere
+                  Docker is installed.</span
+                ></span
+              >
+              <strong class="semibold">build</strong> →
+              <strong class="semibold">ship</strong> →
+              <strong class="semibold">run</strong> methodology:
+            </p>
+            <ol>
+              <li>
+                <strong class="semibold">Build</strong> a Docker image of the
+                site
+              </li>
+              <li>
+                <strong class="semibold">Ship</strong> the image to GitHub's
+                Container Registery
+              </li>
+              <li>
+                <strong class="semibold">Run</strong> the image on my
+                always-free Oracle Cloud
+                <span class="tooltip"
+                  >VM<span class="tooltiptext"
+                    ><strong>Virtual Machine</strong></span
+                  ></span
+                >
+              </li>
+            </ol>
+            <p>
+              I bootstrap the VM with
+              <span class="tooltip"
+                >Ansible<span class="tooltiptext"
+                  >An <strong>Infrastructure as Code</strong> tool used to
+                  configure virtual machines post-provisioning.</span
+                ></span
+              >, setting up
+              <span class="tooltip"
+                >Kubernetes<span class="tooltiptext"
+                  >A <strong>container orchestrator</strong> that automates the
+                  deployment, scaling and rolling updates of containers.</span
+                ></span
+              >
+              and
+              <span class="tooltip"
+                >Flux<span class="tooltiptext"
+                  >A <strong>GitOps</strong> CD tool.</span
+                ></span
+              >
+              seen in Figure 1. Flux watches the portfolio's
+              <a class="link" href="https://github.com/kaichevannes/portfolio"
+                >Git repository</a
+              >
+              and syncs the cluster with its state.
             </p>
           </div>
         </section>
@@ -351,6 +413,43 @@
     </div>
 
     <script>
+      document.querySelectorAll(".tooltip").forEach((timeout) => {
+        let cleanupTimer = null;
+
+        timeout.addEventListener("mouseenter", () => {
+          clearTimeout(cleanupTimer);
+
+          const text = timeout.querySelector(".tooltiptext");
+          if (!text) return;
+
+          const triggerRect = timeout.getBoundingClientRect();
+          const tooltipWidth = text.offsetWidth; // works since visibility:hidden keeps it in layout
+          const pad = 8;
+
+          const naturalLeft =
+            triggerRect.left + triggerRect.width / 2 - tooltipWidth / 2;
+          const naturalRight = naturalLeft + tooltipWidth;
+
+          let shift = 0;
+          if (naturalLeft < pad) {
+            shift = pad - naturalLeft;
+          } else if (naturalRight > window.innerWidth - pad) {
+            shift = window.innerWidth - pad - naturalRight;
+          }
+
+          timeout.style.setProperty(
+            "--tooltip-shift",
+            `${Math.round(shift)}px`,
+          );
+        });
+
+        timeout.addEventListener("mouseleave", () => {
+          cleanupTimer = setTimeout(() => {
+            timeout.style.removeProperty("--tooltip-shift");
+          }, 600);
+        });
+      });
+
       function setPlaying(play) {
         const video = document.querySelector("#video");
 
