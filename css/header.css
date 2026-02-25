@@ -7,19 +7,17 @@
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
 
-.header * {
-  position: relative;
+  & * {
+    position: relative;
+  }
 }
 
 .header--cushioned {
   top: -48px;
   padding-top: calc(48px + 8px);
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header--cushioned {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     top: 0;
     padding-top: 8px;
   }
@@ -37,10 +35,8 @@
   backdrop-filter: blur(4px);
   mask-image: linear-gradient(to bottom, black 0% 50%, transparent 50% 100%);
   pointer-events: none;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__frosted-glass {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     height: 162px;
   }
 }
@@ -51,10 +47,8 @@
   margin-right: auto;
   width: 36px;
   height: 36px;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__spacer {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     display: none;
   }
 }
@@ -90,12 +84,12 @@
 
 .header__title {
   transition: transform 300ms;
-}
 
-.header__title:hover,
-.header__title:focus {
-  transition: transform 150ms;
-  transform: scale(1.01);
+  &:hover,
+  &:focus {
+    transition: transform 150ms;
+    transform: scale(1.01);
+  }
 }
 
 .header__title-anchor {
@@ -110,10 +104,8 @@
   color: var(--color-grey900);
   display: flex;
   gap: 48px;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__nav {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     display: none;
   }
 }
@@ -125,43 +117,41 @@
   font-weight: var(--weight-semibold);
   font-size: calc(20 / 16 * 1rem);
   transition: transform 100ms;
-}
 
-.header__nav-link:hover,
-.header__nav-link:focus {
-  transition: transform 150ms;
-  transform: scaleY(1.02);
-}
-
-.header__nav-link::after {
-  content: "";
-  position: absolute;
-  top: 90%;
-  left: -5%;
-  width: 110%;
-  height: 3px;
-  background: var(--color-primary);
-  transition:
-    top 0ms 400ms,
-    opacity 400ms;
-  border-radius: 32px;
-  opacity: 0;
-}
-
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__nav-link::after {
-    display: none;
+  &:hover,
+  &:focus {
+    transition: transform 150ms;
+    transform: scaleY(1.02);
   }
-}
 
-.header__nav-link:hover::after,
-.header__nav-link:focus::after {
-  color: var(--color-text);
-  top: 100%;
-  opacity: 1;
-  transition:
-    top 250ms ease-out,
-    opacity 300ms ease-out;
+  &:hover::after,
+  &:focus::after {
+    color: var(--color-text);
+    top: 100%;
+    opacity: 1;
+    transition:
+      top 250ms ease-out,
+      opacity 300ms ease-out;
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 90%;
+    left: -5%;
+    width: 110%;
+    height: 3px;
+    background: var(--color-primary);
+    transition:
+      top 0ms 400ms,
+      opacity 400ms;
+    border-radius: 32px;
+    opacity: 0;
+
+    @media (max-width: calc(1000 / 16 * 1rem)) {
+      display: none;
+    }
+  }
 }
 
 .header__buttons {
@@ -169,10 +159,8 @@
   display: flex;
   justify-content: flex-end;
   gap: 16px;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__buttons {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     display: none;
   }
 }
@@ -191,31 +179,34 @@
   gap: 8px;
   font-weight: var(--weight-semibold);
   font-size: calc(20 / 16 * 1rem);
-}
 
-.header__button:hover,
-.header__button:focus {
-  color: var(--color-text);
-  transform: scaleY(1.01);
-  transition: transform 200ms;
-  transition-delay: 100ms;
-}
+  &:hover,
+  &:focus {
+    color: var(--color-text);
+    transform: scaleY(1.01);
+    transition: transform 200ms;
+    transition-delay: 100ms;
+  }
 
-.header__button:focus {
-  outline-offset: 2px;
-}
+  &:focus {
+    outline-offset: 2px;
+  }
 
-.header__button:focus:not(:focus-visible) {
-  outline: none;
+  &:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  &:hover .header__icon {
+    transform: scale(1.01) translateY(-1px);
+    transition: transform 200ms;
+  }
 }
 
 .header__button--mobile {
   align-self: flex-end;
   display: none;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .header__button--mobile {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     display: revert;
   }
 }
@@ -230,9 +221,4 @@
 .header__icon--mobile {
   width: 44px;
   height: 44px;
-}
-
-.header__button:hover .header__icon {
-  transform: scale(1.01) translateY(-1px);
-  transition: transform 200ms;
 }

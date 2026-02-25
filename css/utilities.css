@@ -21,17 +21,13 @@
   margin-right: auto;
   padding-left: 32px;
   padding-right: 32px;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .max-width-wrapper {
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     padding-left: 16px;
     padding-right: 16px;
   }
-}
 
-@media (max-width: calc(600 / 16 * 1rem)) {
-  .max-width-wrapper {
+  @media (max-width: calc(600 / 16 * 1rem)) {
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -102,10 +98,10 @@
     filter 0.3s;
   box-decoration-break: clone;
   outline-color: var(--color-primary);
-}
 
-.link:hover {
-  box-shadow: 0 2px 0 transparent;
+  &:hover {
+    box-shadow: 0 2px 0 transparent;
+  }
 }
 
 .button-link {
@@ -118,19 +114,23 @@
   font-size: calc(20 / 16 * 1rem);
   font-weight: var(--weight-medium);
   transition: transform 200ms;
-}
 
-@media (max-width: calc(1000 / 16 * 1rem)) {
-  .button-link {
+  &:hover {
+    transform: scale(1.03);
+  }
+
+  &:hover .button-link--hover,
+  &:hover .button-link--hover {
+    transition: clip-path 300ms;
+    clip-path: polygon(-1% 101%, -1% -1%, 101% -1%, 101% 101%);
+  }
+
+  @media (max-width: calc(1000 / 16 * 1rem)) {
     text-align: center;
     width: 100%;
     padding-top: 8px;
     padding-bottom: 8px;
   }
-}
-
-.button-link:hover {
-  transform: scale(1.03);
 }
 
 .button-link--primary {
@@ -152,10 +152,4 @@
   border-radius: inherit;
   padding: inherit;
   font-size: inherit;
-}
-
-.button-link:hover .button-link--hover,
-.button-link:hover .button-link--hover {
-  transition: clip-path 300ms;
-  clip-path: polygon(-1% 101%, -1% -1%, 101% -1%, 101% 101%);
 }
