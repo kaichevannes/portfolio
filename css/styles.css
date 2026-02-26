@@ -236,6 +236,10 @@
   font-size: calc(20 / 16 * 1rem);
   transition: transform 100ms;
 
+  &:first-of-type {
+    margin-top: -3px;
+  }
+
   &:hover,
   &:focus {
     color: var(--color-text);

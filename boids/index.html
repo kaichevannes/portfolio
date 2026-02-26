@@ -27,6 +27,18 @@
       }
       document.documentElement.setAttribute("playing-mode", "playing");
     </script>
+
+    <script type="module">
+      import init, * as wasm from "../assets/wasm/wasm_boids.js";
+
+      await init();
+
+      await wasm.initThreadPool(navigator.hardwareConcurrency);
+
+      const universe = wasm.Builder.from_preset(wasm.Preset.Basic).build();
+
+      console.log(universe);
+    </script>
   </head>
 
   <body>
