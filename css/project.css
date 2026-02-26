@@ -162,6 +162,8 @@
   color: var(--color-grey700);
 
   @media (max-width: calc(1000 / 16 * 1rem)) {
+    position: revert;
+    top: revert;
     font-size: calc(24 / 16 * 1rem);
     font-weight: var(--weight-semibold);
     color: var(--color-grey900);
