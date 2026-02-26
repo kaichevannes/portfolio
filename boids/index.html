@@ -272,16 +272,16 @@
           <p class="project__section-content">
             I implemented an optimised version of the
             <a class="link" href="https://en.wikipedia.org/wiki/Boids">Boids</a>
-            algorithm in Rust, further improving performance with
-            multithreading. This compiles to
+            algorithm in Rust, improving performance with multithreading. This
+            compiles to
             <span class="tooltip"
               >WebAssembly<span class="tooltiptext"
-                >WebAssembly (<strong>WASM</strong>), is a modern web standard
-                that runs binary code compiled from LLVM supported languages
-                like C, C++, and Rust at near-native speed on the browser.</span
+                >WebAssembly is a modern web standard that runs binary code
+                compiled from LLVM supported languages like C, C++, and Rust at
+                near-native speed in the browser.</span
               ></span
             >
-            and runs as machine code on the browser.
+            and runs as machine code in the browser.
           </p>
         </section>
         <section class="project__section">
@@ -290,13 +290,12 @@
             I wasn't satisfied with the performance of the Boids implementation
             I did for my University dissertation. Because it was written in
             Python without algorithmic optimisations, it could only run up to
-            100 boids. I've also been interested in using
+            100 boids. I've also been interested in learning Rust, using
             <span class="tooltip"
               >Vite<span class="tooltiptext"
                 >A frontend build tool and development server.</span
               ></span
-            >
-            and writing library code. My acceptance criteria were:
+            >, and writing library code. My acceptance criteria were:
           </p>
           <ol class="project__section-content">
             <li>
@@ -308,7 +307,7 @@
               <span class="tooltip"
                 >Test Driven Development<span class="tooltiptext"
                   >A methodology of writing code where you first write failing
-                  tests, then get the tests to pass.</span
+                  tests and then get them to pass.</span
                 ></span
               >
             </li>
@@ -348,16 +347,16 @@
           </p>
           <ol class="project__section-content">
             <li>
-              <strong class="semibold">Attraction</strong> — move towards the
-              centre of mass of nearby swarm members
+              <strong class="semibold">Attraction</strong> — move towards nearby
+              swarm members
             </li>
             <li>
-              <strong class="semibold">Alignment</strong> — move in the same
-              direction as nearby swarm members
+              <strong class="semibold">Alignment</strong> — match direction with
+              nearby swarm members
             </li>
             <li>
-              <strong class="semibold">Separation</strong> — move away from
-              nearby swarm members to avoid crashing
+              <strong class="semibold">Separation</strong> — avoid crashing into
+              nearby swarm members
             </li>
           </ol>
           <p class="project__section-content">
@@ -424,10 +423,118 @@
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Challenges</h2>
-          <p class="project__section-contents"></p>
+          <p class="project__section-contents">
+            This was my ambitious project so far. WebAssembly is notorious
+            challenging to set up, and I decided not only to try and use
+            multithreaded
+            <span class="tooltip"
+              >WASM<span class="tooltiptext"
+                ><strong>WebAssembly</strong></span
+              ></span
+            >
+            — requiring me to use a nightly build of <em>Rust</em> with specific
+            feature flags to even compile my project — but also bundle it into a
+            Vite library using
+            <span class="tooltip"
+              >Rollup<span class="tooltiptext"
+                >Vite's <strong>build tool</strong></span
+              ></span
+            >, then import it as an
+            <span class="tooltip"
+              >npm<span class="tooltiptext"
+                ><strong>Node Package Manager</strong>. A public registry and
+                command-line tool for publishing and installing JavaScript
+                packages.</span
+              ></span
+            >
+            package into a
+            <span class="tooltip"
+              >Next.js<span class="tooltiptext"
+                >A full-stack <strong>meta-framework</strong> built on top of
+                React.</span
+              ></span
+            >
+            project that uses
+            <span class="tooltip"
+              >Webpack<span class="tooltiptext"
+                >A legacy <strong>JavaScript bundler</strong>.</span
+              ></span
+            >, with next to no documentation to follow because nobody else is
+            mad enough to try to import multithreaded WASM into a Next.js
+            application.
+          </p>
+          <p class="project__section-content">
+            I had a log of difficulty building my project into WebAssembly with
+            threads. WASM doesn't natively support threads in the same way that
+            operating systems do. Instead of CPU threads you use Service Workers
+            spawned from JavaScript. This means you need to add a binding
+            between Rust and JavaScript so that when you would usually create an
+            operating system thread in Rust, you instead create a Service Worker
+            in WebAssembly.
+          </p>
+          <p class="project__section-content">
+            During development, every time I enabled WebAssembly multithreading
+            my simulation started to run <em>more slowly</em>. I knew from my
+            Rust benchmarks that the multithreaded code was faster natively, so
+            I thought there must be some extra overhead in copying data between
+            Service Workers in WASM. I ended up rearchitecting my code to remove
+            all cloning of values but it was still slower. After confirming the
+            code was running on different Service Workers I was at a loss.
+            Later, when implementing the controls I found that when I increased
+            the neighbour radii enough, multithreading actually
+            <em>was</em> faster… I was just testing it on the wrong values.
+          </p>
+          <p class="project__section-content">
+            I split my project into a WASM section, a Vite library, and a
+            Next.js library consumer. I already had the link between the Vite
+            library and Next.js working, so I thought that now I could just push
+            the new package version to npm and see it work. I was
+            <strong class="semibold">very</strong> wrong. Somewhere between
+            <em>“Hello world”</em> and
+            <em>“full multithreaded Boids implementation”</em> something broke,
+            and I immediately regretted not continuously checking the build
+            pipeline as I made changes.
+          </p>
+          <p class="project__section-content">
+            I eventually found the magical Webpack encantations necessary for
+            the single-threaded code to load, but the multithreaded code was
+            crashing on worker instantiation. Several days of debugging later I
+            came to the conclusion that the issue was likely to do with how
+            Webpack handles dynamic imports, and dozens of patch versions later,
+            I felt I was reaching diminishing returns and decided to move on.
+          </p>
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Lessons Learned</h2>
+          <p class="project__section-content">
+            I learned that Test Driven Development is very effective when
+            writing library code. Writing the tests first left me confident that
+            my simulation was correct, and when I wrote the visualiser, the
+            simulation code worked first try. This is a stark constrast to my
+            dissertation, where two months before submission I realised my
+            simulation code has a massive bug in it:
+            <strong class="semibold"
+              >one of the Boids rules was being skipped over entirely due to a
+              typo</strong
+            >. The unoptimised algorithm meant that I didn't have enough time
+            left to rerun the necessary simulations for my write-up, and I had
+            to accept the failure. If I had used TDD, I would have caught this
+            bug early.
+          </p>
+          <p class="project__section-content">
+            Architecturally, I learned the cost of integrating different
+            systems. Getting WebAssembly working in Rust isn't that difficult,
+            writing a React library in Vite isn't that difficult, importing a
+            React library into a Next.js project isn't that difficult. The
+            astonishing difficulty comes from combining them, ending up with an
+            enormous surface area for errors, many in external libraries.
+          </p>
+          <p class="project__section-content">
+            In future projects, I will only adopt dependencies that reduce
+            complexity. As programmers, our goal isn't to use the mightiest
+            technologies, it's to deliver working software. If our mighty
+            technologies prevent us from shipping code, they're worth nothing.
+          </p>
         </section>
         <svg class="project__icon--bleed">
           <use
