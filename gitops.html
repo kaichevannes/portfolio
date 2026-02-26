@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="css/styles.css" />
     <link rel="stylesheet" href="css/project.css" />
 
-    <link rel="preload" as="image" href="assets/images/meditation.webp" />
-
     <script>
       if (
         localStorage.getItem("color-mode") === "dark" ||
@@ -299,78 +297,295 @@
         </figure>
         <section class="project__section">
           <h2 class="project__section-title">Summary</h2>
-          <div class="project__section-contents">
-            <p>
-              I set up a
+          <p class="project__section-content">
+            I set up a
+            <span class="tooltip"
+              >CI/CD<span class="tooltiptext"
+                ><strong>Continuous Integration</strong> /
+                <strong>Continuous Deployment</strong> automates testing and
+                releases.</span
+              ></span
+            >
+            pipeline using GitHub Actions to automate site updates. On each
+            merge to <code>main</code> it follows the
+            <span class="tooltip"
+              >Docker<span class="tooltiptext"
+                >A tool for creating <strong>containers</strong>: mini operating
+                systems that have instructions for how to install and run an
+                application, so apps run identically anywhere Docker is
+                installed.</span
+              ></span
+            >
+            <strong class="semibold">build</strong> →
+            <strong class="semibold">ship</strong> →
+            <strong class="semibold">run</strong> methodology:
+          </p>
+          <ol class="project__section-content">
+            <li>
+              <strong class="semibold">Build</strong> a Docker image of the site
+            </li>
+            <li>
+              <strong class="semibold">Ship</strong> the image to GitHub's
+              Container Registery
+            </li>
+            <li>
+              <strong class="semibold">Run</strong> the image on my always-free
+              Oracle Cloud
               <span class="tooltip"
-                >CI/CD<span class="tooltiptext"
-                  ><strong>Continuous Integration</strong> /
-                  <strong>Continuous Deployment</strong> automates testing and
-                  releases.</span
+                >VM<span class="tooltiptext"
+                  ><strong>Virtual Machine</strong></span
                 ></span
               >
-              pipeline using GitHub Actions to automate site updates. On each
-              merge to <code>main</code> it follows the
-              <span class="tooltip"
-                >Docker<span class="tooltiptext"
-                  >A tool for creating <strong>containers</strong>: mini
-                  operating systems that have instructions for how to install
-                  and run an application, so apps run identically anywhere
-                  Docker is installed.</span
-                ></span
-              >
-              <strong class="semibold">build</strong> →
-              <strong class="semibold">ship</strong> →
-              <strong class="semibold">run</strong> methodology:
-            </p>
-            <ol>
-              <li>
-                <strong class="semibold">Build</strong> a Docker image of the
-                site
-              </li>
-              <li>
-                <strong class="semibold">Ship</strong> the image to GitHub's
-                Container Registery
-              </li>
-              <li>
-                <strong class="semibold">Run</strong> the image on my
-                always-free Oracle Cloud
-                <span class="tooltip"
-                  >VM<span class="tooltiptext"
-                    ><strong>Virtual Machine</strong></span
-                  ></span
-                >
-              </li>
-            </ol>
-            <p>
-              I bootstrap the VM with
-              <span class="tooltip"
-                >Ansible<span class="tooltiptext"
-                  >An <strong>Infrastructure as Code</strong> tool used to
-                  configure virtual machines post-provisioning.</span
-                ></span
-              >, setting up
-              <span class="tooltip"
-                >Kubernetes<span class="tooltiptext"
-                  >A <strong>container orchestrator</strong> that automates the
-                  deployment, scaling and rolling updates of containers.</span
-                ></span
-              >
-              and
-              <span class="tooltip"
-                >Flux<span class="tooltiptext"
-                  >A <strong>GitOps</strong> CD tool.</span
-                ></span
-              >
-              seen in Figure 1. Flux watches the portfolio's
-              <a class="link" href="https://github.com/kaichevannes/portfolio"
-                >Git repository</a
-              >
-              and syncs the cluster with its state.
-            </p>
-          </div>
+            </li>
+          </ol>
+          <p class="project__section-content">
+            I bootstrap the VM with
+            <span class="tooltip"
+              >Ansible<span class="tooltiptext"
+                >An <strong>Infrastructure as Code</strong> tool used to
+                configure virtual machines post-provisioning.</span
+              ></span
+            >, setting up
+            <span class="tooltip"
+              >Kubernetes<span class="tooltiptext"
+                >A <strong>container orchestrator</strong> that automates the
+                deployment, scaling and rolling updates of containers.</span
+              ></span
+            >
+            and
+            <span class="tooltip"
+              >Flux<span class="tooltiptext"
+                >A <strong>GitOps</strong> CD tool.</span
+              ></span
+            >
+            seen in Figure 1. Flux watches the portfolio's
+            <a class="link" href="https://github.com/kaichevannes/portfolio"
+              >Git repository</a
+            >
+            and syncs the cluster with its state.
+          </p>
         </section>
-        <section></section>
+        <section class="project__section">
+          <h2 class="project__section-title">Purpose & Goal</h2>
+          <p class="project__section-content">
+            I became interested in
+            <span class="tooltip"
+              >DevOps<span class="tooltiptext"
+                >A software development approach that follows
+                <em>the three ways</em>: increasing left to right flow of work,
+                increasing right to left flow of feedback, cultivating a culture
+                of continuous experimentation and learning.</span
+              ></span
+            >
+            after reading <em>The Phoenix Project</em> during my 2023 summer
+            internship at Thought Quarter. I saw this project as an opportunity
+            to imporve my mental model of CI/CD technologies and Docker. My
+            acceptance criteria were:
+          </p>
+          <ol class="project__section-content">
+            <li>
+              <strong class="semibold">One-click</strong> cluster bootstrap
+            </li>
+            <li><strong class="semibold">One-click</strong> deploy</li>
+            <li>
+              <strong class="semibold">Zero-downtime</strong> rolling updates
+            </li>
+          </ol>
+          <p class="project__section-content">
+            To build a foundation, I completed
+            <a
+              class="link"
+              href="https://www.udemy.com/certificate/UC-c44e8380-3f04-4ec5-9ba1-79e84fdadc8e/"
+              >Docker Mastery</a
+            >
+            and
+            <a
+              class="link"
+              href="https://www.udemy.com/certificate/UC-64b4f7e8-f42d-4f9a-88db-fc2634b40f90/"
+              >Kubernetes Mastery</a
+            >
+            by Bret Fisher on Udemy.
+          </p>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Spotlight</h2>
+          <p class="project__section-content">
+            GitOps changes the <strong class="semibold">run</strong> stage of
+            <strong class="semibold">build</strong>
+            → <strong class="semibold">ship</strong> →
+            <strong class="semibold">run</strong>. Instead of
+            <em>pushing</em> changes to a Kubernetes cluster using a secret key,
+            GitOps <em>pulls</em> the changes from source control. This
+            eliminates the need to store high-privilege access keys, improving
+            security. Figure 2 shows the Kubernetes
+            <span class="tooltip"
+              >manifest<span class="tooltiptext"
+                >YAML files that store the declarative state of the
+                cluster.</span
+              ></span
+            >
+            files that Flux syncs the cluster state with.
+          </p>
+          <figure class="full-bleed">
+            <img
+              class="project__section-image"
+              src="assets/images/manifest-files.webp"
+              alt="A screenshot of the portfolio GitHub repo showing a list of YAML manifest files."
+            />
+            <figcaption class="project__caption">
+              Figure 2: Kubernetes manifest files
+            </figcaption>
+          </figure>
+          <p class="project__section-content">
+            One of the key benefits of GitOps is that because we store the
+            cluster state in code, rolling back releases is the same as rolling
+            back code. My CI/CD pipeline updates the deployment to the current
+            commit hash which Flux detects and applies to the cluster with a
+            Kubernetes rolling update.
+          </p>
+          <figure class="full-bleed">
+            <img
+              class="project__section-image"
+              src="assets/images/image-tag.webp"
+              alt="A screenshot of the portfolio GitHub repo showing the portfolio-deployment.yaml file. A highlighted line shows the image hash of the current version."
+            />
+            <figcaption class="project__caption">
+              Figure 3: The image tag for the current release is set to the
+              latest commit hash
+            </figcaption>
+          </figure>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Challenges</h2>
+          <p class="project__section-content">
+            The biggest challenge in self-hosting my portfolio was the
+            networking. To serve a request from a user that types
+            <em>kaichevannes.com</em> into their browser, I need to:
+          </p>
+          <ol class="project__section-content">
+            <li>
+              <strong class="semibold">Allow</strong> incoming traffic on HTTP
+              and HTTPS to my Oracle Cloud VM through its ingress rules
+            </li>
+            <li>
+              <strong class="semibold">Route</strong> incoming requests to
+              <span class="tooltip"
+                >Traefik<span class="tooltiptext"
+                  >A cloud native reverse proxy similar to nginx, designed for
+                  use with containers.</span
+                ></span
+              >, running on my Kubernetes cluster
+            </li>
+            <li>
+              <strong class="semibold">Provide</strong> Traefik with the
+              credentials to complete an
+              <span class="tooltip"
+                >ACME<span class="tooltiptext"
+                  ><strong>Automatic Certificate Management Environment</strong>
+                  protocol. It automates the retrieval and renewal of the TLS
+                  certificates we need to serve requests over HTTPS.</span
+                ></span
+              >
+              DNS challenge with my domain registrar
+            </li>
+            <li>
+              <strong class="semibold">Persist</strong> the TLS certificate to
+              avoid Let's Encrypt rate limits
+            </li>
+            <li>
+              <strong class="semibold">Redirect</strong> HTTP requests to HTTPS
+              requests using a Kubernetes Ingress resource
+            </li>
+            <li>
+              <strong class="semibold">Forward</strong> HTTPS requests to
+              <span class="tooltip"
+                >Next.js<span class="tooltiptext"
+                  >A full-stack meta-framework built on top of React.</span
+                ></span
+              >
+            </li>
+          </ol>
+          <p class="project__section-content">
+            In step 3, I need to provide Traefik with a secret API token for
+            authentication. In declarative methodologies like GitOps this
+            presents a challenge because the full cluster state is kept in
+            source control.
+          </p>
+          <p class="project__section-content">
+            In enterprise, your Kubernetes cluster is usually hosted with a
+            cloud provider that has a built-in secret manager like
+            <span class="tooltip"
+              >AWS<span class="tooltiptext"
+                ><strong>Amazon Web Services</strong></span
+              ></span
+            >
+            or
+            <span class="tooltip"
+              >Azure<span class="tooltiptext"
+                ><strong>Microsoft Azure</strong></span
+              ></span
+            >. Because I'm running a
+            <span class="tooltip"
+              >K3s<span class="tooltiptext"
+                >A minimal <strong>Kubernetes distribution</strong> built for
+                environments with limited resources.</span
+              ></span
+            >
+            cluster on a VM, I need to handle secrets myself.
+          </p>
+          <p class="project__section-content">
+            I use
+            <a
+              class="link"
+              href="https://github.com/bitnami-labs/sealed-secrets"
+              >Bitnami Sealed Secrets</a
+            >
+            which generates a public/private key pair inside the cluster. I can
+            encrypt the secret API token using the clusters public key and
+            safely store it in source control. The private key to decrypt this
+            secret only exists within the cluster.
+          </p>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Lessons Learned</h2>
+          <p class="project__section-content">
+            This project taught me to slow down and and make less assumptions.
+            For example, when configuring Traefik locally I used the built-in
+            Kubernetes <em>Ingress</em> resource, but the documentation for
+            certificate verfication used a custom
+            <em>IngressRoute</em> resource. I didn't think this woud change
+            anything so I skipped locally testing it and this led me down a
+            rabbithole of attempting to fix what I thought was a networking
+            issue for my broken deployment...
+          </p>
+          <p class="project__section-content">
+            I tried changing my cluster configuration only to break my bootstrap
+            script, linking Traefik directly to my VM's network using Kubernetes
+            hostports, forwarding requests using custom iptables rules, swapping
+            the networking backend of my cluster. I read the docs more
+            thoroughly and realised it wasn't a networking issue but the
+            configuration of the
+            <em>IngressRoute</em> resource that I assumed would switch out one
+            for one with my local <em>Ingress</em> resource.
+          </p>
+          <p class="project__section-content">
+            I gained a better appreciation for documentation because the issues
+            I was running into were difficult to Google. I also improved my
+            understanding of working iteratively in small batch sizes; trying to
+            put so many pieces together in one go led to such a large surface
+            area for problems that I eventually had to take it step by step
+            anyway. Next time, I'll start that way.
+          </p>
+        </section>
+        <nav class="project__nav">
+          <a
+            class="project__nav-link project__nav-link--disabled"
+            aria-disabled="true"
+            tabindex="-1"
+            >←</a
+          >
+          <a class="project__nav-link" href="/boids.html">Web Boids →</a>
+        </nav>
       </main>
       <footer class="footer">
         <div class="footer__icons">
