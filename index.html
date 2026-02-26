@@ -15,6 +15,14 @@
 
     <link rel="preload" as="image" href="/assets/images/meditation.webp" />
 
+    <link rel="modulepreload" href="/assets/wasm/wasm_boids.js" />
+    <link
+      rel="preload"
+      href="/assets/wasm/wasm_boids.wasm"
+      as="fetch"
+      crossorigin
+    />
+
     <script>
       if (
         localStorage.getItem("color-mode") === "dark" ||

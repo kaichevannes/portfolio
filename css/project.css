@@ -124,6 +124,10 @@
   color: hsl(46deg 33% 92%);
 }
 
+.project__video-button--boids {
+  color: var(--color-text);
+}
+
 .project__video-button-icon {
   margin: auto;
   width: 64px;

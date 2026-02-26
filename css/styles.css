@@ -370,6 +370,26 @@
   background: var(--color-text);
 }
 
+.boids__wrapper {
+  display: grid;
+  place-content: center;
+  gap: 24px;
+}
+
+.boids__canvas {
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  @media (prefers-reduced-motion: no-preference) {
+    display: block;
+  }
+}
+
+.boids__canvas-wrapper {
+  position: relative;
+}
+
 .footer {
   margin-top: 128px;
   padding-bottom: 32px;
