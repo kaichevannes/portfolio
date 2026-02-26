@@ -75,6 +75,19 @@
   width: 100px;
 }
 
+.project__icon--bleed {
+  max-width: 100vw;
+  height: 16px;
+  /* Half the empty space outside of the max width wrapper */
+  margin-left: clamp(-72px, calc((100vw - 1100px) / 2 * -1), 0px);
+  margin-right: clamp(-72px, calc((100vw - 1100px) / 2 * -1), 0px);
+
+  @media (max-width: calc(1000 / 16 * 1rem)) {
+    margin-left: revert;
+    margin-right: revert;
+  }
+}
+
 .project__tech-entry {
   display: flex;
   flex-direction: column;
