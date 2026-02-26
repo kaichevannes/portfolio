@@ -6,13 +6,13 @@
     <title>Kai Chevannes</title>
     <meta name="description" content="Portfolio" />
 
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/utilities.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="stylesheet" href="css/project.css" />
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/utilities.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/project.css" />
 
     <script>
       if (
@@ -53,17 +53,17 @@
               class="header__lightbulb-inner light-mode-only"
               style="color: var(--color-highlight)"
             >
-              <use href="assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <!-- Dark mode lightbulb inner -->
             <svg
               class="header__lightbulb-inner dark-mode-only"
               style="color: transparent"
             >
-              <use href="assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <svg class="header__lightbulb-outer">
-              <use href="assets/svgs/lightbulb.svg#lightbulb" />
+              <use href="/assets/svgs/lightbulb.svg#lightbulb" />
             </svg>
           </div>
         </div>
@@ -80,7 +80,7 @@
             onclick="setSoundMode('muted');"
           >
             <svg class="header__icon">
-              <use href="assets/svgs/volume-2.svg#volume-2" />
+              <use href="/assets/svgs/volume-2.svg#volume-2" />
             </svg>
             sound
           </button>
@@ -91,7 +91,7 @@
             onclick="setSoundMode('sound');"
           >
             <svg class="header__icon">
-              <use href="assets/svgs/volume-x.svg#volume-x" />
+              <use href="/assets/svgs/volume-x.svg#volume-x" />
             </svg>
             muted
           </button>
@@ -99,7 +99,7 @@
           <!-- Light mode button -->
           <audio
             id="sound-lightoff"
-            src="assets/sounds/lightoff.mp3"
+            src="/assets/sounds/lightoff.mp3"
             preload="auto"
           ></audio>
           <button
@@ -108,7 +108,7 @@
             onclick="setColorMode('dark'); playLightOff();"
           >
             <svg class="header__icon">
-              <use href="assets/svgs/sun.svg#sun" />
+              <use href="/assets/svgs/sun.svg#sun" />
             </svg>
             light
           </button>
@@ -116,7 +116,7 @@
           <!-- Dark mode button -->
           <audio
             id="sound-lighton"
-            src="assets/sounds/lighton.mp3"
+            src="/assets/sounds/lighton.mp3"
             preload="auto"
           ></audio>
           <button
@@ -125,7 +125,7 @@
             onclick="setColorMode('light'); playLightOn();"
           >
             <svg class="header__icon">
-              <use href="assets/svgs/moon.svg#moon" />
+              <use href="/assets/svgs/moon.svg#moon" />
             </svg>
             dark
           </button>
@@ -135,16 +135,15 @@
           onclick="openMobileDialog()"
         >
           <svg class="header__icon header__icon--mobile">
-            <use href="assets/svgs/menu.svg#menu" />
+            <use href="/assets/svgs/menu.svg#menu" />
           </svg>
         </button>
         <dialog id="mobile-dialog" class="header__mobile-dialog">
           <nav class="header__mobile-nav">
             <a href="/#about" class="header__nav-link header__nav-link--mobile"
-              >about</a
-            >
+              >about</a            >
             <a
-              href="/#projects"
+              href="/#projcts"
               class="header__nav-link header__nav-link--mobile"
               >projects</a
             >
@@ -159,45 +158,44 @@
               <!-- Light mode button -->
               <audio
                 id="sound-lightoff"
-                src="assets/sounds/lightoff.mp3"
+                src="/assets/sounds/lightoff.mp3"
                 preload="auto"
-              ></audio>
-              <button
+              ></audio>              <button
                 class="header__button header__button--mobile header__button--mobile-menu light-mode-only"
                 onclick="setColorMode('dark'); playLightOff();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="assets/svgs/sun.svg#sun" />
+                  <use href="/assets/svgs/sun.svg#sun" />
                 </svg>
                 light
               </button>
 
-              <!-- Dark mode button -->
+              <!-- Dark moe button -->
               <audio
                 id="sound-lighton"
-                src="assets/sounds/lighton.mp3"
+                src="/assets/sounds/lighton.mp3"
                 preload="auto"
               ></audio>
               <button
                 class="header__button header__button--mobile header__button--mobile-menu dark-mode-only"
-                onclick="setColorMode('light'); playLightOn();"
+                onlick="setColorMode('light'); playLightOn();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="assets/svgs/moon.svg#moon" />
+                  <use href="/assets/svgs/moon.svg#moon" />
                 </svg>
                 dark
               </button>
             </div>
             <div>
-              <!-- Sound button -->
+              <!-- Sound btton -->
               <button
                 class="header__button header__button--mobile header__button--mobile-menu sound-on-only"
                 onclick="setSoundMode('muted');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="assets/svgs/volume-2.svg#volume-2" />
+                  <use href="/assets/svgs/volume-2.svg#volume-2" />
                 </svg>
-                sound
+                sond
               </button>
 
               <!-- Muted button -->
@@ -206,7 +204,7 @@
                 onclick="setSoundMode('sound');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="assets/svgs/volume-x.svg#volume-x" />
+                  <use hre="/assets/svgs/volume-x.svg#volume-x" />
                 </svg>
                 muted
               </button>
@@ -216,8 +214,8 @@
             class="header__button header__button--mobile header__button--close"
             onclick="closeMobileDialog()"
           >
-            <svg class="header__icon header__icon--mobile">
-              <use href="assets/svgs/x.svg#x" />
+            <svg class="eader__icon header__icon--mobile">
+              <use href="/assets/svgs/x.svg#x" />
             </svg>
           </button>
         </dialog>
@@ -236,27 +234,27 @@
             <div class="project__tech">
               <div class="project__tech-entry">
                 <svg class="project__icon project__icon--oracle">
-                  <use href="assets/svgs/oracle-cloud.svg#oracle-cloud" />
+                  <use href="/assets/svgs/oracle-cloud.svg#oracle-cloud" />
                 </svg>
                 <p class="project__tech-text">Oracle Cloud</p>
               </div>
-              <div class="project__tech-entry">
+              <div clas="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="assets/svgs/ansible.svg#ansible" />
+                  <use href="/assets/svgs/ansible.svg#ansible" />
                 </svg>
                 <p class="project__tech-text">Ansible</p>
               </div>
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="assets/svgs/kubernetes.svg#kubernetes" />
+                  <use href="/ssets/svgs/kubernetes.svg#kubernetes" />
                 </svg>
                 <p class="project__tech-text">Kubernetes</p>
               </div>
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="assets/svgs/flux.svg#flux" />
+                  <use href="/assets/svgs/flux.svg#flux" />
                 </svg>
-                <p class="project__tech-text">Flux</p>
+                <p clas="project__tech-text">Flux</p>
               </div>
             </div>
           </div>
@@ -264,22 +262,21 @@
         <figure>
           <div class="project__video-wrapper">
             <video
-              id="video"
-              class="project__video"
+              id="video"              class="project__video"
               playsinline
               autoplay
               loop
               muted
               preload="auto"
             >
-              <source src="assets/videos/cluster-bootstrap.mp4" />
+              <source src="/assets/videos/cluster-bootstrap.mp4" />
             </video>
             <button
               class="project__video-button playing-only"
-              onclick="setPlaying(false)"
+              onclick="setPlayng(false)"
             >
               <svg class="project__video-button-icon">
-                <use href="assets/svgs/pause.svg#pause" />
+                <use href="/assets/svgs/pause.svg#pause" />
               </svg>
             </button>
             <button
@@ -287,7 +284,7 @@
               onclick="setPlaying(true)"
             >
               <svg class="project__video-button-icon">
-                <use href="assets/svgs/play.svg#play" />
+                <use href="/asets/svgs/play.svg#play" />
               </svg>
             </button>
           </div>
@@ -295,7 +292,10 @@
             Figure 1: Bootstrapping the VM with Ansible
           </figcaption>
         </figure>
-        <section class="project__section">
+        <svg>
+          <use href="/assets/svgs/preface-squiggly.svg" />
+        </svg>
+        <section class="prject__section">
           <h2 class="project__section-title">Summary</h2>
           <p class="project__section-content">
             I set up a
@@ -314,25 +314,24 @@
                 systems that have instructions for how to install and run an
                 application, so apps run identically anywhere Docker is
                 installed.</span
-              ></span
-            >
+              ></span            >
             <strong class="semibold">build</strong> →
             <strong class="semibold">ship</strong> →
             <strong class="semibold">run</strong> methodology:
           </p>
-          <ol class="project__section-content">
+          <ol class="project__ection-content">
             <li>
               <strong class="semibold">Build</strong> a Docker image of the site
             </li>
             <li>
               <strong class="semibold">Ship</strong> the image to GitHub's
-              Container Registery
+              Container Registry
             </li>
             <li>
               <strong class="semibold">Run</strong> the image on my always-free
               Oracle Cloud
               <span class="tooltip"
-                >VM<span class="tooltiptext"
+                >VM<span class"tooltiptext"
                   ><strong>Virtual Machine</strong></span
                 ></span
               >
@@ -350,22 +349,20 @@
               >Kubernetes<span class="tooltiptext"
                 >A <strong>container orchestrator</strong> that automates the
                 deployment, scaling and rolling updates of containers.</span
-              ></span
-            >
+              ></span            >
             and
             <span class="tooltip"
               >Flux<span class="tooltiptext"
                 >A <strong>GitOps</strong> CD tool.</span
               ></span
-            >
-            seen in Figure 1. Flux watches the portfolio's
+            >            seen in Figure 1. Flux watches the portfolio's
             <a class="link" href="https://github.com/kaichevannes/portfolio"
               >Git repository</a
             >
             and syncs the cluster with its state.
           </p>
         </section>
-        <section class="project__section">
+        <section class="projct__section">
           <h2 class="project__section-title">Purpose & Goal</h2>
           <p class="project__section-content">
             I became interested in
@@ -374,7 +371,7 @@
                 >A software development approach that follows
                 <em>the three ways</em>: increasing left to right flow of work,
                 increasing right to left flow of feedback, cultivating a culture
-                of continuous experimentation and learning.</span
+                of coninuous experimentation and learning.</span
               ></span
             >
             after reading <em>The Phoenix Project</em> during my 2023 summer
@@ -429,7 +426,7 @@
           <figure class="full-bleed">
             <img
               class="project__section-image"
-              src="assets/images/manifest-files.webp"
+              src="/assets/images/manifest-files.webp"
               alt="A screenshot of the portfolio GitHub repo showing a list of YAML manifest files."
             />
             <figcaption class="project__caption">
@@ -446,7 +443,7 @@
           <figure class="full-bleed">
             <img
               class="project__section-image"
-              src="assets/images/image-tag.webp"
+              src="/assets/images/image-tag.webp"
               alt="A screenshot of the portfolio GitHub repo showing the portfolio-deployment.yaml file. A highlighted line shows the image hash of the current version."
             />
             <figcaption class="project__caption">
@@ -510,8 +507,7 @@
             authentication. In declarative methodologies like GitOps this
             presents a challenge because the full cluster state is kept in
             source control.
-          </p>
-          <p class="project__section-content">
+          </p>          <p class="project__section-content">
             In enterprise, your Kubernetes cluster is usually hosted with a
             cloud provider that has a built-in secret manager like
             <span class="tooltip"
@@ -527,7 +523,7 @@
             >. Because I'm running a
             <span class="tooltip"
               >K3s<span class="tooltiptext"
-                >A minimal <strong>Kubernetes distribution</strong> built for
+                >A mnimal <strong>Kubernetes distribution</strong> built for
                 environments with limited resources.</span
               ></span
             >
@@ -584,26 +580,26 @@
             tabindex="-1"
             >←</a
           >
-          <a class="project__nav-link" href="/boids.html">Web Boids →</a>
+          <a class="project__nav-link" href="/boids">Web Boids →</a>
         </nav>
       </main>
       <footer class="footer">
         <div class="footer__icons">
           <a href="https://wave.webaim.org/" class="footer__link">
             <svg class="footer__icon footer__icon--wave">
-              <use href="assets/svgs/wave.svg#wave" />
+              <use href="/assets/svgs/wave.svg#wave" />
             </svg>
             Wave
           </a>
           <a href="https://www.deque.com/" class="footer__link">
             <svg class="footer__icon footer__icon--axe">
-              <use href="assets/svgs/axe.svg#axe" />
+              <use href="/assets/svgs/axe.svg#axe" />
             </svg>
             Axe Deque
           </a>
           <a href="https://accessibilityinsights.io/" class="footer__link">
             <svg class="footer__icon">
-              <use href="assets/svgs/a11yinsights.svg#a11yinsights" />
+              <use href="/assets/svgs/a11yinsights.svg#a11yinsights" />
             </svg>
             A11y Insights
           </a>
@@ -614,13 +610,13 @@
             class="footer__link"
           >
             <svg class="footer__icon">
-              <use href="assets/svgs/linkedin.svg#linkedin" />
+              <use href="/assets/svgs/linkedin.svg#linkedin" />
             </svg>
             LinkedIn
           </a>
           <a href="https://github.com/kaichevannes" class="footer__link">
             <svg class="footer__icon footer__icon--github">
-              <use href="assets/svgs/github.svg#github" />
+              <use href="/assets/svgs/github.svg#github" />
             </svg>
             GitHub
           </a>
@@ -672,20 +668,18 @@
         if (play) {
           video.play();
           document.documentElement.setAttribute("playing-mode", "playing");
-        } else {
-          video.pause();
+        } else {          video.pause();
           document.documentElement.setAttribute("playing-mode", "paused");
         }
       }
 
-      const mobileDialog = document.querySelector("#mobile-dialog");
+      const mobileDialog =document.querySelector("#mobile-dialog");
 
       mobileDialog.addEventListener("click", (e) => {
         if (e.target === mobileDialog) {
           mobileDialog.close();
         }
       });
-
       function openMobileDialog() {
         mobileDialog.showModal();
       }
@@ -695,13 +689,13 @@
       }
 
       function setColorMode(mode) {
-        document.documentElement.setAttribute("color-mode", mode);
+        document.documentEement.setAttribute("color-mode", mode);
         localStorage.setItem("color-mode", mode);
 
         const lightButton = document.querySelector(
           ".header__button.light-mode-only",
         );
-        const darkButton = document.querySelector(
+        const darkButton =document.querySelector(
           ".header__button.dark-mode-only",
         );
 
