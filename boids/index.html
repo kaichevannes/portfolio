@@ -269,15 +269,162 @@
         </svg>
         <section class="project__section">
           <h2 class="project__section-title">Summary</h2>
+          <p class="project__section-content">
+            I implemented an optimised version of the
+            <a class="link" href="https://en.wikipedia.org/wiki/Boids">Boids</a>
+            algorithm in Rust, further improving performance with
+            multithreading. This compiles to
+            <span class="tooltip"
+              >WebAssembly<span class="tooltiptext"
+                >WebAssembly (<strong>WASM</strong>), is a modern web standard
+                that runs binary code compiled from LLVM supported languages
+                like C, C++, and Rust at near-native speed on the browser.</span
+              ></span
+            >
+            and runs as machine code on the browser.
+          </p>
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Purpose & Goal</h2>
+          <p class="project__section-content">
+            I wasn't satisfied with the performance of the Boids implementation
+            I did for my University dissertation. Because it was written in
+            Python without algorithmic optimisations, it could only run up to
+            100 boids. I've also been interested in using
+            <span class="tooltip"
+              >Vite<span class="tooltiptext"
+                >A frontend build tool and development server.</span
+              ></span
+            >
+            and writing library code. My acceptance criteria were:
+          </p>
+          <ol class="project__section-content">
+            <li>
+              <strong class="semibold">Implement</strong> an optimised Boids
+              algorithm
+            </li>
+            <li>
+              <strong class="semibold">Utilise</strong>
+              <span class="tooltip"
+                >Test Driven Development<span class="tooltiptext"
+                  >A methodology of writing code where you first write failing
+                  tests, then get the tests to pass.</span
+                ></span
+              >
+            </li>
+            <li>
+              <strong class="semibold">Support</strong> multithreading natively
+              and on the web
+            </li>
+            <li>
+              <strong class="semibold">Verify</strong> optimisations improved
+              performance
+            </li>
+          </ol>
+          <p class="project__section-content">
+            I started by reading
+            <a class="link" href="https://doc.rust-lang.org/book/"
+              >The Rust Programming Language</a
+            >
+            and completing <em>ThePrimeagen's</em>
+            <a
+              class="link"
+              href="https://static.frontendmasters.com/ud/c/eddf8c40d0/aPVwjxMZsP/algorithms.pdf"
+              >Algorithms Course</a
+            >
+          </p>
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Spotlight</h2>
+          <p class="project__section-content">
+            Boids is a swarming algorithm modelled on the natural flocking
+            patterns of birds. Each member of the swarm follows their own rules
+            based on their surroundings, producing emergent behaviour. The Boids
+            algorithm can produce many patterns of behaviour:
+            <em>Birds</em> (see the <em>Basic</em> preset on the simulation
+            above), <em>Fish</em> (see the <em>Maruyama</em> preset), and
+            <em>UAVs</em> (see the <em>Zhang</em> preset). The Boids rules are
+            as follows:
+          </p>
+          <ol class="project__section-content">
+            <li>
+              <strong class="semibold">Attraction</strong> — move towards the
+              centre of mass of nearby swarm members
+            </li>
+            <li>
+              <strong class="semibold">Alignment</strong> — move in the same
+              direction as nearby swarm members
+            </li>
+            <li>
+              <strong class="semibold">Separation</strong> — move away from
+              nearby swarm members to avoid crashing
+            </li>
+          </ol>
+          <p class="project__section-content">
+            The most intensive computation in the Boids algorithm is in
+            determining neighbours. The naive algorithm is
+            <span class="tooltip"
+              ><strong class="semibold"
+                >O(N<sup>2</sup>)<span class="tooltiptext"
+                  >Big O notation tells us how much an algorithm slows down as
+                  its input size increases.</span
+                ></strong
+              ></span
+            >: for each <strong class="semibold">Nth</strong> swarm member we
+            have to check our distance to all
+            <strong class="semibold">N</strong> other swarm members. The tiled
+            algorithm improves on this by splitting the grid into tiles as large
+            as the Boids can see, and only checking Boids within adjacent tiles.
+            Our <strong class="semibold">N</strong> Boids only have to check a
+            fixed number of neighbours because each tile has a maximum capacity,
+            determined by the swarms density. This means the algorithm is
+            <strong class="semibold">O(N)</strong>.
+          </p>
+          <p class="project__section-content">
+            The naive and the tiled algorithms can be improved by adding a
+            multithreading strategy. I use the
+            <a class="link" href="https://github.com/rayon-rs/rayon">rayon</a>
+            Rust
+            <span class="tooltip"
+              >crate<span class="tooltiptext">A Rust package.</span></span
+            >, which implements work stealing: each thread is given a queue of
+            work, and once that queue is depleted it will start to steal chunks
+            of work from other threads. We can fine-tune this strategy by
+            adjusting the minimum number of tasks per chunk. If the minimum is
+            low, we will spend more time stealing work than doing work, if it is
+            too high then threads will start to sit idle.
+          </p>
+          <figure class="full-bleed">
+            <img
+              class="project__section-image"
+              src="/assets/images/violin-1000.webp"
+              alt="A violin graph with the average time in milliseconds on the x-axis and the minimum number of boids per thread on the y-axis. Values are shown as ranges of uncertainty."
+            />
+            <figcaption class="project__caption">
+              Figure 1: Average time in milliseconds for 1,000 boids to complete
+              100 timesteps over 100 samples, with 1–1,000 Boids per thread
+              (multithreaded naive strategy). Both very low or very high Boids
+              per thread give worse performance.
+            </figcaption>
+          </figure>
+          <figure class="full-bleed">
+            <img
+              class="project__section-image"
+              src="/assets/images/strategy-comparison.webp"
+              alt="A line graph with four lines on it labelled as naive, naive_mt (multithreaded naive), tiled, tiled_mt (multithreaded tiled). The number of boids in the simulation is on the x-axis and the average time in seconds is on the y-axis."
+            />
+            <figcaption class="project__caption">
+              Figure 2: Strategy comparison showing average time in milliseconds
+              for 1–10,000 boids to complete 1,000 time steps over 100 samples,
+              with 200 Boids per thread. The multithreaded strategies outperform
+              the single-threaded strategies, and the tiled strategy outperforms
+              the naive strategy.
+            </figcaption>
+          </figure>
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Challenges</h2>
+          <p class="project__section-contents"></p>
         </section>
         <section class="project__section">
           <h2 class="project__section-title">Lessons Learned</h2>
