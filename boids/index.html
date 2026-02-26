@@ -730,17 +730,26 @@
       });
 
       let eventCausedPause = false;
+
+      function eventPlay() {
+        if (eventCausedPause) {
+          play();
+          eventCausedPause = false;
+        }
+      }
+
+      function eventPause() {
+        if (playing) {
+          pause();
+          eventCausedPause = true;
+        }
+      }
+
       document.addEventListener("visibilitychange", () => {
         if (document.visibilityState === "visible") {
-          if (eventCausedPause) {
-            play();
-            eventCausedPause = false;
-          }
+          eventPlay();
         } else {
-          if (playing) {
-            pause();
-            eventCausedPause = true;
-          }
+          eventPause();
         }
       });
 
@@ -749,15 +758,9 @@
           const entry = entries[0];
 
           if (entry.isIntersecting) {
-            if (eventCausedPause) {
-              play();
-              eventCausedPause = false;
-            }
+            eventPlay();
           } else {
-            if (playing) {
-              pause();
-              eventCausedPause = true;
-            }
+            eventPause();
           }
         },
         {
