@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" color-mode="light" sound-mode="sound">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Kai Chevannes</title>
+    <meta name="description" content="Portfolio" />
+
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="/css/global.css" />
+    <link rel="stylesheet" href="/css/utilities.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/css/project.css" />
+
+    <script>
+      if (
+        localStorage.getItem("color-mode") === "dark" ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches &&
+          !localStorage.getItem("color-mode"))
+      ) {
+        document.documentElement.setAttribute("color-mode", "dark");
+      }
+      if (localStorage.getItem("sound-mode") === "muted") {
+        document.documentElement.setAttribute("sound-mode", "muted");
+      }
+      document.documentElement.setAttribute("playing-mode", "playing");
+    </script>
+  </head>
+
+  <body>
+    <div class="max-width-wrapper">
+      <header class="header">
+        <div class="header__frosted-glass"></div>
+        <h1 class="header__title">
+          <a class="header__title-anchor" href="/">
+            kai chevannes<span class="accent">.</span>
+          </a>
+        </h1>
+        <div class="header__spacer">
+          <div
+            class="header__lightbulb slide-in"
+            style="
+              --offset: -80px;
+              --duration: 1300ms;
+              --ease-function: var(--spring-easing);
+            "
+          >
+            <div class="header__lightbulb-cord"></div>
+            <!-- Light mode lightbulb inner -->
+            <svg
+              class="header__lightbulb-inner light-mode-only"
+              style="color: var(--color-highlight)"
+            >
+              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+            </svg>
+            <!-- Dark mode lightbulb inner -->
+            <svg
+              class="header__lightbulb-inner dark-mode-only"
+              style="color: transparent"
+            >
+              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+            </svg>
+            <svg class="header__lightbulb-outer">
+              <use href="/assets/svgs/lightbulb.svg#lightbulb" />
+            </svg>
+          </div>
+        </div>
+        <nav class="header__nav">
+          <a href="/#about" class="header__nav-link">about</a>
+          <a href="/#projects" class="header__nav-link">projects</a>
+          <a href="/#contact" class="header__nav-link">contact</a>
+        </nav>
+        <div class="header__spacer"></div>
+        <div class="header__buttons">
+          <!-- Sound button -->
+          <button
+            class="header__button slide-in sound-on-only"
+            onclick="setSoundMode('muted');"
+          >
+            <svg class="header__icon">
+              <use href="/assets/svgs/volume-2.svg#volume-2" />
+            </svg>
+            sound
+          </button>
+
+          <!-- Muted button -->
+          <button
+            class="header__button slide-in sound-muted-only"
+            onclick="setSoundMode('sound');"
+          >
+            <svg class="header__icon">
+              <use href="/assets/svgs/volume-x.svg#volume-x" />
+            </svg>
+            muted
+          </button>
+
+          <!-- Light mode button -->
+          <audio
+            id="sound-lightoff"
+            src="/assets/sounds/lightoff.mp3"
+            preload="auto"
+          ></audio>
+          <button
+            class="header__button slide-in light-mode-only"
+            style="--delay: 300ms"
+            onclick="setColorMode('dark'); playLightOff();"
+          >
+            <svg class="header__icon">
+              <use href="/assets/svgs/sun.svg#sun" />
+            </svg>
+            light
+          </button>
+
+          <!-- Dark mode button -->
+          <audio
+            id="sound-lighton"
+            src="/assets/sounds/lighton.mp3"
+            preload="auto"
+          ></audio>
+          <button
+            class="header__button slide-in dark-mode-only"
+            style="--delay: 300ms"
+            onclick="setColorMode('light'); playLightOn();"
+          >
+            <svg class="header__icon">
+              <use href="/assets/svgs/moon.svg#moon" />
+            </svg>
+            dark
+          </button>
+        </div>
+        <button
+          class="header__button header__button--mobile slide-in"
+          onclick="openMobileDialog()"
+        >
+          <svg class="header__icon header__icon--mobile">
+            <use href="/assets/svgs/menu.svg#menu" />
+          </svg>
+        </button>
+        <dialog id="mobile-dialog" class="header__mobile-dialog">
+          <nav class="header__mobile-nav">
+            <a href="/#about" class="header__nav-link header__nav-link--mobile"
+              >about</a
+            >
+            <a
+              href="/#projects"
+              class="header__nav-link header__nav-link--mobile"
+              >projects</a
+            >
+            <a
+              href="/#contact"
+              class="header__nav-link header__nav-link--mobile"
+              >contact</a
+            >
+          </nav>
+          <div class="header__mobile-buttons">
+            <div>
+              <!-- Light mode button -->
+              <audio
+                id="sound-lightoff"
+                src="/assets/sounds/lightoff.mp3"
+                preload="auto"
+              ></audio>
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu light-mode-only"
+                onclick="setColorMode('dark'); playLightOff();"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="/assets/svgs/sun.svg#sun" />
+                </svg>
+                light
+              </button>
+
+              <!-- Dark mode button -->
+              <audio
+                id="sound-lighton"
+                src="/assets/sounds/lighton.mp3"
+                preload="auto"
+              ></audio>
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu dark-mode-only"
+                onclick="setColorMode('light'); playLightOn();"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="/assets/svgs/moon.svg#moon" />
+                </svg>
+                dark
+              </button>
+            </div>
+            <div>
+              <!-- Sound button -->
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu sound-on-only"
+                onclick="setSoundMode('muted');"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="/assets/svgs/volume-2.svg#volume-2" />
+                </svg>
+                sound
+              </button>
+
+              <!-- Muted button -->
+              <button
+                class="header__button header__button--mobile header__button--mobile-menu sound-muted-only"
+                onclick="setSoundMode('sound');"
+              >
+                <svg class="header__icon header__icon--mobile">
+                  <use href="/assets/svgs/volume-x.svg#volume-x" />
+                </svg>
+                muted
+              </button>
+            </div>
+          </div>
+          <button
+            class="header__button header__button--mobile header__button--close"
+            onclick="closeMobileDialog()"
+          >
+            <svg class="header__icon header__icon--mobile">
+              <use href="/assets/svgs/x.svg#x" />
+            </svg>
+          </button>
+        </dialog>
+      </header>
+      <main class="project">
+        <div class="project__page-title">
+          <div class="project__details">
+            <h1 class="project__title">Web Boids</h1>
+            <p class="project__description">
+              I ported my dissertation to multithreaded WASM, it's blazingly
+              fast.
+            </p>
+          </div>
+          <div>
+            <h2 class="project__key-technologies">Key Technologies</h2>
+            <div class="project__tech">
+              <div class="project__tech-entry">
+                <svg class="project__icon">
+                  <use href="/assets/svgs/rust.svg#rust" />
+                </svg>
+                <p class="project__tech-text">Rust</p>
+              </div>
+              <div class="project__tech-entry">
+                <svg class="project__icon">
+                  <use href="/assets/svgs/webassembly.svg#webassembly" />
+                </svg>
+                <p class="project__tech-text">WebAssembly</p>
+              </div>
+              <div class="project__tech-entry">
+                <svg class="project__icon">
+                  <use href="/assets/svgs/vite.svg#vite" />
+                </svg>
+                <p class="project__tech-text">Vite</p>
+              </div>
+              <div class="project__tech-entry">
+                <svg class="project__icon">
+                  <use href="/assets/svgs/cssmodules.svg#cssmodules" />
+                </svg>
+                <p class="project__tech-text">CSS Modules</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <section class="project__section">
+          <h2 class="project__section-title">Preface</h2>
+        </section>
+        <svg class="project__icon--bleed">
+          <use href="/assets/svgs/preface-squiggly.svg#preface-squiggly" />
+        </svg>
+        <section class="project__section">
+          <h2 class="project__section-title">Summary</h2>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Purpose & Goal</h2>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Spotlight</h2>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Challenges</h2>
+        </section>
+        <section class="project__section">
+          <h2 class="project__section-title">Lessons Learned</h2>
+        </section>
+        <svg class="project__icon--bleed">
+          <use
+            href="/assets/svgs/postscript-squiggly.svg#postscript-squiggly"
+          />
+        </svg>
+        <section class="project__section">
+          <h2 class="project__section-title">Postscript</h2>
+        </section>
+        <nav class="project__nav">
+          <a class="project__nav-link" href="/gitops">← Gitops</a>
+          <a
+            class="project__nav-link project__nav-link--disabled"
+            aria-disabled="true"
+            tabindex="-1"
+            >→</a
+          >
+        </nav>
+      </main>
+      <footer class="footer">
+        <div class="footer__icons">
+          <a href="https://wave.webaim.org/" class="footer__link">
+            <svg class="footer__icon footer__icon--wave">
+              <use href="/assets/svgs/wave.svg#wave" />
+            </svg>
+            Wave
+          </a>
+          <a href="https://www.deque.com/" class="footer__link">
+            <svg class="footer__icon footer__icon--axe">
+              <use href="/assets/svgs/axe.svg#axe" />
+            </svg>
+            Axe Deque
+          </a>
+          <a href="https://accessibilityinsights.io/" class="footer__link">
+            <svg class="footer__icon">
+              <use href="/assets/svgs/a11yinsights.svg#a11yinsights" />
+            </svg>
+            A11y Insights
+          </a>
+        </div>
+        <div class="footer__icons">
+          <a
+            href="https://www.linkedin.com/in/kaichevannes/"
+            class="footer__link"
+          >
+            <svg class="footer__icon">
+              <use href="/assets/svgs/linkedin.svg#linkedin" />
+            </svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/kaichevannes" class="footer__link">
+            <svg class="footer__icon footer__icon--github">
+              <use href="/assets/svgs/github.svg#github" />
+            </svg>
+            GitHub
+          </a>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.querySelectorAll(".tooltip").forEach((timeout) => {
+        let cleanupTimer = null;
+
+        timeout.addEventListener("mouseenter", () => {
+          clearTimeout(cleanupTimer);
+
+          const text = timeout.querySelector(".tooltiptext");
+          if (!text) return;
+
+          const triggerRect = timeout.getBoundingClientRect();
+          const tooltipWidth = text.offsetWidth; // works since visibility:hidden keeps it in layout
+          const pad = 8;
+
+          const naturalLeft =
+            triggerRect.left + triggerRect.width / 2 - tooltipWidth / 2;
+          const naturalRight = naturalLeft + tooltipWidth;
+
+          let shift = 0;
+          if (naturalLeft < pad) {
+            shift = pad - naturalLeft;
+          } else if (naturalRight > window.innerWidth - pad) {
+            shift = window.innerWidth - pad - naturalRight;
+          }
+
+          timeout.style.setProperty(
+            "--tooltip-shift",
+            `${Math.round(shift)}px`,
+          );
+        });
+
+        timeout.addEventListener("mouseleave", () => {
+          cleanupTimer = setTimeout(() => {
+            timeout.style.removeProperty("--tooltip-shift");
+          }, 600);
+        });
+      });
+
+      function setPlaying(play) {
+        const video = document.querySelector("#video");
+
+        if (play) {
+          video.play();
+          document.documentElement.setAttribute("playing-mode", "playing");
+        } else {
+          video.pause();
+          document.documentElement.setAttribute("playing-mode", "paused");
+        }
+      }
+
+      const mobileDialog = document.querySelector("#mobile-dialog");
+
+      mobileDialog.addEventListener("click", (e) => {
+        if (e.target === mobileDialog) {
+          mobileDialog.close();
+        }
+      });
+
+      function openMobileDialog() {
+        mobileDialog.showModal();
+      }
+
+      function closeMobileDialog() {
+        mobileDialog.close();
+      }
+
+      function setColorMode(mode) {
+        document.documentElement.setAttribute("color-mode", mode);
+        localStorage.setItem("color-mode", mode);
+
+        const lightButton = document.querySelector(
+          ".header__button.light-mode-only",
+        );
+        const darkButton = document.querySelector(
+          ".header__button.dark-mode-only",
+        );
+
+        lightButton.classList.remove("slide-in");
+        darkButton.classList.remove("slide-in");
+      }
+
+      function setSoundMode(mode) {
+        document.documentElement.setAttribute("sound-mode", mode);
+        localStorage.setItem("sound-mode", mode);
+
+        const soundButton = document.querySelector(
+          ".header__button.sound-on-only",
+        );
+        const mutedButton = document.querySelector(
+          ".header__button.sound-muted-only",
+        );
+
+        soundButton.classList.remove("slide-in");
+        mutedButton.classList.remove("slide-in");
+      }
+
+      const lightOnAudio = document.getElementById("sound-lighton");
+      function playLightOn() {
+        if (document.documentElement.getAttribute("sound-mode") === "muted")
+          return;
+
+        lightOnAudio.currentTime = 0;
+        lightOnAudio.play();
+      }
+
+      const lightOffAudio = document.getElementById("sound-lightoff");
+      function playLightOff() {
+        if (document.documentElement.getAttribute("sound-mode") === "muted")
+          return;
+
+        lightOffAudio.currentTime = 0;
+        lightOffAudio.play();
+      }
+    </script>
+  </body>
+</html>
