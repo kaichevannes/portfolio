@@ -668,10 +668,10 @@
             Axe Deque
           </a>
           <a href="https://accessibilityinsights.io/" class="footer__link">
+            A11y Insights
             <svg class="footer__icon">
               <use href="/_assets/svgs/a11yinsights.svg#a11yinsights" />
             </svg>
-            A11y Insights
           </a>
         </div>
         <div class="footer__icons">
@@ -695,54 +695,6 @@
     </div>
 
     <script type="module" src="/_js/boids.js" defer></script>
-    <script src="/_js/main.js"></script>
-
-    <script>
-      const tabs = document.querySelectorAll('[role="tab"]');
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          // Deactivate all
-          tabs.forEach((t) => {
-            t.setAttribute("aria-selected", "false");
-            t.setAttribute("tabindex", "-1");
-          });
-          document
-            .querySelectorAll('[role="tabpanel"]')
-            .forEach((p) => (p.hidden = true));
-
-          // Activate clicked tab
-          tab.setAttribute("aria-selected", "true");
-          tab.setAttribute("tabindex", "0");
-          document.getElementById(tab.getAttribute("aria-controls")).hidden =
-            false;
-        });
-      });
-
-      document.querySelectorAll(".boids__control").forEach((control) => {
-        const slider = control.querySelector("input[type='range']");
-        const output = control.querySelector("output");
-        const logMin = Math.log(1);
-        const logMax = Math.log(4000);
-
-        const toLog = (value) =>
-          Math.exp(logMin + ((logMax - logMin) * (value - 1)) / (4000 - 1));
-
-        slider.addEventListener("input", () => {
-          output.value = toLog(slider.value).toFixed(2);
-        });
-        output.value = toLog(slider.value).toFixed(2);
-
-        slider.addEventListener("input", () => {
-          const pct =
-            ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-          slider.style.setProperty("--progress", `${pct}%`);
-        });
-
-        const pct =
-          ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-        slider.style.setProperty("--progress", `${pct}%`);
-      });
-    </script>
+    <script src="/_js/main.js" defer></script>
   </body>
 </html>

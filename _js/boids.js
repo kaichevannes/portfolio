@@ -11,12 +11,6 @@ const universe = wasm.Builder.from_preset(wasm.Preset.Basic)
   .build();
 let playing = true;
 let showFps = true;
-
-const numberOfBoidsControl = document.getElementById("number-of-boids");
-numberOfBoidsControl.addEventListener("input", () => {
-  universe.set_number_of_boids(numberOfBoidsControl.value);
-});
-
 let rafId = null;
 let tickTimeout = null;
 
@@ -48,61 +42,7 @@ function pause() {
   }
 }
 
-const playButton = document.getElementById("play-button");
-const pauseButton = document.getElementById("pause-button");
 const canvas = document.getElementById("boids-canvas");
-
-playButton.addEventListener("click", () => {
-  play();
-  document.documentElement.setAttribute("playing-mode", "playing");
-});
-
-pauseButton.addEventListener("click", () => {
-  pause();
-  document.documentElement.setAttribute("playing-mode", "paused");
-});
-
-let eventCausedPause = false;
-
-function eventPlay() {
-  if (eventCausedPause) {
-    play();
-    eventCausedPause = false;
-  }
-}
-
-function eventPause() {
-  if (playing) {
-    pause();
-    eventCausedPause = true;
-  }
-}
-
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible") {
-    eventPlay();
-  } else {
-    eventPause();
-  }
-});
-
-const observer = new IntersectionObserver(
-  (entries) => {
-    const entry = entries[0];
-
-    if (entry.isIntersecting) {
-      eventPlay();
-    } else {
-      eventPause();
-    }
-  },
-  {
-    root: null,
-    threshold: 0.3,
-  },
-);
-observer.observe(canvas);
-
 let lastFrameTime = performance.now();
 
 function render(timestamp) {
@@ -185,5 +125,112 @@ function render(timestamp) {
     rafId = requestAnimationFrame(render);
   }
 }
+
+// -------------------
+//     UI Wiring
+// -------------------
+
+const playButton = document.getElementById("play-button");
+const pauseButton = document.getElementById("pause-button");
+
+playButton.addEventListener("click", () => {
+  play();
+  document.documentElement.setAttribute("playing-mode", "playing");
+});
+pauseButton.addEventListener("click", () => {
+  pause();
+  document.documentElement.setAttribute("playing-mode", "paused");
+});
+
+let eventCausedPause = false;
+function eventPlay() {
+  if (eventCausedPause) {
+    play();
+    eventCausedPause = false;
+  }
+}
+function eventPause() {
+  if (playing) {
+    pause();
+    eventCausedPause = true;
+  }
+}
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    eventPlay();
+  } else {
+    eventPause();
+  }
+});
+
+const observer = new IntersectionObserver(
+  (entries) => {
+    const entry = entries[0];
+
+    if (entry.isIntersecting) {
+      eventPlay();
+    } else {
+      eventPause();
+    }
+  },
+  {
+    root: null,
+    threshold: 0.3,
+  },
+);
+observer.observe(canvas);
+
+const tabs = document.querySelectorAll('[role="tab"]');
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    // Deactivate all
+    tabs.forEach((t) => {
+      t.setAttribute("aria-selected", "false");
+      t.setAttribute("tabindex", "-1");
+    });
+    document
+      .querySelectorAll('[role="tabpanel"]')
+      .forEach((p) => (p.hidden = true));
+
+    // Activate clicked tab
+    tab.setAttribute("aria-selected", "true");
+    tab.setAttribute("tabindex", "0");
+    document.getElementById(tab.getAttribute("aria-controls")).hidden =
+      false;
+  });
+});
+
+const numberOfBoidsControl = document.getElementById("number-of-boids");
+numberOfBoidsControl.addEventListener("input", () => {
+  universe.set_number_of_boids(numberOfBoidsControl.value);
+});
+
+const logMin = Math.log(1);
+const logMax = Math.log(4000);
+
+const toLog = (value) =>
+  Math.exp(logMin + ((logMax - logMin) * (value - 1)) / (4000 - 1));
+
+slider.addEventListener("input", () => {
+  output.value = toLog(slider.value).toFixed(2);
+});
+output.value = toLog(slider.value).toFixed(2);
+
+
+document.querySelectorAll(".boids__control").forEach((control) => {
+  const slider = control.querySelector("input[type='range']");
+
+  slider.addEventListener("input", () => {
+    const pct =
+      ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    slider.style.setProperty("--progress", `${pct}%`);
+  });
+
+  const pct =
+    ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+  slider.style.setProperty("--progress", `${pct}%`);
+});
 
 play();
