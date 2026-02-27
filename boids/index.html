@@ -529,6 +529,16 @@
               hidden
             >
               <div class="boids__control">
+                <label class="boids__control-label" for="show-fps"
+                  >Show FPS</label
+                >
+                <input
+                  id="show-fps"
+                  class="boids__control-input--checkbox boids__control-output"
+                  type="checkbox"
+                />
+              </div>
+              <div class="boids__control">
                 <label class="boids__control-label" for="algorithm"
                   >Algorithm</label
                 >
@@ -570,16 +580,6 @@
                   list="boids-per-thread-values"
                 />
                 <datalist id="boids-per-thread-values"></datalist>
-              </div>
-              <div class="boids__control">
-                <label class="boids__control-label" for="show-fps"
-                  >Show FPS</label
-                >
-                <input
-                  id="show-fps"
-                  class="boids__control-input--checkbox boids__control-output"
-                  type="checkbox"
-                />
               </div>
             </div>
           </div>
