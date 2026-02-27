@@ -215,12 +215,6 @@ document.querySelectorAll("input[type='range']").forEach((slider) => {
   slider.style.setProperty("--progress", `${pct}%`);
 });
 
-const unLog = (value, min, max) => {
-  const logMin = Math.log(min);
-  const logMax = Math.log(max);
-  return Math.exp(logMin + value * (logMax - logMin));
-};
-
 function initialiseSlider({
   id,
   min,
@@ -241,6 +235,12 @@ function initialiseSlider({
     option.label = n;
     datalist.appendChild(option);
   });
+
+  const unLog = (value, min, max) => {
+    const logMin = Math.log(min);
+    const logMax = Math.log(max);
+    return Math.exp(logMin + value * (logMax - logMin));
+  };
 
   input.addEventListener("input", () => {
     const actual = logarithmic ? unLog(input.value, min, max) : input.value;
