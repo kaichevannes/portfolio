@@ -254,43 +254,65 @@ function initializeSlider({
     datalist.appendChild(option);
   });
 
+  function setSlider(value) {
+    input.value = logarithmic ? actualToLog(value) : value;
+    output.value = value.toFixed(numberOfDecimals);
+  }
+
   function resetSlider() {
-    input.value = logarithmic
-      ? actualToLog(defaultValueCallback())
-      : defaultValueCallback();
-    output.value = defaultValueCallback().toFixed(numberOfDecimals);
+    setSlider(defaultValueCallback());
   }
 
   input.addEventListener("dblclick", resetSlider);
   resetSlider();
-  return resetSlider;
+  return [resetSlider, setSlider];
 }
 
 let defaultNumberOfBoids = universe.get_number_of_boids();
-const resetNumberOfBoids = initializeSlider({
-  id: "number-of-boids",
-  min: 1,
-  max: 4000,
-  defaultValueCallback: () => defaultNumberOfBoids,
-  logarithmic: true,
-  snapPoints: [1, 2, 3, 4, 5, 500],
-  func: (x) => universe.set_number_of_boids(x),
-});
+const limitedNumberOfBoidsInitializer = () =>
+  initializeSlider({
+    id: "number-of-boids",
+    min: 1,
+    max: 4000,
+    defaultValueCallback: () => defaultNumberOfBoids,
+    logarithmic: true,
+    snapPoints: [1, 2, 3, 4, 5, 500],
+    func: (x) => universe.set_number_of_boids(x),
+  });
+const unlimitedNumberOfBoidsInitializer = () =>
+  initializeSlider({
+    id: "number-of-boids",
+    min: 1,
+    max: 50000,
+    defaultValueCallback: () => defaultNumberOfBoids,
+    logarithmic: true,
+    snapPoints: [1000, 10000],
+    func: (x) => universe.set_number_of_boids(x),
+  });
+const [resetNumberOfBoids, setNumberOfBoids] =
+  limitedNumberOfBoidsInitializer();
 
-let defaultDensity = universe.get_density();
-const resetDensity = initializeSlider({
-  id: "density",
-  min: 0.01,
-  max: 1000,
-  defaultValueCallback: () => defaultDensity,
+let defaultGridSize = universe.get_size();
+const [resetGridSize, setGridSize] = initializeSlider({
+  id: "grid-size",
+  min: 0.1,
+  max: 200,
+  defaultValueCallback: () => defaultGridSize,
   logarithmic: true,
   numberOfDecimals: 2,
-  snapPoints: [0.01, 0.02, 0.03, 0.04, 0.05, 1, 100],
-  func: (x) => universe.set_density(x),
+  snapPoints: [0.1, 0.2, 0.3, 0.4, 0.5, 1, 100],
+  func: (gridSize) =>
+    universe.set_density(
+      universe.get_number_of_boids() / Math.pow(gridSize, 2),
+    ),
+});
+
+document.getElementById("grid-size").addEventListener("input", () => {
+  console.log(universe.get_size(), universe.get_density());
 });
 
 let defaultAttractionWeighting = universe.get_attraction_weighting();
-const resetAttractionWeighting = initializeSlider({
+const [resetAttractionWeighting, setAttractionWeighting] = initializeSlider({
   id: "attraction-weighting",
   min: 0,
   max: 1,
@@ -301,7 +323,7 @@ const resetAttractionWeighting = initializeSlider({
 });
 
 let defaultAttractionRadius = universe.get_attraction_radius();
-const resetAttractionRadius = initializeSlider({
+const [resetAttractionRadius, setAttractionRadius] = initializeSlider({
   id: "attraction-radius",
   min: 0.01,
   max: 10,
@@ -312,7 +334,7 @@ const resetAttractionRadius = initializeSlider({
 });
 
 let defaultAlignmentWeighting = universe.get_alignment_weighting();
-const resetAlignmentWeighting = initializeSlider({
+const [resetAlignmentWeighting, setAlignmentWeighting] = initializeSlider({
   id: "alignment-weighting",
   min: 0,
   max: 1,
@@ -323,7 +345,7 @@ const resetAlignmentWeighting = initializeSlider({
 });
 
 let defaultAlignmentRadius = universe.get_alignment_radius();
-const resetAlignmentRadius = initializeSlider({
+const [resetAlignmentRadius, setAlignmentRadius] = initializeSlider({
   id: "alignment-radius",
   min: 0.01,
   max: 10,
@@ -334,7 +356,7 @@ const resetAlignmentRadius = initializeSlider({
 });
 
 let defaultSeparationWeighting = universe.get_separation_weighting();
-const resetSeparationWeighting = initializeSlider({
+const [resetSeparationWeighting, setSeparationWeighting] = initializeSlider({
   id: "separation-weighting",
   min: 0,
   max: 1,
@@ -345,7 +367,7 @@ const resetSeparationWeighting = initializeSlider({
 });
 
 let defaultSeparationRadius = universe.get_separation_radius();
-const resetSeparationRadius = initializeSlider({
+const [resetSeparationRadius, setSeparationRadius] = initializeSlider({
   id: "separation-radius",
   min: 0.01,
   max: 10,
@@ -356,7 +378,7 @@ const resetSeparationRadius = initializeSlider({
 });
 
 let defaultMaximumVelocity = universe.get_maximum_velocity();
-const resetMaximumVelocity = initializeSlider({
+const [resetMaximumVelocity, setMaximumVelocity] = initializeSlider({
   id: "maximum-velocity",
   min: 0.01,
   max: 1,
@@ -367,7 +389,7 @@ const resetMaximumVelocity = initializeSlider({
 });
 
 let defaultNoise = universe.get_noise_fraction();
-const resetNoise = initializeSlider({
+const [resetNoise, setNoise] = initializeSlider({
   id: "noise",
   min: 0.01,
   max: 1,
@@ -379,7 +401,7 @@ const resetNoise = initializeSlider({
 
 function resetAll() {
   resetNumberOfBoids();
-  resetDensity();
+  resetGridSize();
   resetAttractionWeighting();
   resetAttractionRadius();
   resetAlignmentWeighting();
@@ -408,7 +430,7 @@ preset.addEventListener("change", (e) => {
   }
 
   defaultNumberOfBoids = universe.get_number_of_boids();
-  defaultDensity = universe.get_density();
+  defaultGridSize = universe.get_size();
   defaultAttractionWeighting = universe.get_attraction_weighting();
   defaultAttractionRadius = universe.get_attraction_radius();
   defaultAlignmentWeighting = universe.get_alignment_weighting();
@@ -418,6 +440,76 @@ preset.addEventListener("change", (e) => {
   defaultMaximumVelocity = universe.get_maximum_velocity();
   defaultNoise = universe.get_noise_fraction();
   resetAll();
+});
+
+function randomFloat(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+const randomize = document.getElementById("randomize");
+randomize.addEventListener("click", () => {
+  universe.set_number_of_boids(randomFloat(1, 4000));
+  universe.set_density(
+    universe.get_number_of_boids() / Math.pow(randomFloat(0.1, 200), 2),
+  );
+  universe.set_attraction_weighting(randomFloat(0, 1));
+  universe.set_attraction_radius(randomFloat(0.01, 10));
+  universe.set_alignment_weighting(randomFloat(0, 1));
+  universe.set_alignment_radius(randomFloat(0.01, 10));
+  universe.set_separation_weighting(randomFloat(0, 1));
+  universe.set_seperation_radius(randomFloat(0.01, 10));
+  universe.set_maximum_velocity(randomFloat(0.01, 1));
+  universe.set_noise_fraction(randomFloat(0.01, 1));
+
+  setNumberOfBoids(universe.get_number_of_boids());
+  setGridSize(universe.get_size());
+  setAttractionWeighting(universe.get_attraction_weighting());
+  setAttractionRadius(universe.get_attraction_radius());
+  setAlignmentWeighting(universe.get_alignment_weighting());
+  setAlignmentRadius(universe.get_alignment_radius());
+  setSeparationWeighting(universe.get_separation_weighting());
+  setSeparationRadius(universe.get_separation_radius());
+  setMaximumVelocity(universe.get_maximum_velocity());
+  setNoise(universe.get_noise_fraction());
+});
+
+const algorithm = document.getElementById("algorithm");
+algorithm.value = "tiled";
+algorithm.addEventListener("change", (e) => {
+  const builder = wasm.Builder.from_default()
+    .number_of_boids(universe.get_number_of_boids())
+    .grid_size(universe.get_size())
+    .noise_fraction(universe.get_noise_fraction())
+    .attraction_weighting(universe.get_attraction_weighting() * 100)
+    .alignment_weighting(universe.get_alignment_weighting() * 100)
+    .separation_weighting(universe.get_separation_weighting() * 100)
+    .attraction_radius(universe.get_attraction_radius())
+    .alignment_radius(universe.get_alignment_radius())
+    .separation_radius(universe.get_separation_radius())
+    .maximum_velocity(universe.get_maximum_velocity())
+    .multithreaded(universe.get_multithreaded())
+    .number_of_boids_per_thread(universe.get_boids_per_thread());
+
+  switch (e.target.value) {
+    case "naive":
+      universe = builder.naive(true).build();
+      break;
+    case "tiled":
+      universe = builder.naive(false).build();
+      break;
+    default:
+      throw new Error(`Algorithm ${e.target.value} not found.`);
+  }
+});
+
+const numberOfBoidsLimiter = document.getElementById("number-of-boids-limiter");
+numberOfBoidsLimiter.checked = true;
+numberOfBoidsLimiter.addEventListener("change", (e) => {
+  if (e.target.checked) {
+    limitedNumberOfBoidsInitializer();
+  } else {
+    unlimitedNumberOfBoidsInitializer();
+  }
 });
 
 play();

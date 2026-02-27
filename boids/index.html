@@ -317,6 +317,28 @@
               aria-labelledby="basic-tab"
             >
               <div class="boids__control">
+                <label class="boids__control-label" for="preset">Preset</label>
+                <select
+                  id="preset"
+                  class="boids__control-input boids__control-input--dropdown"
+                >
+                  <option value="basic">Basic</option>
+                  <option value="maruyama">Maruyama</option>
+                  <option value="zhang">Zhang</option>
+                </select>
+              </div>
+              <div class="boids__control boids__control--random">
+                <button
+                  id="randomize"
+                  class="boids__control-output button-link button-link--primary boids__control-input--random"
+                >
+                  <svg class="boids__icon">
+                    <use href="/_assets/svgs/shuffle.svg#shuffle" />
+                  </svg>
+                  Random
+                </button>
+              </div>
+              <div class="boids__control">
                 <label class="boids__control-label" for="number-of-boids"
                   >Number of Boids</label
                 >
@@ -336,20 +358,20 @@
                 <datalist id="number-of-boids-values"></datalist>
               </div>
               <div class="boids__control">
-                <label class="boids__control-label" for="density"
-                  >Density</label
+                <label class="boids__control-label" for="grid-size"
+                  >Grid Size</label
                 >
-                <output class="boids__control-output" for="density"></output>
+                <output class="boids__control-output" for="grid-size"></output>
                 <input
-                  id="density"
+                  id="grid-size"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
                   step="0.01"
-                  list="density-values"
+                  list="grid-size-values"
                 />
-                <datalist id="density-values"></datalist>
+                <datalist id="grid-size-values"></datalist>
               </div>
               <div class="boids__control">
                 <label class="boids__control-label" for="attraction-weighting"
@@ -498,17 +520,6 @@
                 />
                 <datalist id="noise-values"></datalist>
               </div>
-              <div class="boids__control boids__control--preset">
-                <label class="boids__control-label" for="preset">Preset</label>
-                <select
-                  id="preset"
-                  class="boids__control-input boids__control-input--dropdown"
-                >
-                  <option value="basic" selected>Basic</option>
-                  <option value="maruyama">Maruyama</option>
-                  <option value="zhang">Zhang</option>
-                </select>
-              </div>
             </div>
             <div
               role="tabpanel"
@@ -517,7 +528,30 @@
               aria-labelledby="basic-tab"
               hidden
             >
-              Content for tab two
+              <div class="boids__control">
+                <label class="boids__control-label" for="algorithm"
+                  >Algorithm</label
+                >
+                <select
+                  id="algorithm"
+                  class="boids__control-input boids__control-input--dropdown"
+                >
+                  <option value="naive">Naive</option>
+                  <option value="tiled">Tiled</option>
+                </select>
+              </div>
+              <div class="boids__control">
+                <label
+                  class="boids__control-label"
+                  for="number-of-boids-limiter"
+                  >Number of Boids Limiter</label
+                >
+                <input
+                  id="number-of-boids-limiter"
+                  class="boids__control-input--checkbox"
+                  type="checkbox"
+                />
+              </div>
             </div>
           </div>
         </div>
