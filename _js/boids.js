@@ -197,8 +197,7 @@ tabs.forEach((tab) => {
     // Activate clicked tab
     tab.setAttribute("aria-selected", "true");
     tab.setAttribute("tabindex", "0");
-    document.getElementById(tab.getAttribute("aria-controls")).hidden =
-      false;
+    document.getElementById(tab.getAttribute("aria-controls")).hidden = false;
   });
 });
 
@@ -218,18 +217,15 @@ slider.addEventListener("input", () => {
 });
 output.value = toLog(slider.value).toFixed(2);
 
-
 document.querySelectorAll(".boids__control").forEach((control) => {
   const slider = control.querySelector("input[type='range']");
 
   slider.addEventListener("input", () => {
-    const pct =
-      ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
     slider.style.setProperty("--progress", `${pct}%`);
   });
 
-  const pct =
-    ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+  const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
   slider.style.setProperty("--progress", `${pct}%`);
 });
 

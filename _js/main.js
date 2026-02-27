@@ -22,10 +22,7 @@ document.querySelectorAll(".tooltip").forEach((timeout) => {
       shift = window.innerWidth - pad - naturalRight;
     }
 
-    timeout.style.setProperty(
-      "--tooltip-shift",
-      `${Math.round(shift)}px`,
-    );
+    timeout.style.setProperty("--tooltip-shift", `${Math.round(shift)}px`);
   });
 
   timeout.addEventListener("mouseleave", () => {
@@ -55,12 +52,8 @@ function setColorMode(mode) {
   document.documentElement.setAttribute("color-mode", mode);
   localStorage.setItem("color-mode", mode);
 
-  const lightButton = document.querySelector(
-    ".header__button.light-mode-only",
-  );
-  const darkButton = document.querySelector(
-    ".header__button.dark-mode-only",
-  );
+  const lightButton = document.querySelector(".header__button.light-mode-only");
+  const darkButton = document.querySelector(".header__button.dark-mode-only");
 
   lightButton.classList.remove("slide-in");
   darkButton.classList.remove("slide-in");
@@ -70,9 +63,7 @@ function setSoundMode(mode) {
   document.documentElement.setAttribute("sound-mode", mode);
   localStorage.setItem("sound-mode", mode);
 
-  const soundButton = document.querySelector(
-    ".header__button.sound-on-only",
-  );
+  const soundButton = document.querySelector(".header__button.sound-on-only");
   const mutedButton = document.querySelector(
     ".header__button.sound-muted-only",
   );
@@ -83,8 +74,7 @@ function setSoundMode(mode) {
 
 const lightOnAudio = document.getElementById("sound-lighton");
 function playLightOn() {
-  if (document.documentElement.getAttribute("sound-mode") === "muted")
-    return;
+  if (document.documentElement.getAttribute("sound-mode") === "muted") return;
 
   lightOnAudio.currentTime = 0;
   lightOnAudio.play();
@@ -92,8 +82,7 @@ function playLightOn() {
 
 const lightOffAudio = document.getElementById("sound-lightoff");
 function playLightOff() {
-  if (document.documentElement.getAttribute("sound-mode") === "muted")
-    return;
+  if (document.documentElement.getAttribute("sound-mode") === "muted") return;
 
   lightOffAudio.currentTime = 0;
   lightOffAudio.play();
