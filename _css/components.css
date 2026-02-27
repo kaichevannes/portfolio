@@ -1100,6 +1100,10 @@
     outline: none;
     box-shadow: 0 0 0 3px var(--color-primary);
   }
+
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 .footer {

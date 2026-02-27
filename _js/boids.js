@@ -43,6 +43,8 @@ function pause() {
 }
 
 const canvas = document.getElementById("boids-canvas");
+const FPS_SAMPLES = 10;
+const frameTimes = [];
 let lastFrameTime = performance.now();
 
 function render(timestamp) {
@@ -111,15 +113,17 @@ function render(timestamp) {
   ctx.setTransform(1, 0, 0, 1, 0, 0);
 
   if (showFps) {
-    const delta = timestamp - lastFrameTime;
-    const instantaneous_fps = 1000 / delta;
+    frameTimes.push(timestamp - lastFrameTime);
+    if (frameTimes.length > FPS_SAMPLES) frameTimes.shift();
+    const avgDelta = frameTimes.reduce((a, b) => a + b, 0) / frameTimes.length;
+    const fps = 1000 / avgDelta;
     ctx.fillStyle = getComputedStyle(document.documentElement)
       .getPropertyValue("--color-primary")
       .trim();
     ctx.font = "20px monospace";
-    ctx.fillText(`FPS: ${Math.trunc(instantaneous_fps)}`, width - 94, 20);
-    lastFrameTime = performance.now();
+    ctx.fillText(`FPS: ${Math.trunc(fps)}`, width - 104, 20);
   }
+  lastFrameTime = timestamp;
 
   if (playing) {
     rafId = requestAnimationFrame(render);
@@ -201,30 +205,34 @@ tabs.forEach((tab) => {
   });
 });
 
-const numberOfBoidsControl = document.getElementById("number-of-boids");
-numberOfBoidsControl.addEventListener("input", () => {
-  universe.set_number_of_boids(numberOfBoidsControl.value);
+const unLog = (value, min, max) => {
+  const logMin = Math.log(min);
+  const logMax = Math.log(max);
+  return Math.exp(logMin + value * (logMax - logMin));
+};
+
+const numberOfBoidsInput = document.getElementById("number-of-boids");
+const numberOfBoidsOutput = document.querySelector(
+  "output[for='number-of-boids']",
+);
+numberOfBoidsInput.addEventListener("input", () => {
+  const actual = unLog(numberOfBoidsInput.value, 1, 4000);
+  numberOfBoidsOutput.value = actual.toFixed(0);
+  universe.set_number_of_boids(actual);
 });
+numberOfBoidsInput.value = Math.log(500) / Math.log(4000);
+numberOfBoidsOutput.value = unLog(
+  Math.log(500) / Math.log(4000),
+  1,
+  4000,
+).toFixed(0);
 
-const logMin = Math.log(1);
-const logMax = Math.log(4000);
-
-const toLog = (value) =>
-  Math.exp(logMin + ((logMax - logMin) * (value - 1)) / (4000 - 1));
-
-slider.addEventListener("input", () => {
-  output.value = toLog(slider.value).toFixed(2);
-});
-output.value = toLog(slider.value).toFixed(2);
-
-document.querySelectorAll(".boids__control").forEach((control) => {
-  const slider = control.querySelector("input[type='range']");
-
+// Add progress custom css selector to style slider left side on chrome
+document.querySelectorAll("input[type='range']").forEach((slider) => {
   slider.addEventListener("input", () => {
     const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
     slider.style.setProperty("--progress", `${pct}%`);
   });
-
   const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
   slider.style.setProperty("--progress", `${pct}%`);
 });
