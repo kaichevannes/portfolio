@@ -552,6 +552,35 @@
                   type="checkbox"
                 />
               </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="boids-per-thread"
+                  >Boids per Thread</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="boids-per-thread"
+                ></output>
+                <input
+                  id="boids-per-thread"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="boids-per-thread-values"
+                />
+                <datalist id="boids-per-thread-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="show-fps"
+                  >Show FPS</label
+                >
+                <input
+                  id="show-fps"
+                  class="boids__control-input--checkbox boids__control-output"
+                  type="checkbox"
+                />
+              </div>
             </div>
           </div>
         </div>

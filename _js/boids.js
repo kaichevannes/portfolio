@@ -10,7 +10,7 @@ let universe = wasm.Builder.from_preset(wasm.Preset.Basic)
   .naive(false)
   .build();
 let playing = true;
-let showFps = true;
+let showFps = false;
 let rafId = null;
 let tickTimeout = null;
 
@@ -307,10 +307,6 @@ const [resetGridSize, setGridSize] = initializeSlider({
     ),
 });
 
-document.getElementById("grid-size").addEventListener("input", () => {
-  console.log(universe.get_size(), universe.get_density());
-});
-
 let defaultAttractionWeighting = universe.get_attraction_weighting();
 const [resetAttractionWeighting, setAttractionWeighting] = initializeSlider({
   id: "attraction-weighting",
@@ -510,6 +506,21 @@ numberOfBoidsLimiter.addEventListener("change", (e) => {
   } else {
     unlimitedNumberOfBoidsInitializer();
   }
+});
+
+initializeSlider({
+  id: "boids-per-thread",
+  min: 1,
+  max: 4000,
+  defaultValueCallback: () => 200,
+  logarithmic: true,
+  func: (x) => universe.set_boids_per_thread(x),
+});
+
+const showFpsInput = document.getElementById("show-fps");
+showFpsInput.checked = false;
+showFpsInput.addEventListener("change", (e) => {
+  showFps = e.target.checked;
 });
 
 play();
