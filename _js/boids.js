@@ -215,7 +215,7 @@ document.querySelectorAll("input[type='range']").forEach((slider) => {
   slider.style.setProperty("--progress", `${pct}%`);
 });
 
-function initialiseSlider({
+function initializeSlider({
   id,
   min,
   max,
@@ -261,7 +261,7 @@ function initialiseSlider({
   resetSlider();
 }
 
-initialiseSlider({
+initializeSlider({
   id: "number-of-boids",
   min: 1,
   max: 4000,
