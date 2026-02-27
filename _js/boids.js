@@ -221,45 +221,54 @@ const unLog = (value, min, max) => {
   return Math.exp(logMin + value * (logMax - logMin));
 };
 
-function setupSlider() {
-  const numberOfBoidsInput = document.getElementById("number-of-boids");
-  const numberOfBoidsOutput = document.querySelector(
-    "output[for='number-of-boids']",
-  );
-  const numberOfBoidsDatalist = document.getElementById(
-    "number-of-boids-values",
-  );
-  const snapPoints = [1, 2, 3, 4, 5, 500];
+function initialiseSlider({
+  id,
+  min,
+  max,
+  defaultValue,
+  logarithmic,
+  numberOfDecimals = 0,
+  snapPoints,
+  func,
+}) {
+  const input = document.getElementById(id);
+  const output = document.querySelector(`output[for='${id}']`);
+  const datalist = document.getElementById(`${id}-values`);
 
   snapPoints.forEach((n) => {
     const option = document.createElement("option");
-    option.value = Math.log(n) / Math.log(4000);
+    option.value = logarithmic ? Math.log(n) / Math.log(max) : n;
     option.label = n;
-    numberOfBoidsDatalist.appendChild(option);
-  });
-  numberOfBoidsInput.addEventListener("input", () => {
-    const actual = unLog(numberOfBoidsInput.value, 1, 4000);
-    numberOfBoidsOutput.value = actual.toFixed(0);
-    universe.set_number_of_boids(actual);
+    datalist.appendChild(option);
   });
 
-  let numberOfBoidsDefault = universe.get_number_of_boids();
-  numberOfBoidsInput.addEventListener("dblclick", () => {
-    numberOfBoidsInput.value = Math.log(numberOfBoidsDefault) / Math.log(4000);
-    numberOfBoidsOutput.value = unLog(
-      Math.log(numberOfBoidsDefault) / Math.log(4000),
-      1,
-      4000,
-    ).toFixed(0);
+  input.addEventListener("input", () => {
+    const actual = logarithmic ? unLog(input.value, min, max) : input.value;
+    output.value = actual.toFixed(numberOfDecimals);
+    func(actual);
   });
-  numberOfBoidsInput.value = Math.log(numberOfBoidsDefault) / Math.log(4000);
-  numberOfBoidsOutput.value = unLog(
-    Math.log(numberOfBoidsDefault) / Math.log(4000),
-    1,
-    4000,
-  ).toFixed(0);
+
+  function resetSlider() {
+    input.value = Math.log(defaultValue) / Math.log(max);
+    output.value = unLog(
+      Math.log(defaultValue) / Math.log(max),
+      min,
+      max,
+    ).toFixed(numberOfDecimals);
+  }
+
+  input.addEventListener("dblclick", resetSlider);
+  resetSlider();
 }
 
-setupSlider();
+initialiseSlider({
+  id: "number-of-boids",
+  min: 1,
+  max: 4000,
+  defaultValue: 500,
+  logarithmic: true,
+  snapPoints: [1, 2, 3, 4, 5, 500],
+  func: universe.set_number_of_boids,
+});
 
 play();
