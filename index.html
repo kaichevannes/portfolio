@@ -8,20 +8,11 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/utilities.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="stylesheet" href="/_css/base.css" />
+    <link rel="stylesheet" href="/_css/components.css" />
+    <link rel="stylesheet" href="/_css/utilities.css" />
 
-    <link rel="preload" as="image" href="/assets/images/meditation.webp" />
-
-    <link rel="modulepreload" href="/assets/wasm/wasm_boids.js" />
-    <link
-      rel="preload"
-      href="/assets/wasm/wasm_boids.wasm"
-      as="fetch"
-      crossorigin
-    />
+    <link rel="preload" as="image" href="/_assets/images/meditation.webp" />
 
     <script>
       if (
@@ -61,17 +52,17 @@
               class="header__lightbulb-inner light-mode-only"
               style="color: var(--color-highlight)"
             >
-              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/_assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <!-- Dark mode lightbulb inner -->
             <svg
               class="header__lightbulb-inner dark-mode-only"
               style="color: transparent"
             >
-              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/_assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <svg class="header__lightbulb-outer">
-              <use href="/assets/svgs/lightbulb.svg#lightbulb" />
+              <use href="/_assets/svgs/lightbulb.svg#lightbulb" />
             </svg>
           </div>
         </div>
@@ -88,7 +79,7 @@
             onclick="setSoundMode('muted');"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/volume-2.svg#volume-2" />
+              <use href="/_assets/svgs/volume-2.svg#volume-2" />
             </svg>
             sound
           </button>
@@ -99,7 +90,7 @@
             onclick="setSoundMode('sound');"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/volume-x.svg#volume-x" />
+              <use href="/_assets/svgs/volume-x.svg#volume-x" />
             </svg>
             muted
           </button>
@@ -107,7 +98,7 @@
           <!-- Light mode button -->
           <audio
             id="sound-lightoff"
-            src="/assets/sounds/lightoff.mp3"
+            src="/_assets/sounds/lightoff.mp3"
             preload="auto"
           ></audio>
           <button
@@ -116,7 +107,7 @@
             onclick="setColorMode('dark'); playLightOff();"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/sun.svg#sun" />
+              <use href="/_assets/svgs/sun.svg#sun" />
             </svg>
             light
           </button>
@@ -124,7 +115,7 @@
           <!-- Dark mode button -->
           <audio
             id="sound-lighton"
-            src="/assets/sounds/lighton.mp3"
+            src="/_assets/sounds/lighton.mp3"
             preload="auto"
           ></audio>
           <button
@@ -133,7 +124,7 @@
             onclick="setColorMode('light'); playLightOn();"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/moon.svg#moon" />
+              <use href="/_assets/svgs/moon.svg#moon" />
             </svg>
             dark
           </button>
@@ -143,7 +134,7 @@
           onclick="openMobileDialog()"
         >
           <svg class="header__icon header__icon--mobile">
-            <use href="/assets/svgs/menu.svg#menu" />
+            <use href="/_assets/svgs/menu.svg#menu" />
           </svg>
         </button>
         <dialog id="mobile-dialog" class="header__mobile-dialog">
@@ -167,7 +158,7 @@
               <!-- Light mode button -->
               <audio
                 id="sound-lightoff"
-                src="/assets/sounds/lightoff.mp3"
+                src="/_assets/sounds/lightoff.mp3"
                 preload="auto"
               ></audio>
               <button
@@ -175,7 +166,7 @@
                 onclick="setColorMode('dark'); playLightOff();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/sun.svg#sun" />
+                  <use href="/_assets/svgs/sun.svg#sun" />
                 </svg>
                 light
               </button>
@@ -183,7 +174,7 @@
               <!-- Dark mode button -->
               <audio
                 id="sound-lighton"
-                src="/assets/sounds/lighton.mp3"
+                src="/_assets/sounds/lighton.mp3"
                 preload="auto"
               ></audio>
               <button
@@ -191,7 +182,7 @@
                 onclick="setColorMode('light'); playLightOn();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/moon.svg#moon" />
+                  <use href="/_assets/svgs/moon.svg#moon" />
                 </svg>
                 dark
               </button>
@@ -203,7 +194,7 @@
                 onclick="setSoundMode('muted');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/volume-2.svg#volume-2" />
+                  <use href="/_assets/svgs/volume-2.svg#volume-2" />
                 </svg>
                 sound
               </button>
@@ -214,7 +205,7 @@
                 onclick="setSoundMode('sound');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/volume-x.svg#volume-x" />
+                  <use href="/_assets/svgs/volume-x.svg#volume-x" />
                 </svg>
                 muted
               </button>
@@ -225,7 +216,7 @@
             onclick="closeMobileDialog()"
           >
             <svg class="header__icon header__icon--mobile">
-              <use href="/assets/svgs/x.svg#x" />
+              <use href="/_assets/svgs/x.svg#x" />
             </svg>
           </button>
         </dialog>
@@ -243,12 +234,12 @@
           </div>
           <div class="hero__image-wrapper">
             <img
-              src="/assets/images/meditation.webp"
+              src="/_assets/images/meditation.webp"
               alt="Blurred background image."
               class="hero__image hero__image--blurred"
             />
             <img
-              src="/assets/images/meditation.webp"
+              src="/_assets/images/meditation.webp"
               alt="Me sitting in lotus position on my bed in the morning sun."
               class="hero__image"
             />
@@ -300,7 +291,7 @@
               <div class="projects__project">
                 <img
                   class="projects__image"
-                  src="/assets/images/gitops.webp"
+                  src="/_assets/images/gitops.webp"
                   alt="A drawn digital image of Moby the Docker whale with the Kubernetes ship wheel logo on the front."
                 />
                 <div class="projects__details">
@@ -318,7 +309,7 @@
               <div class="projects__project">
                 <img
                   class="projects__image"
-                  src="/assets/images/boids.webp"
+                  src="/_assets/images/boids.webp"
                   alt="A drawn digital image of DiVinci's Vitruvian Man diagram with boids drawn over the top."
                 />
                 <div class="projects__details">
@@ -350,13 +341,13 @@
                 <h3 class="contact__heading">Let's talk</h3>
                 <a href="mailto:hello@kaichevannes.com" class="contact__social">
                   <svg class="contact__icon">
-                    <use href="/assets/svgs/mail.svg#mail" />
+                    <use href="/_assets/svgs/mail.svg#mail" />
                   </svg>
                   <div class="contact__text">
                     hello@kaichevannes.com
                     <svg class="contact__squiggly">
                       <use
-                        href="/assets/svgs/mail-squiggly.svg#mail-squiggly"
+                        href="/_assets/svgs/mail-squiggly.svg#mail-squiggly"
                       />
                     </svg>
                   </div>
@@ -424,19 +415,19 @@
         <div class="footer__icons">
           <a href="https://wave.webaim.org/" class="footer__link">
             <svg class="footer__icon footer__icon--wave">
-              <use href="/assets/svgs/wave.svg#wave" />
+              <use href="/_assets/svgs/wave.svg#wave" />
             </svg>
             Wave
           </a>
           <a href="https://www.deque.com/" class="footer__link">
             <svg class="footer__icon footer__icon--axe">
-              <use href="/assets/svgs/axe.svg#axe" />
+              <use href="/_assets/svgs/axe.svg#axe" />
             </svg>
             Axe Deque
           </a>
           <a href="https://accessibilityinsights.io/" class="footer__link">
             <svg class="footer__icon">
-              <use href="/assets/svgs/a11yinsights.svg#a11yinsights" />
+              <use href="/_assets/svgs/a11yinsights.svg#a11yinsights" />
             </svg>
             A11y Insights
           </a>
@@ -447,13 +438,13 @@
             class="footer__link"
           >
             <svg class="footer__icon">
-              <use href="/assets/svgs/linkedin.svg#linkedin" />
+              <use href="/_assets/svgs/linkedin.svg#linkedin" />
             </svg>
             LinkedIn
           </a>
           <a href="https://github.com/kaichevannes" class="footer__link">
             <svg class="footer__icon footer__icon--github">
-              <use href="/assets/svgs/github.svg#github" />
+              <use href="/_assets/svgs/github.svg#github" />
             </svg>
             GitHub
           </a>
@@ -461,70 +452,6 @@
       </footer>
     </div>
 
-    <script>
-      const mobileDialog = document.querySelector("#mobile-dialog");
-
-      mobileDialog.addEventListener("click", (e) => {
-        if (e.target === mobileDialog) {
-          mobileDialog.close();
-        }
-      });
-
-      function openMobileDialog() {
-        mobileDialog.showModal();
-      }
-
-      function closeMobileDialog() {
-        mobileDialog.close();
-      }
-
-      function setColorMode(mode) {
-        document.documentElement.setAttribute("color-mode", mode);
-        localStorage.setItem("color-mode", mode);
-
-        const lightButton = document.querySelector(
-          ".header__button.light-mode-only",
-        );
-        const darkButton = document.querySelector(
-          ".header__button.dark-mode-only",
-        );
-
-        lightButton.classList.remove("slide-in");
-        darkButton.classList.remove("slide-in");
-      }
-
-      function setSoundMode(mode) {
-        document.documentElement.setAttribute("sound-mode", mode);
-        localStorage.setItem("sound-mode", mode);
-
-        const soundButton = document.querySelector(
-          ".header__button.sound-on-only",
-        );
-        const mutedButton = document.querySelector(
-          ".header__button.sound-muted-only",
-        );
-
-        soundButton.classList.remove("slide-in");
-        mutedButton.classList.remove("slide-in");
-      }
-
-      const lightOnAudio = document.getElementById("sound-lighton");
-      function playLightOn() {
-        if (document.documentElement.getAttribute("sound-mode") === "muted")
-          return;
-
-        lightOnAudio.currentTime = 0;
-        lightOnAudio.play();
-      }
-
-      const lightOffAudio = document.getElementById("sound-lightoff");
-      function playLightOff() {
-        if (document.documentElement.getAttribute("sound-mode") === "muted")
-          return;
-
-        lightOffAudio.currentTime = 0;
-        lightOffAudio.play();
-      }
-    </script>
+    <script src="_js/main.js"></script>
   </body>
 </html>

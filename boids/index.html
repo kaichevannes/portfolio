@@ -8,11 +8,9 @@
 
     <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/utilities.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
-    <link rel="stylesheet" href="/css/project.css" />
+    <link rel="stylesheet" href="/_css/base.css" />
+    <link rel="stylesheet" href="/_css/components.css" />
+    <link rel="stylesheet" href="/_css/utilities.css" />
 
     <script>
       if (
@@ -53,17 +51,17 @@
               class="header__lightbulb-inner light-mode-only"
               style="color: var(--color-highlight)"
             >
-              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/_assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <!-- Dark mode lightbulb inner -->
             <svg
               class="header__lightbulb-inner dark-mode-only"
               style="color: transparent"
             >
-              <use href="/assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
+              <use href="/_assets/svgs/lightbulb-inner.svg#lightbulb-inner" />
             </svg>
             <svg class="header__lightbulb-outer">
-              <use href="/assets/svgs/lightbulb.svg#lightbulb" />
+              <use href="/_assets/svgs/lightbulb.svg#lightbulb" />
             </svg>
           </div>
         </div>
@@ -80,7 +78,7 @@
             onclick="setSoundMode('muted');"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/volume-2.svg#volume-2" />
+              <use href="/_assets/svgs/volume-2.svg#volume-2" />
             </svg>
             sound
           </button>
@@ -91,7 +89,7 @@
             onclick="setSoundMode('sound');"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/volume-x.svg#volume-x" />
+              <use href="/_assets/svgs/volume-x.svg#volume-x" />
             </svg>
             muted
           </button>
@@ -99,7 +97,7 @@
           <!-- Light mode button -->
           <audio
             id="sound-lightoff"
-            src="/assets/sounds/lightoff.mp3"
+            src="/_assets/sounds/lightoff.mp3"
             preload="auto"
           ></audio>
           <button
@@ -108,7 +106,7 @@
             onclick="setColorMode('dark'); playLightOff();"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/sun.svg#sun" />
+              <use href="/_assets/svgs/sun.svg#sun" />
             </svg>
             light
           </button>
@@ -116,7 +114,7 @@
           <!-- Dark mode button -->
           <audio
             id="sound-lighton"
-            src="/assets/sounds/lighton.mp3"
+            src="/_assets/sounds/lighton.mp3"
             preload="auto"
           ></audio>
           <button
@@ -125,7 +123,7 @@
             onclick="setColorMode('light'); playLightOn();"
           >
             <svg class="header__icon">
-              <use href="/assets/svgs/moon.svg#moon" />
+              <use href="/_assets/svgs/moon.svg#moon" />
             </svg>
             dark
           </button>
@@ -135,7 +133,7 @@
           onclick="openMobileDialog()"
         >
           <svg class="header__icon header__icon--mobile">
-            <use href="/assets/svgs/menu.svg#menu" />
+            <use href="/_assets/svgs/menu.svg#menu" />
           </svg>
         </button>
         <dialog id="mobile-dialog" class="header__mobile-dialog">
@@ -159,7 +157,7 @@
               <!-- Light mode button -->
               <audio
                 id="sound-lightoff"
-                src="/assets/sounds/lightoff.mp3"
+                src="/_assets/sounds/lightoff.mp3"
                 preload="auto"
               ></audio>
               <button
@@ -167,7 +165,7 @@
                 onclick="setColorMode('dark'); playLightOff();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/sun.svg#sun" />
+                  <use href="/_assets/svgs/sun.svg#sun" />
                 </svg>
                 light
               </button>
@@ -175,7 +173,7 @@
               <!-- Dark mode button -->
               <audio
                 id="sound-lighton"
-                src="/assets/sounds/lighton.mp3"
+                src="/_assets/sounds/lighton.mp3"
                 preload="auto"
               ></audio>
               <button
@@ -183,7 +181,7 @@
                 onclick="setColorMode('light'); playLightOn();"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/moon.svg#moon" />
+                  <use href="/_assets/svgs/moon.svg#moon" />
                 </svg>
                 dark
               </button>
@@ -195,7 +193,7 @@
                 onclick="setSoundMode('muted');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/volume-2.svg#volume-2" />
+                  <use href="/_assets/svgs/volume-2.svg#volume-2" />
                 </svg>
                 sound
               </button>
@@ -206,7 +204,7 @@
                 onclick="setSoundMode('sound');"
               >
                 <svg class="header__icon header__icon--mobile">
-                  <use href="/assets/svgs/volume-x.svg#volume-x" />
+                  <use href="/_assets/svgs/volume-x.svg#volume-x" />
                 </svg>
                 muted
               </button>
@@ -217,7 +215,7 @@
             onclick="closeMobileDialog()"
           >
             <svg class="header__icon header__icon--mobile">
-              <use href="/assets/svgs/x.svg#x" />
+              <use href="/_assets/svgs/x.svg#x" />
             </svg>
           </button>
         </dialog>
@@ -236,25 +234,25 @@
             <div class="project__tech">
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="/assets/svgs/rust.svg#rust" />
+                  <use href="/_assets/svgs/rust.svg#rust" />
                 </svg>
                 <p class="project__tech-text">Rust</p>
               </div>
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="/assets/svgs/webassembly.svg#webassembly" />
+                  <use href="/_assets/svgs/webassembly.svg#webassembly" />
                 </svg>
                 <p class="project__tech-text">WebAssembly</p>
               </div>
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="/assets/svgs/vite.svg#vite" />
+                  <use href="/_assets/svgs/vite.svg#vite" />
                 </svg>
                 <p class="project__tech-text">Vite</p>
               </div>
               <div class="project__tech-entry">
                 <svg class="project__icon">
-                  <use href="/assets/svgs/cssmodules.svg#cssmodules" />
+                  <use href="/_assets/svgs/cssmodules.svg#cssmodules" />
                 </svg>
                 <p class="project__tech-text">CSS Modules</p>
               </div>
@@ -274,7 +272,7 @@
               class="project__video-button project__video-button--boids playing-only"
             >
               <svg class="project__video-button-icon">
-                <use href="/assets/svgs/pause.svg#pause" />
+                <use href="/_assets/svgs/pause.svg#pause" />
               </svg>
             </button>
             <button
@@ -282,35 +280,35 @@
               class="project__video-button project__video-button--boids paused-only"
             >
               <svg class="project__video-button-icon">
-                <use href="/assets/svgs/play.svg#play" />
+                <use href="/_assets/svgs/play.svg#play" />
               </svg>
             </button>
           </div>
           <div class="boids__tabs">
             <!-- Tab List -->
-            <div role="tablist">
+            <div role="tablist" class="boids__tablist">
               <button
                 role="tab"
                 id="basic-tab"
+                class="boids__tab"
+                aria-selected="true"
                 aria-controls="basic-controls"
                 tabindex="0"
               >
                 Basic
               </button>
-            </div>
-
-            <div>test</div>
-
-            <div role="tablist">
               <button
                 role="tab"
                 id="advanced-tab"
+                class="boids__tab"
                 aria-controls="advanced-controls"
                 tabindex="0"
               >
                 Advanced
               </button>
+              <div class="boids__tab-decoration"></div>
             </div>
+
             <!-- Tab Panels -->
             <div
               role="tabpanel"
@@ -318,13 +316,39 @@
               class="boids__controls"
               aria-labelledby="basic-tab"
             >
-              Content for tab one
+              <div class="boids__control">
+                <label class="boids__control-label" for="number-of-boids"
+                  >Number of Boids</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="number-of-boids"
+                ></output>
+                <input
+                  id="number-of-boids"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="100"
+                  step="0.1"
+                  list="number-of-boids-values"
+                />
+                <datalist id="number-of-boids-values">
+                  <option value="1"></option>
+                  <option value="100"></option>
+                  <option value="500"></option>
+                  <option value="1000"></option>
+                  <option value="2000"></option>
+                  <option value="4000"></option>
+                </datalist>
+              </div>
             </div>
             <div
               role="tabpanel"
               id="advanced-controls"
               class="boids__controls"
               aria-labelledby="basic-tab"
+              hidden
             >
               Content for tab two
             </div>
@@ -334,7 +358,7 @@
           <h2 class="project__section-title">Preface</h2>
         </section>
         <svg class="project__icon--bleed">
-          <use href="/assets/svgs/preface-squiggly.svg#preface-squiggly" />
+          <use href="/_assets/svgs/preface-squiggly.svg#preface-squiggly" />
         </svg>
         <section class="project__section">
           <h2 class="project__section-title">Summary</h2>
@@ -465,7 +489,7 @@
           <figure class="full-bleed">
             <img
               class="project__section-image"
-              src="/assets/images/violin-1000.webp"
+              src="/_assets/images/violin-1000.webp"
               alt="A violin graph with the average time in milliseconds on the x-axis and the minimum number of boids per thread on the y-axis. Values are shown as ranges of uncertainty."
             />
             <figcaption class="project__caption">
@@ -478,7 +502,7 @@
           <figure class="full-bleed">
             <img
               class="project__section-image"
-              src="/assets/images/strategy-comparison.webp"
+              src="/_assets/images/strategy-comparison.webp"
               alt="A line graph with four lines on it labelled as naive, naive_mt (multithreaded naive), tiled, tiled_mt (multithreaded tiled). The number of boids in the simulation is on the x-axis and the average time in seconds is on the y-axis."
             />
             <figcaption class="project__caption">
@@ -607,7 +631,7 @@
         </section>
         <svg class="project__icon--bleed">
           <use
-            href="/assets/svgs/postscript-squiggly.svg#postscript-squiggly"
+            href="/_assets/svgs/postscript-squiggly.svg#postscript-squiggly"
           />
         </svg>
         <section class="project__section">
@@ -633,19 +657,19 @@
         <div class="footer__icons">
           <a href="https://wave.webaim.org/" class="footer__link">
             <svg class="footer__icon footer__icon--wave">
-              <use href="/assets/svgs/wave.svg#wave" />
+              <use href="/_assets/svgs/wave.svg#wave" />
             </svg>
             Wave
           </a>
           <a href="https://www.deque.com/" class="footer__link">
             <svg class="footer__icon footer__icon--axe">
-              <use href="/assets/svgs/axe.svg#axe" />
+              <use href="/_assets/svgs/axe.svg#axe" />
             </svg>
             Axe Deque
           </a>
           <a href="https://accessibilityinsights.io/" class="footer__link">
             <svg class="footer__icon">
-              <use href="/assets/svgs/a11yinsights.svg#a11yinsights" />
+              <use href="/_assets/svgs/a11yinsights.svg#a11yinsights" />
             </svg>
             A11y Insights
           </a>
@@ -656,13 +680,13 @@
             class="footer__link"
           >
             <svg class="footer__icon">
-              <use href="/assets/svgs/linkedin.svg#linkedin" />
+              <use href="/_assets/svgs/linkedin.svg#linkedin" />
             </svg>
             LinkedIn
           </a>
           <a href="https://github.com/kaichevannes" class="footer__link">
             <svg class="footer__icon footer__icon--github">
-              <use href="/assets/svgs/github.svg#github" />
+              <use href="/_assets/svgs/github.svg#github" />
             </svg>
             GitHub
           </a>
@@ -670,293 +694,55 @@
       </footer>
     </div>
 
-    <script type="module">
-      import init, * as wasm from "../assets/wasm/wasm_boids.js";
-
-      const wasmInstance = await init();
-      await wasm.initThreadPool(navigator.hardwareConcurrency);
-      wasm.init_panic_hook();
-      const universe = wasm.Builder.from_preset(wasm.Preset.Basic)
-        .number_of_boids(500)
-        .multithreaded(true)
-        .number_of_boids_per_thread(200)
-        .build();
-      let playing = true;
-      let showFps = true;
-
-      let rafId = null;
-      let tickTimeout = null;
-
-      function tickLoop() {
-        if (!playing) return;
-        universe.tick();
-        tickTimeout = setTimeout(tickLoop, 0);
-      }
-
-      function play() {
-        playing = true;
-        if (tickTimeout === null) {
-          tickLoop();
-        }
-        if (rafId === null) {
-          rafId = requestAnimationFrame(render);
-        }
-      }
-
-      function pause() {
-        playing = false;
-        if (rafId !== null) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-        if (tickTimeout !== null) {
-          clearTimeout(tickTimeout);
-          tickTimeout = null;
-        }
-      }
-
-      const playButton = document.getElementById("play-button");
-      const pauseButton = document.getElementById("pause-button");
-      const canvas = document.getElementById("boids-canvas");
-
-      playButton.addEventListener("click", () => {
-        play();
-        document.documentElement.setAttribute("playing-mode", "playing");
-      });
-
-      pauseButton.addEventListener("click", () => {
-        pause();
-        document.documentElement.setAttribute("playing-mode", "paused");
-      });
-
-      let eventCausedPause = false;
-
-      function eventPlay() {
-        if (eventCausedPause) {
-          play();
-          eventCausedPause = false;
-        }
-      }
-
-      function eventPause() {
-        if (playing) {
-          pause();
-          eventCausedPause = true;
-        }
-      }
-
-      document.addEventListener("visibilitychange", () => {
-        if (document.visibilityState === "visible") {
-          eventPlay();
-        } else {
-          eventPause();
-        }
-      });
-
-      const observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-
-          if (entry.isIntersecting) {
-            eventPlay();
-          } else {
-            eventPause();
-          }
-        },
-        {
-          root: null,
-          threshold: 0.3,
-        },
-      );
-      observer.observe(canvas);
-
-      let lastFrameTime = performance.now();
-
-      function render(timestamp) {
-        const FLOATS_PER_BOID = 6;
-        const boidsPtr = universe.get_boids_pointer();
-        const numBoids = universe.get_number_of_boids();
-        const data = new Float32Array(
-          wasmInstance.memory.buffer,
-          boidsPtr,
-          numBoids * FLOATS_PER_BOID,
-        );
-        let boids = [];
-        for (let i = 0; i < numBoids; i++) {
-          const offset = i * FLOATS_PER_BOID;
-
-          const boid = {
-            x: data[offset],
-            y: data[offset + 1],
-            vx: data[offset + 2],
-            vy: data[offset + 3],
-          };
-
-          boids.push(boid);
-        }
-
-        const width = canvas.width;
-        const height = canvas.height;
-        const ctx = canvas.getContext("2d");
-
-        if (!ctx) {
-          return;
-        }
-
-        ctx.clearRect(0, 0, width, height);
-        ctx.fillStyle = getComputedStyle(document.documentElement)
-          .getPropertyValue("--color-background")
-          .trim();
-        ctx.fillRect(0, 0, width, height);
-        ctx.fillStyle = getComputedStyle(document.documentElement)
-          .getPropertyValue("--color-text")
-          .trim();
-
-        const universeSize = universe.get_size();
-        const triangleSize = width / 100;
-        boids.forEach((b) => {
-          let x = (b.x / universeSize) * width;
-          let y = (b.y / universeSize) * height;
-          const angle = Math.atan2(b.vy, b.vx);
-
-          ctx.setTransform(
-            Math.cos(angle),
-            Math.sin(angle),
-            -Math.sin(angle),
-            Math.cos(angle),
-            x,
-            y,
-          );
-
-          ctx.beginPath();
-          ctx.moveTo(triangleSize, 0);
-          ctx.lineTo(-triangleSize, triangleSize);
-          ctx.lineTo(-triangleSize, -triangleSize);
-          ctx.closePath();
-          ctx.fill();
-        });
-        ctx.setTransform(1, 0, 0, 1, 0, 0);
-
-        if (showFps) {
-          const delta = timestamp - lastFrameTime;
-          const instantaneous_fps = 1000 / delta;
-          ctx.fillStyle = getComputedStyle(document.documentElement)
-            .getPropertyValue("--color-primary")
-            .trim();
-          ctx.font = "20px monospace";
-          ctx.fillText(`FPS: ${Math.trunc(instantaneous_fps)}`, width - 94, 20);
-          lastFrameTime = performance.now();
-        }
-
-        if (playing) {
-          rafId = requestAnimationFrame(render);
-        }
-      }
-
-      play();
-    </script>
+    <script type="module" src="/_js/boids.js" defer></script>
+    <script src="/_js/main.js"></script>
 
     <script>
-      document.querySelectorAll(".tooltip").forEach((timeout) => {
-        let cleanupTimer = null;
+      const tabs = document.querySelectorAll('[role="tab"]');
 
-        timeout.addEventListener("mouseenter", () => {
-          clearTimeout(cleanupTimer);
+      tabs.forEach((tab) => {
+        tab.addEventListener("click", () => {
+          // Deactivate all
+          tabs.forEach((t) => {
+            t.setAttribute("aria-selected", "false");
+            t.setAttribute("tabindex", "-1");
+          });
+          document
+            .querySelectorAll('[role="tabpanel"]')
+            .forEach((p) => (p.hidden = true));
 
-          const text = timeout.querySelector(".tooltiptext");
-          if (!text) return;
-
-          const triggerRect = timeout.getBoundingClientRect();
-          const tooltipWidth = text.offsetWidth; // works since visibility:hidden keeps it in layout
-          const pad = 8;
-
-          const naturalLeft =
-            triggerRect.left + triggerRect.width / 2 - tooltipWidth / 2;
-          const naturalRight = naturalLeft + tooltipWidth;
-
-          let shift = 0;
-          if (naturalLeft < pad) {
-            shift = pad - naturalLeft;
-          } else if (naturalRight > window.innerWidth - pad) {
-            shift = window.innerWidth - pad - naturalRight;
-          }
-
-          timeout.style.setProperty(
-            "--tooltip-shift",
-            `${Math.round(shift)}px`,
-          );
-        });
-
-        timeout.addEventListener("mouseleave", () => {
-          cleanupTimer = setTimeout(() => {
-            timeout.style.removeProperty("--tooltip-shift");
-          }, 600);
+          // Activate clicked tab
+          tab.setAttribute("aria-selected", "true");
+          tab.setAttribute("tabindex", "0");
+          document.getElementById(tab.getAttribute("aria-controls")).hidden =
+            false;
         });
       });
 
-      const mobileDialog = document.querySelector("#mobile-dialog");
+      document.querySelectorAll(".boids__control").forEach((control) => {
+        const slider = control.querySelector("input[type='range']");
+        const output = control.querySelector("output");
+        const logMin = Math.log(1);
+        const logMax = Math.log(4000);
 
-      mobileDialog.addEventListener("click", (e) => {
-        if (e.target === mobileDialog) {
-          mobileDialog.close();
-        }
+        const toLog = (value) =>
+          Math.exp(logMin + ((logMax - logMin) * (value - 1)) / (4000 - 1));
+
+        slider.addEventListener("input", () => {
+          output.value = toLog(slider.value).toFixed(2);
+        });
+        output.value = toLog(slider.value).toFixed(2);
+
+        slider.addEventListener("input", () => {
+          const pct =
+            ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+          slider.style.setProperty("--progress", `${pct}%`);
+        });
+
+        const pct =
+          ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+        slider.style.setProperty("--progress", `${pct}%`);
       });
-
-      function openMobileDialog() {
-        mobileDialog.showModal();
-      }
-
-      function closeMobileDialog() {
-        mobileDialog.close();
-      }
-
-      function setColorMode(mode) {
-        document.documentElement.setAttribute("color-mode", mode);
-        localStorage.setItem("color-mode", mode);
-
-        const lightButton = document.querySelector(
-          ".header__button.light-mode-only",
-        );
-        const darkButton = document.querySelector(
-          ".header__button.dark-mode-only",
-        );
-
-        lightButton.classList.remove("slide-in");
-        darkButton.classList.remove("slide-in");
-      }
-
-      function setSoundMode(mode) {
-        document.documentElement.setAttribute("sound-mode", mode);
-        localStorage.setItem("sound-mode", mode);
-
-        const soundButton = document.querySelector(
-          ".header__button.sound-on-only",
-        );
-        const mutedButton = document.querySelector(
-          ".header__button.sound-muted-only",
-        );
-
-        soundButton.classList.remove("slide-in");
-        mutedButton.classList.remove("slide-in");
-      }
-
-      const lightOnAudio = document.getElementById("sound-lighton");
-      function playLightOn() {
-        if (document.documentElement.getAttribute("sound-mode") === "muted")
-          return;
-
-        lightOnAudio.currentTime = 0;
-        lightOnAudio.play();
-      }
-
-      const lightOffAudio = document.getElementById("sound-lightoff");
-      function playLightOff() {
-        if (document.documentElement.getAttribute("sound-mode") === "muted")
-          return;
-
-        lightOffAudio.currentTime = 0;
-        lightOffAudio.play();
-      }
     </script>
   </body>
 </html>
