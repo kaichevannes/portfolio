@@ -1024,6 +1024,13 @@
     "input input";
 }
 
+.boids__control--preset {
+  @media (max-width: calc(600 / 16 * 1rem)) {
+    order: -1;
+    margin-bottom: 4px;
+  }
+}
+
 .boids__control-label {
   grid-area: label;
 }
@@ -1104,6 +1111,15 @@
   &:active {
     cursor: grabbing;
   }
+}
+
+.boids__control-input--dropdown {
+  grid-area: output;
+  background: var(--color-background);
+  color: var(--color-text);
+  border: 1px solid var(--color-text);
+  border-radius: 4px;
+  padding: 0px 8px;
 }
 
 .footer {

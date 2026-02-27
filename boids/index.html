@@ -330,10 +330,184 @@
                   type="range"
                   min="0"
                   max="1"
-                  step="any"
+                  step="0.01"
                   list="number-of-boids-values"
                 />
                 <datalist id="number-of-boids-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="density"
+                  >Density</label
+                >
+                <output class="boids__control-output" for="density"></output>
+                <input
+                  id="density"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="density-values"
+                />
+                <datalist id="density-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="attraction-weighting"
+                  >Attraction Weighting</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="attraction-weighting"
+                ></output>
+                <input
+                  id="attraction-weighting"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="any"
+                  list="attraction-weighting-values"
+                />
+                <datalist id="attraction-weighting-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="attraction-radius"
+                  >Attraction Radius</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="attraction-radius"
+                ></output>
+                <input
+                  id="attraction-radius"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="attraction-radius-values"
+                />
+                <datalist id="attraction-radius-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="alignment-weighting"
+                  >Alignment Weighting</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="alignment-weighting"
+                ></output>
+                <input
+                  id="alignment-weighting"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="alignment-weighting-values"
+                />
+                <datalist id="alignment-weighting-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="alignment-radius"
+                  >Alignment Radius</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="alignment-radius"
+                ></output>
+                <input
+                  id="alignment-radius"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="alignment-radius-values"
+                />
+                <datalist id="alignment-radius-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="separation-weighting"
+                  >Separation Weighting</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="separation-weighting"
+                ></output>
+                <input
+                  id="separation-weighting"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="separation-weighting-values"
+                />
+                <datalist id="separation-weighting-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="separation-radius"
+                  >Separation Radius</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="separation-radius"
+                ></output>
+                <input
+                  id="separation-radius"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="separation-radius-values"
+                />
+                <datalist id="separation-radius-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="maximum-velocity"
+                  >Maximum Velocity</label
+                >
+                <output
+                  class="boids__control-output"
+                  for="maximum-velocity"
+                ></output>
+                <input
+                  id="maximum-velocity"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="maximum-velocity-values"
+                />
+                <datalist id="maximum-velocity-values"></datalist>
+              </div>
+              <div class="boids__control">
+                <label class="boids__control-label" for="noise">Noise</label>
+                <output class="boids__control-output" for="noise"></output>
+                <input
+                  id="noise"
+                  class="boids__control-input boids__control-input--slider"
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  list="noise-values"
+                />
+                <datalist id="noise-values"></datalist>
+              </div>
+              <div class="boids__control boids__control--preset">
+                <label class="boids__control-label" for="preset">Preset</label>
+                <select
+                  id="preset"
+                  class="boids__control-input boids__control-input--dropdown"
+                >
+                  <option value="basic" selected>Basic</option>
+                  <option value="maruyama">Maruyama</option>
+                  <option value="zhang">Zhang</option>
+                </select>
               </div>
             </div>
             <div
