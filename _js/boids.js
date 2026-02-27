@@ -205,28 +205,6 @@ tabs.forEach((tab) => {
   });
 });
 
-const unLog = (value, min, max) => {
-  const logMin = Math.log(min);
-  const logMax = Math.log(max);
-  return Math.exp(logMin + value * (logMax - logMin));
-};
-
-const numberOfBoidsInput = document.getElementById("number-of-boids");
-const numberOfBoidsOutput = document.querySelector(
-  "output[for='number-of-boids']",
-);
-numberOfBoidsInput.addEventListener("input", () => {
-  const actual = unLog(numberOfBoidsInput.value, 1, 4000);
-  numberOfBoidsOutput.value = actual.toFixed(0);
-  universe.set_number_of_boids(actual);
-});
-numberOfBoidsInput.value = Math.log(500) / Math.log(4000);
-numberOfBoidsOutput.value = unLog(
-  Math.log(500) / Math.log(4000),
-  1,
-  4000,
-).toFixed(0);
-
 // Add progress custom css selector to style slider left side on chrome
 document.querySelectorAll("input[type='range']").forEach((slider) => {
   slider.addEventListener("input", () => {
@@ -236,5 +214,52 @@ document.querySelectorAll("input[type='range']").forEach((slider) => {
   const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
   slider.style.setProperty("--progress", `${pct}%`);
 });
+
+const unLog = (value, min, max) => {
+  const logMin = Math.log(min);
+  const logMax = Math.log(max);
+  return Math.exp(logMin + value * (logMax - logMin));
+};
+
+function setupSlider() {
+  const numberOfBoidsInput = document.getElementById("number-of-boids");
+  const numberOfBoidsOutput = document.querySelector(
+    "output[for='number-of-boids']",
+  );
+  const numberOfBoidsDatalist = document.getElementById(
+    "number-of-boids-values",
+  );
+  const snapPoints = [1, 2, 3, 4, 5, 500];
+
+  snapPoints.forEach((n) => {
+    const option = document.createElement("option");
+    option.value = Math.log(n) / Math.log(4000);
+    option.label = n;
+    numberOfBoidsDatalist.appendChild(option);
+  });
+  numberOfBoidsInput.addEventListener("input", () => {
+    const actual = unLog(numberOfBoidsInput.value, 1, 4000);
+    numberOfBoidsOutput.value = actual.toFixed(0);
+    universe.set_number_of_boids(actual);
+  });
+
+  let numberOfBoidsDefault = universe.get_number_of_boids();
+  numberOfBoidsInput.addEventListener("dblclick", () => {
+    numberOfBoidsInput.value = Math.log(numberOfBoidsDefault) / Math.log(4000);
+    numberOfBoidsOutput.value = unLog(
+      Math.log(numberOfBoidsDefault) / Math.log(4000),
+      1,
+      4000,
+    ).toFixed(0);
+  });
+  numberOfBoidsInput.value = Math.log(numberOfBoidsDefault) / Math.log(4000);
+  numberOfBoidsOutput.value = unLog(
+    Math.log(numberOfBoidsDefault) / Math.log(4000),
+    1,
+    4000,
+  ).toFixed(0);
+}
+
+setupSlider();
 
 play();
