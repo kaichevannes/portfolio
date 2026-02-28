@@ -1017,6 +1017,7 @@
 }
 
 .boids__control {
+  min-height: 32px;
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-areas:
@@ -1130,8 +1131,6 @@
 .boids__control-input--checkbox {
   width: 18px;
   height: 18px;
-  /* margin-top: auto; */
-  /* margin-bottom: auto; */
   margin-top: 6px;
   accent-color: var(--color-text);
 }

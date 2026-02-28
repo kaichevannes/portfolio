@@ -229,6 +229,10 @@ function initializeSlider({
   const output = document.querySelector(`output[for='${id}']`);
   const datalist = document.getElementById(`${id}-values`);
 
+  if (min === 0 && logarithmic) {
+    min = 0.001;
+  }
+
   const actualToLog = (value) => {
     const logMin = Math.log(min);
     const logMax = Math.log(max);
@@ -245,6 +249,19 @@ function initializeSlider({
     const actual = logarithmic ? logToActual(input.value) : Number(input.value);
     output.value = actual.toFixed(numberOfDecimals);
     func(actual);
+  });
+
+  input.addEventListener("keydown", (e) => {
+    const step = 0.01;
+    let val = parseFloat(input.value);
+    if (e.key === "ArrowUp" || e.key === "ArrowRight") {
+      input.value = Math.min(val + step, parseFloat(input.max));
+      e.preventDefault();
+    } else if (e.key === "ArrowDown" || e.key === "ArrowLeft") {
+      input.value = Math.max(val - step, parseFloat(input.min));
+      e.preventDefault();
+    }
+    input.dispatchEvent(new Event("input", { bubbles: true }));
   });
 
   snapPoints.forEach((n) => {
@@ -326,6 +343,7 @@ const [resetAttractionRadius, setAttractionRadius] = initializeSlider({
   defaultValueCallback: () => defaultAttractionRadius,
   logarithmic: true,
   numberOfDecimals: 2,
+  snapPoints: [3],
   func: (x) => universe.set_attraction_radius(x),
 });
 
@@ -348,6 +366,7 @@ const [resetAlignmentRadius, setAlignmentRadius] = initializeSlider({
   defaultValueCallback: () => defaultAlignmentRadius,
   logarithmic: true,
   numberOfDecimals: 2,
+  snapPoints: [3],
   func: (x) => universe.set_alignment_radius(x),
 });
 
@@ -370,6 +389,7 @@ const [resetSeparationRadius, setSeparationRadius] = initializeSlider({
   defaultValueCallback: () => defaultSeparationRadius,
   logarithmic: true,
   numberOfDecimals: 2,
+  snapPoints: [3],
   func: (x) => universe.set_seperation_radius(x),
 });
 
@@ -387,7 +407,7 @@ const [resetMaximumVelocity, setMaximumVelocity] = initializeSlider({
 let defaultNoise = universe.get_noise_fraction();
 const [resetNoise, setNoise] = initializeSlider({
   id: "noise",
-  min: 0.01,
+  min: 0,
   max: 1,
   defaultValueCallback: () => defaultNoise,
   logarithmic: true,
@@ -416,7 +436,9 @@ preset.addEventListener("change", (e) => {
       universe = wasm.Universe.build_from_preset(wasm.Preset.Basic);
       break;
     case "maruyama":
-      universe = wasm.Universe.build_from_preset(wasm.Preset.Maruyama);
+      universe = wasm.Builder.from_preset(wasm.Preset.Maruyama)
+        .number_of_boids(1500)
+        .build();
       break;
     case "zhang":
       universe = wasm.Universe.build_from_preset(wasm.Preset.Zhang);
@@ -434,7 +456,8 @@ preset.addEventListener("change", (e) => {
   defaultSeparationWeighting = universe.get_separation_weighting();
   defaultSeparationRadius = universe.get_separation_radius();
   defaultMaximumVelocity = universe.get_maximum_velocity();
-  defaultNoise = universe.get_noise_fraction();
+  defaultNoise =
+    universe.get_noise_fraction() === 0 ? 0.001 : universe.get_noise_fraction();
   resetAll();
 });
 
@@ -442,11 +465,25 @@ function randomFloat(min, max) {
   return Math.random() * (max - min) + min;
 }
 
+function randomNormalMid(min, max, mid, spread = 10) {
+  // spread: roughly controls how tight values are around mid
+  const stdDev = (max - min) / spread;
+  let val;
+  do {
+    let u = 0,
+      v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    const z = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+    val = mid + z * stdDev;
+  } while (val < min || val > max);
+  return val;
+}
 const randomize = document.getElementById("randomize");
 randomize.addEventListener("click", () => {
-  universe.set_number_of_boids(randomFloat(1, 4000));
+  universe.set_number_of_boids(randomNormalMid(1, 4000, 1500));
   universe.set_density(
-    universe.get_number_of_boids() / Math.pow(randomFloat(0.1, 200), 2),
+    universe.get_number_of_boids() / Math.pow(randomNormalMid(0.1, 200, 10), 2),
   );
   universe.set_attraction_weighting(randomFloat(0, 1));
   universe.set_attraction_radius(randomFloat(0.01, 10));
@@ -454,8 +491,8 @@ randomize.addEventListener("click", () => {
   universe.set_alignment_radius(randomFloat(0.01, 10));
   universe.set_separation_weighting(randomFloat(0, 1));
   universe.set_seperation_radius(randomFloat(0.01, 10));
-  universe.set_maximum_velocity(randomFloat(0.01, 1));
-  universe.set_noise_fraction(randomFloat(0.01, 1));
+  universe.set_maximum_velocity(randomNormalMid(0.01, 1, 0.2));
+  universe.set_noise_fraction(randomNormalMid(0.01, 1, 0.1));
 
   setNumberOfBoids(universe.get_number_of_boids());
   setGridSize(universe.get_size());
@@ -521,6 +558,14 @@ const showFpsInput = document.getElementById("show-fps");
 showFpsInput.checked = false;
 showFpsInput.addEventListener("change", (e) => {
   showFps = e.target.checked;
+});
+
+const multithreadedLabel = document.querySelector("label[for='multithreaded']");
+multithreadedLabel.textContent = `Multithreaded (${navigator.hardwareConcurrency} cores)`;
+const multithreaded = document.getElementById("multithreaded");
+multithreaded.checked = true;
+multithreaded.addEventListener("change", (e) => {
+  universe.set_multithreaded(e.target.checked);
 });
 
 play();
