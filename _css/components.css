@@ -84,20 +84,17 @@
 
 .header__title {
   transition: transform 300ms;
+  color: inherit;
+  text-decoration: none;
+  font-size: calc(32 / 16 * 1rem);
+  font-weight: var(--weight-bold);
+  white-space: nowrap;
 
   &:hover,
   &:focus {
     transition: transform 150ms;
     transform: scale(1.01);
   }
-}
-
-.header__title-anchor {
-  color: inherit;
-  text-decoration: none;
-  font-size: calc(32 / 16 * 1rem);
-  font-weight: var(--weight-bold);
-  white-space: nowrap;
 }
 
 .header__nav {
@@ -342,12 +339,14 @@
 }
 
 .hero__hello {
+  display: block;
   font-weight: var(--weight-medium);
   color: var(--color-grey900);
   font-size: calc(20 / 16 * 1rem);
 }
 
 .hero__job-role {
+  display: block;
   font-weight: var(--weight-bold);
   line-height: 1.1;
   letter-spacing: -3%;
