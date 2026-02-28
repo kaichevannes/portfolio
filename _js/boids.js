@@ -313,7 +313,7 @@ let defaultGridSize = universe.get_size();
 const [resetGridSize, setGridSize] = initializeSlider({
   id: "grid-size",
   min: 0.1,
-  max: 200,
+  max: 500,
   defaultValueCallback: () => defaultGridSize,
   logarithmic: true,
   numberOfDecimals: 2,
@@ -443,6 +443,20 @@ preset.addEventListener("change", (e) => {
     case "zhang":
       universe = wasm.Universe.build_from_preset(wasm.Preset.Zhang);
       break;
+    case "orbit":
+      universe = wasm.Builder.from_default()
+        .number_of_boids(1500)
+        .grid_size(60)
+        .attraction_weighting(50)
+        .alignment_weighting(15)
+        .separation_weighting(34)
+        .attraction_radius(7.5)
+        .alignment_radius(5.5)
+        .separation_radius(8.5)
+        .maximum_velocity(0.93)
+        .noise_fraction(0.07)
+        .build();
+      break;
     default:
       throw new Error(`Preset ${e.target.value} not found.`);
   }
@@ -481,16 +495,17 @@ function randomNormalMid(min, max, mid, spread = 10) {
 }
 const randomize = document.getElementById("randomize");
 randomize.addEventListener("click", () => {
-  universe.set_number_of_boids(randomNormalMid(1, 4000, 1500));
+  universe.set_number_of_boids(randomNormalMid(1, 4000, 1000));
   universe.set_density(
-    universe.get_number_of_boids() / Math.pow(randomNormalMid(0.1, 200, 10), 2),
+    universe.get_number_of_boids() /
+      Math.pow(randomNormalMid(0.1, 500, 10, 12), 2),
   );
-  universe.set_attraction_weighting(randomFloat(0, 1));
-  universe.set_attraction_radius(randomFloat(0.01, 10));
-  universe.set_alignment_weighting(randomFloat(0, 1));
-  universe.set_alignment_radius(randomFloat(0.01, 10));
-  universe.set_separation_weighting(randomFloat(0, 1));
-  universe.set_seperation_radius(randomFloat(0.01, 10));
+  universe.set_attraction_weighting(randomNormalMid(0, 1, 0.5, 3));
+  universe.set_alignment_weighting(randomNormalMid(0, 1, 0.5, 3));
+  universe.set_separation_weighting(randomNormalMid(0, 1, 0.5, 3));
+  universe.set_attraction_radius(randomNormalMid(0.01, 100, 15, 3));
+  universe.set_alignment_radius(randomNormalMid(0.01, 100, 15, 3));
+  universe.set_seperation_radius(randomNormalMid(0.01, 100, 15, 3));
   universe.set_maximum_velocity(randomNormalMid(0.01, 1, 0.2));
   universe.set_noise_fraction(randomNormalMid(0.01, 1, 0.1));
 

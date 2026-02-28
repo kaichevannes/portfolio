@@ -838,6 +838,7 @@
 }
 
 .project__section {
+  scroll-margin-top: 102px;
   display: grid;
   gap: 24px 32px;
   font-size: calc(20 / 16 * 1rem);
@@ -922,6 +923,7 @@
   display: grid;
   place-content: center;
   gap: 24px;
+  margin-bottom: 8px;
 }
 
 .boids__canvas {
