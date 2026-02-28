@@ -178,9 +178,10 @@
   margin-right: -16px;
   color: var(--color-grey900);
 
-  transition:
-    display 250ms allow-discrete,
-    overlay 250ms allow-discrete;
+  /* UNCOMMENT IF TRANSITION ALLOW DISCRETE IS FIXED IN IOS AND FIREFOX */
+  /* transition: */
+  /* display 250ms allow-discrete, */
+  /* overlay 250ms allow-discrete; */
 
   &:not([open]) {
     display: none;
