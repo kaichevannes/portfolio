@@ -475,10 +475,6 @@ preset.addEventListener("change", (e) => {
   resetAll();
 });
 
-function randomFloat(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
 function randomNormalMid(min, max, mid, spread = 10) {
   // spread: roughly controls how tight values are around mid
   const stdDev = (max - min) / spread;
@@ -495,17 +491,40 @@ function randomNormalMid(min, max, mid, spread = 10) {
 }
 const randomize = document.getElementById("randomize");
 randomize.addEventListener("click", () => {
-  universe.set_number_of_boids(randomNormalMid(1, 4000, 1000));
-  universe.set_density(
-    universe.get_number_of_boids() /
-      Math.pow(randomNormalMid(0.1, 500, 10, 12), 2),
-  );
-  universe.set_attraction_weighting(randomNormalMid(0, 1, 0.5, 3));
-  universe.set_alignment_weighting(randomNormalMid(0, 1, 0.5, 3));
-  universe.set_separation_weighting(randomNormalMid(0, 1, 0.5, 3));
-  universe.set_attraction_radius(randomNormalMid(0.01, 100, 15, 3));
-  universe.set_alignment_radius(randomNormalMid(0.01, 100, 15, 3));
-  universe.set_seperation_radius(randomNormalMid(0.01, 100, 15, 3));
+  const coin = Math.random();
+  if (coin < 0.6) {
+    universe.set_number_of_boids(randomNormalMid(1, 4000, 1000));
+    universe.set_density(
+      universe.get_number_of_boids() /
+        Math.pow(randomNormalMid(0.1, 500, 10, 12), 2),
+    );
+  } else {
+    universe.set_number_of_boids(randomNormalMid(900, 1100, 1000));
+    universe.set_density(
+      universe.get_number_of_boids() / Math.pow(randomNormalMid(13, 17, 15), 2),
+    );
+  }
+
+  const coin2 = Math.random();
+  if (coin2 < 0.5) {
+    universe.set_attraction_weighting(randomNormalMid(0, 1, 0.5, 3));
+    universe.set_alignment_weighting(randomNormalMid(0, 1, 0.5, 3));
+    universe.set_separation_weighting(randomNormalMid(0, 1, 0.5, 3));
+  } else {
+    universe.set_attraction_weighting(randomNormalMid(0.28, 0.38, 0.33));
+    universe.set_alignment_weighting(randomNormalMid(0.28, 0.38, 0.33));
+    universe.set_separation_weighting(randomNormalMid(0.28, 0.38, 0.33));
+  }
+  const coin3 = Math.random();
+  if (coin3 < 0.2) {
+    universe.set_attraction_radius(randomNormalMid(2.5, 3.5, 3));
+    universe.set_alignment_radius(randomNormalMid(2.5, 3.5, 3));
+    universe.set_seperation_radius(randomNormalMid(2.5, 3.5, 3));
+  } else {
+    universe.set_attraction_radius(randomNormalMid(0.01, 15, 4, 3));
+    universe.set_alignment_radius(randomNormalMid(0.01, 15, 4, 3));
+    universe.set_seperation_radius(randomNormalMid(0.01, 15, 4, 3));
+  }
   universe.set_maximum_velocity(randomNormalMid(0.01, 1, 0.2));
   universe.set_noise_fraction(randomNormalMid(0.01, 1, 0.1));
 
