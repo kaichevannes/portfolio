@@ -835,6 +835,14 @@
     opacity: 1;
     transition: opacity 200ms;
   }
+
+  @media (max-width: calc(1000 / 16 * 1rem)) {
+    margin-top: -32px;
+  }
+
+  @media (max-width: calc(600 / 16 * 1rem)) {
+    margin-top: -40px;
+  }
 }
 
 .project__caption {
@@ -924,6 +932,10 @@
   &:focus {
     transition: transform 150ms;
     transform: scale(1.01);
+  }
+
+  @media (max-width: calc(600 / 16 * 1rem)) {
+    font-size: calc(32 / 16 * 1rem);
   }
 }
 
