@@ -1,7 +1,10 @@
 import init, * as wasm from "../_assets/wasm/wasm_boids.js";
 
 const wasmInstance = await init();
-await wasm.initThreadPool(navigator.hardwareConcurrency);
+const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+if (!isMobile) {
+  await wasm.initThreadPool(navigator.hardwareConcurrency);
+}
 wasm.init_panic_hook();
 let universe = wasm.Builder.from_preset(wasm.Preset.Basic)
   .number_of_boids(500)
