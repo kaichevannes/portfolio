@@ -36,13 +36,8 @@ const mobileDialog = document.querySelector("#mobile-dialog");
 
 mobileDialog.addEventListener("click", (e) => {
   if (e.target === mobileDialog) {
-    closeMobileDialog();
+    mobileDialog.close();
   }
-});
-
-mobileDialog.addEventListener("cancel", (e) => {
-  e.preventDefault();
-  closeMobileDialog();
 });
 
 function openMobileDialog() {
@@ -50,15 +45,7 @@ function openMobileDialog() {
 }
 
 function closeMobileDialog() {
-  mobileDialog.classList.add("closing");
   mobileDialog.close();
-  mobileDialog.addEventListener(
-    "animationend",
-    () => {
-      mobileDialog.classList.remove("closing");
-    },
-    { once: true },
-  );
 }
 
 function setColorMode(mode) {
