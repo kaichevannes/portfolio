@@ -606,7 +606,7 @@
               class="link"
               href="/gitops"
               >more here</a
-            >) changed the approach to loading WebAssembly. I discuss this after
+            >) changed my approach to loading WebAssembly. I discuss this after
             the original post below.
           </div>
         </section>
@@ -657,14 +657,8 @@
                 ></span
               >
             </li>
-            <li>
-              <strong class="semibold">Support</strong> multithreading natively
-              and on the web
-            </li>
-            <li>
-              <strong class="semibold">Verify</strong> optimisations improved
-              performance
-            </li>
+            <li><strong class="semibold">Support</strong> multithreading</li>
+            <li><strong class="semibold">Measure</strong> performance</li>
           </ol>
           <p class="project__section-content">
             I started by reading
@@ -693,12 +687,12 @@
           </p>
           <ol class="project__section-content">
             <li>
-              <strong class="semibold">Attraction</strong> — move towards nearby
-              swarm members
+              <strong class="semibold">Attraction</strong> — move
+              <em>towards</em> nearby swarm members
             </li>
             <li>
-              <strong class="semibold">Alignment</strong> — match direction with
-              nearby swarm members
+              <strong class="semibold">Alignment</strong> — move
+              <em>with</em> nearby swarm members
             </li>
             <li>
               <strong class="semibold">Separation</strong> — avoid crashing into
@@ -722,8 +716,8 @@
             as the Boids can see, and only checking Boids within adjacent tiles.
             Our <strong class="semibold">N</strong> Boids only have to check a
             fixed number of neighbours because each tile has a maximum capacity,
-            determined by the swarms density. This means the algorithm is
-            <strong class="semibold">O(N)</strong>.
+            determined by the swarms density. This means tiling reduces
+            complexity to <strong class="semibold">O(N)</strong>.
           </p>
           <p class="project__section-content">
             The naive and the tiled algorithms can be improved by adding a
@@ -733,7 +727,7 @@
             <span class="tooltip"
               >crate<span class="tooltiptext">A Rust package.</span></span
             >, which implements work stealing: each thread is given a queue of
-            work, and once that queue is depleted it will start to steal chunks
+            work, and once that queue is depleted, it will start to steal chunks
             of work from other threads. We can fine-tune this strategy by
             adjusting the minimum number of tasks per chunk. If the minimum is
             low, we will spend more time stealing work than doing work, if it is
@@ -770,9 +764,8 @@
         <section class="project__section">
           <h2 class="project__section-title">Challenges</h2>
           <p class="project__section-contents">
-            This was my ambitious project so far. WebAssembly is notorious
-            challenging to set up, and I decided not only to try and use
-            multithreaded
+            WebAssembly is notorious challenging to set up, and I decided not
+            only to try and use multithreaded
             <span class="tooltip"
               >WASM<span class="tooltiptext"
                 ><strong>WebAssembly</strong></span
@@ -819,27 +812,26 @@
             in WebAssembly.
           </p>
           <p class="project__section-content">
-            During development, every time I enabled WebAssembly multithreading
-            my simulation started to run <em>more slowly</em>. I knew from my
-            Rust benchmarks that the multithreaded code was faster natively, so
-            I thought there must be some extra overhead in copying data between
-            Service Workers in WASM. I ended up rearchitecting my code to remove
-            all cloning of values but it was still slower. After confirming the
-            code was running on different Service Workers I was at a loss.
-            Later, when implementing the controls I found that when I increased
-            the neighbour radii enough, multithreading actually
-            <em>was</em> faster… I was just testing it on the wrong values.
+            During development, every time I enabled WASM multithreading my
+            simulation started to run <em>more slowly</em>. I knew from my Rust
+            benchmarks that the multithreaded code was faster natively, so I
+            thought there must be some extra overhead in copying data between
+            Service Workers in WASM. I rearchitected my code to remove cloning
+            of values but it was still slower. After confirming the code was
+            running on different Service Workers I was at a loss. Later, when
+            implementing the controls I found that when I increased the
+            neighbour radii enough, multithreading actually <em>was</em> faster…
+            I was just testing it on the wrong values.
           </p>
           <p class="project__section-content">
             I split my project into a WASM section, a Vite library, and a
             Next.js library consumer. I already had the link between the Vite
             library and Next.js working, so I thought that now I could just push
-            the new package version to npm and see it work. I was
+            the new package version to npm and watch the magic happen. I was
             <strong class="semibold">very</strong> wrong. Somewhere between
             <em>“Hello world”</em> and
-            <em>“full multithreaded Boids implementation”</em> something broke,
-            and I immediately regretted not continuously checking the build
-            pipeline as I made changes.
+            <em>“full multithreaded Boids implementation”</em> something broke;
+            I should have been checking the build pipeline as I made changes.
           </p>
           <p class="project__section-content">
             I eventually found the magical Webpack encantations necessary for
@@ -855,7 +847,7 @@
           <p class="project__section-content">
             I learned that Test Driven Development is very effective when
             writing library code. Writing the tests first left me confident that
-            my simulation was correct, and when I wrote the visualiser, the
+            my simulation was correct, and when I wrote the visualiser the
             simulation code worked first try. This is a stark constrast to my
             dissertation, where two months before submission I realised my
             simulation code has a massive bug in it:
@@ -890,11 +882,33 @@
         <section class="project__section">
           <h2 class="project__section-title">Postscript</h2>
           <p class="project__section-content">
-            NOTE: I pause and play the animation when it goes out of frame or
-            switching tabs to reduce system load when not necessary.
+            During my portfolio rewrite, I was dreading the hours I expected it
+            would take to get my simulation running in vanilla HTML and
+            JavaScript. It turns out, WebAssembly isn't that complicated after
+            all. I needed to import a file and… it… it's working?!
+            <em>Let me check multithreading…</em>
+            multithreading is
+            <strong class="semibold"><em>ALSO</em> working!?</strong> My poor
+            past self, I'm never getting back those days spent trying and
+            failing to do the equivalent of importing a file.
           </p>
-
-          <p></p>
+          <p class="project__section-content">
+            I added some enhancements to the simulation while I was at it: I
+            pause and play the animation when it goes out of frame or switching
+            tabs to reduce system load when not necessary, I rearranged the
+            controls to make them more intuitive, I added a new
+            <strong class="semibold">Orbit</strong> preset which is ever so
+            satisfying, and <em>most importantly</em>: I added a
+            <strong class="semibold">randomise</strong> button.
+          </p>
+          <p class="project__section-content">
+            <a class="link" href="#simulation">
+              <svg class="project__icon--chevrons-up">
+                <use href="/_assets/svgs/chevrons-up.svg#chevrons-up" />
+              </svg>
+              Back to simulation
+            </a>
+          </p>
         </section>
         <nav class="project__nav">
           <a class="project__nav-link" href="/gitops">← Gitops</a>

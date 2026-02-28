@@ -757,6 +757,15 @@
   width: 100px;
 }
 
+.project__icon--chevrons-up {
+  display: inline;
+  width: 24px;
+  height: 24px;
+  margin-right: -6px;
+  margin-bottom: -5px;
+  margin-left: -5px;
+}
+
 .project__icon--bleed {
   max-width: 100vw;
   height: 16px;
@@ -856,6 +865,7 @@
   position: sticky;
   top: 72px;
   grid-column: title;
+  align-self: start;
   grid-row: 1 / -1;
   font-size: calc(20 / 16 * 1rem);
   font-weight: var(--weight-medium);
@@ -924,6 +934,7 @@
   place-content: center;
   gap: 24px;
   margin-bottom: 8px;
+  scroll-margin-top: 104px;
 }
 
 .boids__canvas {
