@@ -164,6 +164,8 @@
 
 .header__mobile-dialog {
   position: fixed;
+  display: flex;
+  flex-direction: column;
   top: 0;
   right: 0;
   bottom: 0;
@@ -180,9 +182,8 @@
     display 500ms allow-discrete,
     overlay 500ms allow-discrete;
 
-  &[open] {
-    display: flex;
-    flex-direction: column;
+  &:not([open]) {
+    display: none;
   }
 
   &::backdrop {
