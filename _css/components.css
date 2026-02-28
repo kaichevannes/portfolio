@@ -179,8 +179,8 @@
   color: var(--color-grey900);
 
   transition:
-    display 500ms allow-discrete,
-    overlay 500ms allow-discrete;
+    display 250ms allow-discrete,
+    overlay 250ms allow-discrete;
 
   &:not([open]) {
     display: none;
@@ -197,7 +197,10 @@
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    animation: horizontalSlideOut 250ms ease-out forwards;
+    &.closing {
+      animation: horizontalSlideOut 250ms ease-out forwards;
+    }
+
     &[open] {
       animation: horizontalSlideIn 300ms cubic-bezier(0, 0.6, 0.32, 1.06)
         backwards;
