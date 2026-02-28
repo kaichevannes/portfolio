@@ -680,6 +680,18 @@
   width: 135px;
   color: var(--color-background);
   background: var(--color-text);
+
+  &:disabled {
+    background: none;
+    border: none;
+    cursor: default;
+    color: var(--color-text);
+    padding-left: 0;
+  }
+
+  &:hover:disabled {
+    transform: revert;
+  }
 }
 
 .project {
