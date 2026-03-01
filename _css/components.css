@@ -61,8 +61,8 @@
   position: absolute;
   inset: 0;
   height: 100%;
-  margin-left: -16px;
-  margin-right: -16px;
+  margin-left: -12px;
+  margin-right: -12px;
   transform: translateY(100%);
 
   background: hsl(0deg 0% 100% / 0.1);
