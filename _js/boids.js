@@ -208,14 +208,29 @@ tabs.forEach((tab) => {
   });
 });
 
-// Add progress custom css selector to style slider left side on chrome
-document.querySelectorAll("input[type='range']").forEach((slider) => {
-  slider.addEventListener("input", () => {
-    const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-    slider.style.setProperty("--progress", `${pct}%`);
-  });
+function updateSliderProgress(slider) {
   const pct = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
   slider.style.setProperty("--progress", `${pct}%`);
+}
+
+// Add progress custom css selector to style slider left side on chrome
+document.querySelectorAll("input[type='range']").forEach((slider) => {
+  slider.addEventListener("input", () => updateSliderProgress(slider));
+  updateSliderProgress(slider);
+
+  const nativeDescriptor = Object.getOwnPropertyDescriptor(
+    HTMLInputElement.prototype,
+    "value",
+  );
+  Object.defineProperty(slider, "value", {
+    set(value) {
+      nativeDescriptor.set.call(this, value);
+      updateSliderProgress(this);
+    },
+    get() {
+      return nativeDescriptor.get.call(this);
+    },
+  });
 });
 
 function initializeSlider({
