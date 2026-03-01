@@ -330,7 +330,8 @@
 }
 
 .header__button--mobile {
-  align-self: flex-end;
+  align-self: flex-start;
+  margin-top: 4px;
   display: none;
 
   @media (max-width: calc(1000 / 16 * 1rem)) {
