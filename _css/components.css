@@ -1100,11 +1100,6 @@
     display: none;
   }
 
-  @media (max-width: calc(1000 / 16 * 1rem)) {
-    column-gap: 8px;
-    row-gap: 0px;
-  }
-
   @media (max-width: calc(600 / 16 * 1rem)) {
     grid-template-columns: 1fr;
   }
