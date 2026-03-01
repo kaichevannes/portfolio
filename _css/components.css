@@ -54,6 +54,12 @@
   .header--cushioned & {
     height: calc(200% + 2 * 48px);
   }
+
+  @media (max-width: calc(1000 / 16 * 1rem)) {
+    .header--cushioned & {
+      height: 200%;
+    }
+  }
 }
 
 .header__frosted-glass-edge {
@@ -83,6 +89,12 @@
 
   .header--cushioned & {
     height: calc(100% + 48px);
+  }
+
+  @media (max-width: calc(1000 / 16 * 1rem)) {
+    .header--cushioned & {
+      height: 100%;
+    }
   }
 }
 
