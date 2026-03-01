@@ -310,9 +310,6 @@
   &:hover,
   &:focus {
     color: var(--color-text);
-    transform: scaleY(1.01);
-    transition: transform 200ms;
-    transition-delay: 100ms;
   }
 
   &:focus {
