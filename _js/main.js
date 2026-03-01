@@ -87,4 +87,3 @@ function playLightOff() {
   lightOffAudio.currentTime = 0;
   lightOffAudio.play();
 }
-  e.preventDefault();
