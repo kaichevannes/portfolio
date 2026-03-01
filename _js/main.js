@@ -87,13 +87,4 @@ function playLightOff() {
   lightOffAudio.currentTime = 0;
   lightOffAudio.play();
 }
-
-const contactForm = document.getElementById("contact-form");
-const sendButton = contactForm.querySelector("button[type='submit']");
-
-contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-  sendButton.textContent = "Sending...";
-  sendButton.disabled = true;
-});
