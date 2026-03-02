@@ -17,19 +17,6 @@
     <link rel="stylesheet" href="/_css/utilities.css" />
 
     <script>
-      (function () {
-        var src = "//cdn.jsdelivr.net/npm/eruda";
-        if (
-          !/eruda=true/.test(window.location) &&
-          localStorage.getItem("active-eruda") != "true"
-        )
-          return;
-        document.write("<scr" + 'ipt src="' + src + '"></scr' + "ipt>");
-        document.write("<scr" + "ipt>eruda.init();</scr" + "ipt>");
-      })();
-    </script>
-
-    <script>
       if (
         localStorage.getItem("color-mode") === "dark" ||
         (window.matchMedia("(prefers-color-scheme: dark)").matches &&
