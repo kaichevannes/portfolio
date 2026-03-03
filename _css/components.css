@@ -898,6 +898,8 @@
 
 .project__video-wrapper {
   position: relative;
+  background-color: #1e1e2d;
+  border-radius: 16px;
 
   &:hover .project__video-button {
     opacity: 1;
@@ -911,6 +913,10 @@
   @media (max-width: calc(600 / 16 * 1rem)) {
     margin-top: -40px;
   }
+}
+
+.project__video-wrapper--boids {
+  background-color: revert;
 }
 
 .project__caption {

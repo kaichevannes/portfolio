@@ -19,8 +19,6 @@
     <link rel="stylesheet" href="/_css/utilities.css" />
     <!-- MATCH END -->
 
-    <link rel="preload" as="image" href="/_assets/images/meditation.webp" />
-
     <script>
       if (
         localStorage.getItem("color-mode") === "dark" ||
@@ -259,6 +257,7 @@
               sizes="(max-width: 37.5rem) 95vw, (max-width: 62.5rem) 80vw, 491px"
               alt="Blurred background image."
               fetchpriority="high"
+              loading="eager"
             />
             <img
               class="hero__image"
@@ -272,6 +271,7 @@
               height="388px"
               sizes="(max-width: 37.5rem) 95vw, (max-width: 62.5rem) 80vw, 491px"
               alt="Blurred background image."
+              preload="auto"
               fetchpriority="high"
             />
           </div>
