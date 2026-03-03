@@ -32,6 +32,6 @@ Ensure the image is already in webp format.
   <!-- We specify the size of the image for mobile, tablet, desktop. -->
   <!-- This should match your CSS, i.e. width=95% goes to 95vw, width=1000px goes to 1000px -->
   sizes="(max-width: 37.5rem) 95vw, (max-width: 62.5rem) 80vw, 1000px"
-  alt="Blurred background image."
+  alt="What I would want to know about the image if I couldn't see it."
 />
 ```
