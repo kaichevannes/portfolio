@@ -442,6 +442,8 @@
 }
 
 .hero__image {
+  width: 100%;
+  height: auto;
   position: absolute;
   border-radius: 100px;
   object-fit: cover;
