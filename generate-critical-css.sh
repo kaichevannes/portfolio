@@ -9,7 +9,7 @@ for page in $pages; do
     const filePath = '$page';
     const critters = new Critters({ path: '.' });
 
-    const html = readFileSync(filepath, 'utf8');
+    const html = readFileSync(filePath, 'utf8');
     const result = await critters.process(html);
 
     writeFileSync(filePath, result);
