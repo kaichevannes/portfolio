@@ -3,7 +3,7 @@ import { readdirSync, statSync } from "fs";
 
 const pages = readdirSync(".")
   .filter((path) => statSync(path).isDirectory())
-  .filter((folder) => !folder.startsWith("_"))
+  .filter((folder) => !folder.startsWith("_") && !folder.startsWith("."))
   .map((folder) => `${folder}/index.html`);
 
 pages.push("index.html");
