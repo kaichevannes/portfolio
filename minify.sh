@@ -14,7 +14,6 @@ for htmlFile in $(find -name "index.html"); do
 <link rel="stylesheet" href="/_css/base.css" />[[:space:]]*\
 <link rel="stylesheet" href="/_css/components.css" />[[:space:]]*\
 <link rel="stylesheet" href="/_css/utilities.css" />[[:space:]]*\
-<!-- MATCH END -->\
-|<link rel="stylesheet" href="styles.css" />|' \
+<!-- MATCH END -->' \
   "$htmlFile"
 done
