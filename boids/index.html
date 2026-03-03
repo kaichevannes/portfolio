@@ -278,6 +278,7 @@
             <button
               id="pause-button"
               class="project__video-button project__video-button--boids playing-only"
+              aria-label="pause"
             >
               <svg class="project__video-button-icon">
                 <use href="/_assets/svgs/pause.svg#pause" />
@@ -286,6 +287,7 @@
             <button
               id="play-button"
               class="project__video-button project__video-button--boids paused-only"
+              aria-label="play"
             >
               <svg class="project__video-button-icon">
                 <use href="/_assets/svgs/play.svg#play" />
@@ -351,16 +353,16 @@
                 <label class="boids__control-label" for="number-of-boids"
                   >Number of Boids</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="number-of-boids"
-                ></output>
+                <output class="boids__control-output" for="number-of-boids"
+                  >500</output
+                >
                 <input
                   id="number-of-boids"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.7492851342936675"
                   step="any"
                   list="number-of-boids-values"
                 />
@@ -370,13 +372,16 @@
                 <label class="boids__control-label" for="grid-size"
                   >Grid Size</label
                 >
-                <output class="boids__control-output" for="grid-size"></output>
+                <output class="boids__control-output" for="grid-size"
+                  >100.00</output
+                >
                 <input
                   id="grid-size"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.8110365849096722"
                   step="any"
                   list="grid-size-values"
                 />
@@ -386,16 +391,16 @@
                 <label class="boids__control-label" for="attraction-weighting"
                   >Attraction Weighting</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="attraction-weighting"
-                ></output>
+                <output class="boids__control-output" for="attraction-weighting"
+                  >0.33</output
+                >
                 <input
                   id="attraction-weighting"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.3333333432674408"
                   step="any"
                   list="attraction-weighting-values"
                 />
@@ -405,16 +410,16 @@
                 <label class="boids__control-label" for="attraction-radius"
                   >Attraction Radius</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="attraction-radius"
-                ></output>
+                <output class="boids__control-output" for="attraction-radius"
+                  >3.00</output
+                >
                 <input
                   id="attraction-radius"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.8257070849065542"
                   step="any"
                   list="attraction-radius-values"
                 />
@@ -424,16 +429,16 @@
                 <label class="boids__control-label" for="alignment-weighting"
                   >Alignment Weighting</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="alignment-weighting"
-                ></output>
+                <output class="boids__control-output" for="alignment-weighting"
+                  >0.33</output
+                >
                 <input
                   id="alignment-weighting"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.3333333432674408"
                   step="any"
                   list="alignment-weighting-values"
                 />
@@ -443,16 +448,16 @@
                 <label class="boids__control-label" for="alignment-radius"
                   >Alignment Radius</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="alignment-radius"
-                ></output>
+                <output class="boids__control-output" for="alignment-radius"
+                  >3.00</output
+                >
                 <input
                   id="alignment-radius"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.8257070849065542"
                   step="any"
                   list="alignment-radius-values"
                 />
@@ -462,16 +467,16 @@
                 <label class="boids__control-label" for="separation-weighting"
                   >Separation Weighting</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="separation-weighting"
-                ></output>
+                <output class="boids__control-output" for="separation-weighting"
+                  >0.33</output
+                >
                 <input
                   id="separation-weighting"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.3333333432674408"
                   step="any"
                   list="separation-weighting-values"
                 />
@@ -481,16 +486,16 @@
                 <label class="boids__control-label" for="separation-radius"
                   >Separation Radius</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="separation-radius"
-                ></output>
+                <output class="boids__control-output" for="separation-radius"
+                  >3.00</output
+                >
                 <input
                   id="separation-radius"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.8257070849065542"
                   step="any"
                   list="separation-radius-values"
                 />
@@ -500,16 +505,16 @@
                 <label class="boids__control-label" for="maximum-velocity"
                   >Maximum Velocity</label
                 >
-                <output
-                  class="boids__control-output"
-                  for="maximum-velocity"
-                ></output>
+                <output class="boids__control-output" for="maximum-velocity"
+                  >0.40</output
+                >
                 <input
                   id="maximum-velocity"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.8010299988997272"
                   step="any"
                   list="maximum-velocity-values"
                 />
@@ -517,13 +522,14 @@
               </div>
               <div class="boids__control">
                 <label class="boids__control-label" for="noise">Noise</label>
-                <output class="boids__control-output" for="noise"></output>
+                <output class="boids__control-output" for="noise">0.05</output>
                 <input
                   id="noise"
                   class="boids__control-input boids__control-input--slider"
                   type="range"
                   min="0"
                   max="1"
+                  value="0.5663233369358369"
                   step="any"
                   list="noise-values"
                 />
