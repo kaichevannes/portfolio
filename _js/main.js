@@ -36,15 +36,21 @@ const mobileDialog = document.querySelector("#mobile-dialog");
 
 mobileDialog.addEventListener("click", (e) => {
   if (e.target === mobileDialog) {
-    mobileDialog.close();
+    closeMobileDialog();
   }
 });
 
 function openMobileDialog() {
+  document
+    .getElementById("mobile-hamburger")
+    .setAttribute("aria-expanded", "true");
   mobileDialog.showModal();
 }
 
 function closeMobileDialog() {
+  document
+    .getElementById("mobile-hamburger")
+    .setAttribute("aria-expanded", "false");
   mobileDialog.close();
 }
 
