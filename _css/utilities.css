@@ -133,25 +133,39 @@
 }
 
 .link {
+  --underline-size: 2px;
+  --fade-in-duration: 200ms;
+  --fade-out-duration: 300ms;
   text-decoration: none;
   color: inherit;
-  box-shadow: 0 2px 0 var(--color-primary);
+  box-shadow: 0 var(--underline-size) 0 var(--color-primary);
   font-weight: var(--weight-semibold);
   transition:
-    box-shadow 0.2s,
-    filter 0.3s;
+    box-shadow var(--fade-out-duration),
+    filter 300ms;
   box-decoration-break: clone;
   outline-color: var(--color-primary);
 
   &:hover {
-    box-shadow: 0 2px 0 transparent;
+    box-shadow: 0 var(--underline-size) 0 transparent;
+    transition:
+      box-shadow var(--fade-in-duration),
+      filter 300ms;
   }
+}
+
+.link--heading {
+  --underline-size: 3px;
+  --fade-in-duration: 150ms;
+  --fade-out-duration: 400ms;
 }
 
 .button-link {
   position: relative;
   text-decoration: none;
   border: none;
+  min-width: 132px;
+  text-align: center;
   width: fit-content;
   padding: 4px 16px;
   border-radius: 4px;

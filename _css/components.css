@@ -494,6 +494,7 @@
 }
 
 .projects__project {
+  position: relative;
   padding-top: 12px;
   display: flex;
   gap: 16px;
@@ -512,6 +513,12 @@
   border: 2px solid var(--color-grey700);
   border-radius: 16px;
   box-shadow: var(--shadow);
+  transition: transform 150ms;
+
+  &:hover {
+    transition: transform 100ms;
+    transform: scale(1.01);
+  }
 
   @media (max-width: calc(1000 / 16 * 1rem)) {
     margin-top: 16px;
@@ -557,11 +564,6 @@
   font-size: calc(20 / 16 * 1rem);
   font-weight: var(--weight-medium);
   color: var(--color-grey500);
-}
-
-.projects__buttons {
-  display: flex;
-  gap: 16px;
 }
 
 .contact {
@@ -734,7 +736,6 @@
   position: relative;
   grid-area: send;
   margin: 8px;
-  width: 135px;
   color: var(--color-background);
   background: var(--color-text);
 
@@ -748,6 +749,11 @@
 
   &:hover:disabled {
     transform: revert;
+  }
+
+  /* For more specificity */
+  &.contact__submit {
+    width: 135px;
   }
 }
 
