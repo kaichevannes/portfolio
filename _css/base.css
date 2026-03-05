@@ -127,8 +127,8 @@ body {
   --color-background: hsl(0deg 0% 7%);
   --color-shadow: 46deg 33% 92%;
   --color-text: hsl(46deg 33% 92%);
-  --color-highlight: hsl(166deg 100% 24%);
-  --color-primary: hsl(166deg 100% 30%);
+  --color-highlight: hsl(166deg 100% 25%);
+  --color-primary: hsl(166deg 100% 28%);
   --color-grey300: hsl(60deg 4% 47%);
   --color-grey500: hsl(37deg 5% 60%);
   --color-grey700: hsl(60deg 4% 72%);

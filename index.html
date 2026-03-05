@@ -222,6 +222,7 @@
           <button
             class="header__button header__button--mobile header__button--close"
             onclick="closeMobileDialog()"
+            aria-label="Close Menu"
           >
             <svg class="header__icon header__icon--mobile">
               <use href="/_assets/svgs/x.svg#x" />
@@ -333,7 +334,12 @@
                 />
                 <div class="projects__details">
                   <h3 class="projects__name">
-                    <a class="link link--heading" href="/gitops">GitOps</a>
+                    <a class="projects__link" href="/gitops">
+                      <span class="link link--heading">GitOps</span>
+                      <svg class="projects__icon" aria-hidden="true">
+                        <use href="/_assets/svgs/newspaper.svg#newspaper" />
+                      </svg>
+                    </a>
                   </h3>
                   <p class="projects__description">
                     Self-hosted, zero-downtime Kubernetes… and why I ditched it
@@ -355,21 +361,23 @@
                 />
                 <div class="projects__details">
                   <h3 class="projects__name">
-                    <a class="link link--heading" href="/boids">Web Boids</a>
+                    <a class="projects__link" href="/boids">
+                      <span class="link link--heading">Web Boids</span>
+                      <svg
+                        class="projects__icon projects__icon--gamepad"
+                        aria-hidden="true"
+                      >
+                        <use href="/_assets/svgs/gamepad-2.svg#gamepad-2" />
+                      </svg>
+                      <svg class="projects__icon" aria-hidden="true">
+                        <use href="/_assets/svgs/newspaper.svg#newspaper" />
+                      </svg>
+                    </a>
                   </h3>
                   <p class="projects__description">
                     I ported my dissertation to multithreaded WASM, it's
                     blazingly fast.
                   </p>
-                  <a
-                    href="/boids#simulation"
-                    class="button-link button-link--primary"
-                  >
-                    Demo
-                    <div class="button-link--hover" aria-hidden="true">
-                      Demo
-                    </div>
-                  </a>
                 </div>
               </div>
             </div>

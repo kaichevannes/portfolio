@@ -515,11 +515,6 @@
   box-shadow: var(--shadow);
   transition: transform 150ms;
 
-  &:hover {
-    transition: transform 100ms;
-    transform: scale(1.01);
-  }
-
   @media (max-width: calc(1000 / 16 * 1rem)) {
     margin-top: 16px;
     max-height: revert;
@@ -530,6 +525,27 @@
     margin-top: 8px;
     width: 100%;
   }
+}
+
+.projects__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.projects__icon {
+  display: inline;
+  width: 26px;
+  height: 26px;
+  margin-bottom: -1px;
+}
+
+.projects__icon--gamepad {
+  width: 30px;
+  height: 30px;
+  margin-bottom: -4px;
+  margin-left: -1px;
+  margin-right: -1px;
+  color: var(--color-primary);
 }
 
 .projects__details {
