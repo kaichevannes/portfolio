@@ -530,6 +530,11 @@
 .projects__link {
   text-decoration: none;
   color: inherit;
+
+  &:hover .link {
+    box-shadow: 0 var(--underline-size) 0 transparent;
+    transition: box-shadow var(--fade-in-duration);
+  }
 }
 
 .projects__icon {
