@@ -143,7 +143,11 @@
           </button>
         </div>
         <button
-          class="header__button header__button--mobile slide-in"
+          id="mobile-hamburger"
+          class="header__button header__button--mobile"
+          aria-label="Open Menu"
+          aria-expanded="false"
+          aria-controls="mobile-dialog"
           onclick="openMobileDialog()"
         >
           <svg class="header__icon header__icon--mobile">
@@ -227,6 +231,7 @@
           <button
             class="header__button header__button--mobile header__button--close"
             onclick="closeMobileDialog()"
+            aria-label="Close Menu"
           >
             <svg class="header__icon header__icon--mobile">
               <use href="/_assets/svgs/x.svg#x" />
