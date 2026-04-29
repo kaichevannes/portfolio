@@ -110,6 +110,10 @@
   }
 }
 
+.header__spacer--right {
+  margin-left: 10px;
+}
+
 .header__lightbulb {
   width: 36px;
   height: 36px;
