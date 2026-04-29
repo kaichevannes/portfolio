@@ -539,7 +539,8 @@
   padding: 16px;
   box-shadow: var(--shadow);
 
-  &:hover {
+  &:hover,
+  &:focus-within {
     border-color: var(--color-text);
   }
 }
