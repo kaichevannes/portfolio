@@ -533,6 +533,8 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
   position: relative;
   border: 2px solid var(--color-grey500);
   border-radius: 16px;
@@ -546,6 +548,7 @@
 }
 
 .card__image {
+  order: -1;
   aspect-ratio: 490 / 376;
   transition: transform 250ms;
 
