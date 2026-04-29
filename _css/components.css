@@ -502,7 +502,7 @@
     margin-inline: -16px;
     margin-bottom: -64px;
     grid-auto-flow: column;
-    grid-auto-columns: 80%;
+    grid-auto-columns: 60%;
     grid-template-columns: none;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
@@ -516,6 +516,10 @@
     & > * {
       scroll-snap-align: start;
     }
+  }
+
+  @media (max-width: calc(600 / 16 * 1rem)) {
+    grid-auto-columns: 80%;
   }
 }
 
