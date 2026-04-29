@@ -85,57 +85,32 @@
         </nav>
         <div class="header__spacer"></div>
         <div class="header__buttons">
-          <!-- Sound button -->
-          <button
-            class="header__button slide-in sound-on-only"
-            onclick="setSoundMode('muted');"
-          >
-            <svg class="header__icon">
-              <use href="/_assets/svgs/volume-2.svg#volume-2" />
+          <a class="header__button slide-in" href="/accessibility">
+            <svg class="header__icon header__icon--accessibility">
+              <use href="/_assets/svgs/accessibility.svg#accessibility" />
             </svg>
-            sound
-          </button>
-
-          <!-- Muted button -->
-          <button
-            class="header__button slide-in sound-muted-only"
-            onclick="setSoundMode('sound');"
-          >
-            <svg class="header__icon">
-              <use href="/_assets/svgs/volume-x.svg#volume-x" />
-            </svg>
-            muted
-          </button>
+            accessibility
+          </a>
 
           <!-- Light mode button -->
-          <audio
-            id="sound-lightoff"
-            src="/_assets/sounds/lightoff.mp3"
-            preload="auto"
-          ></audio>
           <button
             class="header__button slide-in light-mode-only"
             style="--delay: 300ms"
             onclick="setColorMode('dark'); playLightOff();"
           >
-            <svg class="header__icon">
+            <svg class="header__icon" aria-hidden="true">
               <use href="/_assets/svgs/sun.svg#sun" />
             </svg>
             light
           </button>
 
           <!-- Dark mode button -->
-          <audio
-            id="sound-lighton"
-            src="/_assets/sounds/lighton.mp3"
-            preload="auto"
-          ></audio>
           <button
             class="header__button slide-in dark-mode-only"
             style="--delay: 300ms"
             onclick="setColorMode('light'); playLightOn();"
           >
-            <svg class="header__icon">
+            <svg class="header__icon" aria-hidden="true">
               <use href="/_assets/svgs/moon.svg#moon" />
             </svg>
             dark
@@ -171,59 +146,45 @@
           </nav>
           <div class="header__mobile-buttons">
             <div>
+              <a
+                href="/accessibility"
+                class="header__button header__button--mobile header__button--mobile-menu"
+              >
+                <svg
+                  class="header__icon header__icon--mobile header__icon--accessibility"
+                >
+                  <use href="/_assets/svgs/accessibility.svg#accessibility" />
+                </svg>
+                accessibility
+              </a>
+            </div>
+            <div>
               <!-- Light mode button -->
-              <audio
-                id="sound-lightoff"
-                src="/_assets/sounds/lightoff.mp3"
-                preload="auto"
-              ></audio>
               <button
                 class="header__button header__button--mobile header__button--mobile-menu light-mode-only"
                 onclick="setColorMode('dark'); playLightOff();"
               >
-                <svg class="header__icon header__icon--mobile">
+                <svg
+                  class="header__icon header__icon--mobile"
+                  aria-hidden="true"
+                >
                   <use href="/_assets/svgs/sun.svg#sun" />
                 </svg>
                 light
               </button>
 
               <!-- Dark mode button -->
-              <audio
-                id="sound-lighton"
-                src="/_assets/sounds/lighton.mp3"
-                preload="auto"
-              ></audio>
               <button
                 class="header__button header__button--mobile header__button--mobile-menu dark-mode-only"
                 onclick="setColorMode('light'); playLightOn();"
               >
-                <svg class="header__icon header__icon--mobile">
+                <svg
+                  class="header__icon header__icon--mobile"
+                  aria-hidden="true"
+                >
                   <use href="/_assets/svgs/moon.svg#moon" />
                 </svg>
                 dark
-              </button>
-            </div>
-            <div>
-              <!-- Sound button -->
-              <button
-                class="header__button header__button--mobile header__button--mobile-menu sound-on-only"
-                onclick="setSoundMode('muted');"
-              >
-                <svg class="header__icon header__icon--mobile">
-                  <use href="/_assets/svgs/volume-2.svg#volume-2" />
-                </svg>
-                sound
-              </button>
-
-              <!-- Muted button -->
-              <button
-                class="header__button header__button--mobile header__button--mobile-menu sound-muted-only"
-                onclick="setSoundMode('sound');"
-              >
-                <svg class="header__icon header__icon--mobile">
-                  <use href="/_assets/svgs/volume-x.svg#volume-x" />
-                </svg>
-                muted
               </button>
             </div>
           </div>
@@ -500,5 +461,15 @@
 
     <script src="_js/main.js" defer></script>
     <script src="_js/home.js" defer></script>
+    <audio
+      id="sound-lightoff"
+      src="/_assets/sounds/lightoff.mp3"
+      preload="auto"
+    ></audio>
+    <audio
+      id="sound-lighton"
+      src="/_assets/sounds/lighton.mp3"
+      preload="auto"
+    ></audio>
   </body>
 </html>

@@ -293,6 +293,7 @@
 }
 
 .header__button {
+  text-decoration: none;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -361,6 +362,10 @@
 .header__icon--mobile {
   width: 44px;
   height: 44px;
+}
+
+.header__icon--accessibility {
+  margin-right: -4px;
 }
 
 .hero {
