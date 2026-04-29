@@ -546,6 +546,7 @@
 
 .card__title {
   padding-top: 8px;
+  margin-top: 8px;
   font-size: calc(32 / 16 * 1rem);
   font-weight: var(--weight-semibold);
   color: var(--color-grey900);
