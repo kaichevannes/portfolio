@@ -154,10 +154,16 @@
   }
 }
 
-.link--heading {
+.link--card {
   --underline-size: 3px;
-  --fade-in-duration: 150ms;
+  --fade-in-duration: 300ms;
   --fade-out-duration: 400ms;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
 }
 
 .button-link {
